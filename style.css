@@ -1,0 +1,8 @@
+body {
+    font-family: Arial, sans-serif; /* Fuente del texto */
+    background-color: #0f172a; /* Fondo oscuro azulado */
+    color: white; /* Color del texto */
+    text-align: center; /* Centra el texto en pantalla */
+    padding-top: 50px; /* Espacio superior para separar el texto del borde */
+  }
+  
