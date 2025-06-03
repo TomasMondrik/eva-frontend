@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Registrarse - EVA</title>
+  <script src="https://cdn.tailwindcss.com"></script> <!-- Importa Tailwind -->
+</head>
+
+<body class="bg-gray-100 text-gray-800 flex items-center justify-center h-screen">
+
+  <!-- Contenedor principal -->
+  <div class="bg-white p-8 rounded shadow-md w-full max-w-md">
+    <!-- Título -->
+    <h1 class="text-3xl font-bold mb-6 text-center">Crear cuenta</h1>
+
+    <!-- Logo o ícono -->
+    <div class="mb-6 flex justify-center">
+      <div class="w-20 h-20 bg-gray-300 rounded"></div> <!-- Placeholder de imagen/logo -->
+    </div>
+
+    <!-- Formulario -->
+    <form class="space-y-4">
+      <!-- Campos del registro -->
+      <input type="text" placeholder="Nombre completo" class="w-full border rounded px-4 py-2" required />
+      <input type="email" placeholder="Email" class="w-full border rounded px-4 py-2" required />
+      <input type="password" placeholder="Contraseña" class="w-full border rounded px-4 py-2" required />
+      <input type="password" placeholder="Repetir contraseña" class="w-full border rounded px-4 py-2" required />
+
+      <!-- Checkbox de términos -->
+      <div class="flex items-center space-x-2">
+        <input type="checkbox" id="terms" required />
+        <label for="terms" class="text-sm">Aceptar términos y condiciones</label>
+      </div>
+
+      <!-- Botón de registro -->
+      <button type="submit" class="w-full bg-gray-700 text-white py-2 rounded hover:bg-gray-800 transition">
+        Registrarse
+      </button>
+    </form>
+
+    <!-- Enlaces al pie -->
+    <div class="text-center mt-4 text-sm">
+      ¿Ya tenés cuenta?
+      <a href="login.html" class="font-bold text-blue-600 hover:underline">Iniciar sesión</a>
+    </div>
+
+    <div class="text-center mt-2">
+      <a href="index.html" class="text-xs text-gray-500 hover:text-blue-600 transition">
+        ⬅ Volver a la página principal
+      </a>
+    </div>
+  </div>
+
+</body>
+</html>
