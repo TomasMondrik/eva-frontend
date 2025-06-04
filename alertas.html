@@ -7,29 +7,59 @@
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-950 text-white font-sans h-screen">
-  <div class="flex h-full">
+
+  <div class="flex h-full w-full">
+    
     <!-- Sidebar -->
-    <aside class="w-64 bg-gray-900 p-4 flex flex-col justify-between">
+    <aside class="w-64 bg-gray-900 p-6 flex flex-col justify-between">
       <div>
-        <div class="text-emerald-400 font-bold text-lg mb-4">
-          🏠 Hogar<br>
-          <span class="text-sm text-gray-400">Av. Libertador 6798</span>
+        <!-- ► Dropdown Ubicación -->
+        <div class="relative mb-6">
+          <button id="ubicacionBtn"
+                  onclick="toggleDropdown()"
+                  class="w-full flex justify-between items-center bg-gray-800 text-white p-2 rounded hover:bg-gray-700">
+            <span id="ubicacionActual">🏠 Hogar - Av. Libertador 6798</span>
+            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div id="dropdownUbicacion"
+               class="hidden absolute left-0 w-full mt-2 bg-gray-800 rounded shadow-lg z-10">
+            <button onclick="cambiarUbicacion('hogar')"
+                    class="block w-full text-left px-4 py-2 hover:bg-gray-700">
+              🏠 Hogar
+            </button>
+            <button onclick="cambiarUbicacion('trabajo')"
+                    class="block w-full text-left px-4 py-2 hover:bg-gray-700">
+              🏢 Trabajo
+            </button>
+          </div>
         </div>
+
+        <!-- ► Menú del sidebar -->
         <nav class="space-y-2">
-          <a href="inicio.html" class="block text-gray-300 hover:text-white">📹 Cámaras en vivo</a>
-          <a href="#" class="block bg-emerald-400 text-gray-900 px-2 py-1 rounded">🚨 Alertas</a>
-          <a href="comandos.html" class="block text-gray-300 hover:text-white">💻 Comandos</a>
+          <a href="inicio.html" class="block px-4 py-2 rounded hover:bg-gray-800">📷 Cámaras en vivo</a>
+          <a href="alertas.html" class="block px-4 py-2 rounded hover:bg-gray-800">🚨 Alertas</a>
+          <a href="comandos.html" class="block px-4 py-2 rounded hover:bg-gray-800">🛠️ Comandos</a>
         </nav>
-        <div class="mt-8">
-          <p class="text-gray-400 text-sm mb-2">Otras cuentas:</p>
-          <ul class="space-y-1 text-gray-300 text-sm">
-            <li>1. Sofi</li>
-            <li>2. Eve</li>
-            <li>3. Male</li>
+
+        <!-- ► Otras cuentas -->
+        <div class="mt-8 text-sm">
+          <p class="text-gray-400 mb-2">Otras cuentas:</p>
+          <ul class="space-y-1 text-gray-300">
+            <li>👤 Sofi</li>
+            <li>👤 Eve</li>
+            <li>👤 Male</li>
           </ul>
         </div>
       </div>
-      <div class="text-sm text-gray-400">👤 Tomás<br><span class="text-xs">Sesión activa</span></div>
+
+      <!-- ► Pie del sidebar -->
+      <div class="text-sm text-gray-400">
+        👤 Tomás<br>
+        <span class="text-xs">Sesión activa</span>
+      </div>
     </aside>
 
     <!-- Contenido -->
@@ -53,6 +83,35 @@
       </div>
     </main>
   </div>
+
+  <!-- Script para el dropdown (idéntico a inicio.html) -->
+  <script>
+    function toggleDropdown() {
+      const dropdown = document.getElementById('dropdownUbicacion');
+      dropdown.classList.toggle('hidden');
+    }
+
+    function cambiarUbicacion(opcion) {
+      const ubicacion = document.getElementById('ubicacionActual');
+      const dropdown = document.getElementById('dropdownUbicacion');
+
+      if (opcion === 'hogar') {
+        ubicacion.textContent = '🏠 Hogar - Av. Libertador 6798';
+      } else {
+        alert("⚠️ Cambio a trabajo no disponible aún.");
+        ubicacion.textContent = '🏠 Hogar - Av. Libertador 6798';
+      }
+      dropdown.classList.add('hidden');
+    }
+
+    window.addEventListener('click', function(e) {
+      const btn = document.getElementById('ubicacionBtn');
+      const dropdown = document.getElementById('dropdownUbicacion');
+      if (!btn.contains(e.target)) {
+        dropdown.classList.add('hidden');
+      }
+    });
+  </script>
+
 </body>
 </html>
-

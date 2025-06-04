@@ -5,89 +5,198 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Pantalla de inicio - EVA</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Estilos para el overlay semitransparente */
+    .overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 40;
+    }
+    /* Imagen ampliada en el centro */
+    .zoomed {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      width: 90vw;
+      height: 90vh;
+      transform: translate(-50%, -50%);
+      z-index: 50;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+      border-radius: 1rem;
+    }
+  </style>
 </head>
-<body class="bg-gray-950 text-white font-sans h-screen">
+<body class="flex bg-gray-950 text-white font-sans h-screen">
 
-  <!-- CONTENEDOR PRINCIPAL: Sidebar + contenido -->
-  <div class="flex h-full">
+  <!-- CONTENEDOR PRINCIPAL: Sidebar + Contenido -->
+  <div class="flex h-full w-full">
     
     <!-- SIDEBAR -->
-    <aside class="w-64 bg-gray-900 p-4 flex flex-col justify-between">
+    <aside class="w-64 bg-gray-900 p-6 flex flex-col justify-between">
       <div>
-        <div class="text-emerald-400 font-bold text-lg mb-4">
-          🏠 Hogar<br>
-          <span class="text-sm text-gray-400">Av. Libertador 6798</span>
+        <!-- ► Dropdown Ubicación -->
+        <div class="relative mb-6">
+          <button id="ubicacionBtn"
+                  onclick="toggleDropdown()"
+                  class="w-full flex justify-between items-center bg-gray-800 text-white p-2 rounded hover:bg-gray-700">
+            <span id="ubicacionActual">🏠 Hogar - Av. Libertador 6798</span>
+            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div id="dropdownUbicacion"
+               class="hidden absolute left-0 w-full mt-2 bg-gray-800 rounded shadow-lg z-10">
+            <button onclick="cambiarUbicacion('hogar')"
+                    class="block w-full text-left px-4 py-2 hover:bg-gray-700">
+              🏠 Hogar
+            </button>
+            <button onclick="cambiarUbicacion('trabajo')"
+                    class="block w-full text-left px-4 py-2 hover:bg-gray-700">
+              🏢 Trabajo
+            </button>
+          </div>
         </div>
 
-        <!-- Menú Sidebar -->
+        <!-- ► Enlaces del menú -->
         <nav class="space-y-2">
-          <a href="#" class="block text-gray-300 hover:text-white">📹 Cámaras en vivo</a>
-          <a href="#" class="block bg-emerald-400 text-gray-900 px-2 py-1 rounded">📁 Menú</a>
-          <a href="alertas.html" class="block text-gray-300 hover:text-white">🚨 Alertas</a>
-          <a href="comandos.html" class="block text-gray-300 hover:text-white">💻 Comandos</a>
+          <a href="inicio.html"
+             class="flex items-center px-4 py-2 rounded bg-emerald-500 text-gray-900">
+            <span class="mr-2">📷</span>Cámaras en vivo
+          </a>
+          <a href="alertas.html"
+             class="flex items-center px-4 py-2 rounded hover:bg-gray-800">
+            <span class="mr-2">🚨</span>Alertas
+          </a>
+          <a href="comandos.html"
+             class="flex items-center px-4 py-2 rounded hover:bg-gray-800">
+            <span class="mr-2">🛠️</span>Comandos
+          </a>
         </nav>
 
-        <!-- Otras cuentas -->
-        <div class="mt-8">
-          <p class="text-gray-400 text-sm mb-2">Otras cuentas:</p>
-          <ul class="space-y-1 text-gray-300 text-sm">
-            <li>1. Sofi</li>
-            <li>2. Eve</li>
-            <li>3. Male</li>
+        <!-- ► Otras cuentas -->
+        <div class="mt-8 text-sm">
+          <p class="text-gray-400 mb-2">Otras cuentas:</p>
+          <ul class="space-y-1 text-gray-300">
+            <li>👤 Sofi</li>
+            <li>👤 Eve</li>
+            <li>👤 Male</li>
           </ul>
         </div>
       </div>
 
-      <!-- Pie -->
+      <!-- ► Pie del sidebar -->
       <div class="text-sm text-gray-400">
         👤 Tomás<br>
         <span class="text-xs">Sesión activa</span>
       </div>
     </aside>
 
+
     <!-- CONTENIDO PRINCIPAL -->
     <main class="flex-1 p-8 overflow-y-auto">
-      <div class="grid grid-cols-2 gap-6">
-        <!-- Cámaras con clase 'camera' para zoom -->
-        <div class="camera bg-gray-800 rounded-lg p-4 shadow text-center cursor-pointer transition duration-300">
-          <div class="bg-gray-600 h-48 rounded mb-2"></div>
-          <p class="text-sm text-gray-300">Puerta principal</p>
-        </div>
+      <h1 class="text-3xl font-bold text-emerald-400 mb-6">Cámaras en vivo</h1>
 
-        <div class="camera bg-gray-800 rounded-lg p-4 shadow text-center cursor-pointer transition duration-300">
-          <div class="bg-gray-600 h-48 rounded mb-2"></div>
-          <p class="text-sm text-gray-300">Puerta lateral izquierda</p>
-        </div>
-
-        <div class="camera bg-gray-800 rounded-lg p-4 shadow text-center cursor-pointer transition duration-300">
-          <div class="bg-gray-600 h-48 rounded mb-2"></div>
-          <p class="text-sm text-gray-300">Puerta lateral derecha</p>
-        </div>
-
-        <div class="camera bg-gray-800 rounded-lg p-4 shadow text-center cursor-pointer transition duration-300">
-          <div class="bg-gray-600 h-48 rounded mb-2"></div>
-          <p class="text-sm text-gray-300">Puerta de atrás</p>
-        </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+        <!-- Imagen de Cámara 1 -->
+        <img src="https://via.placeholder.com/800x600" alt="Cámara 1"
+             class="camera w-full h-64 bg-gray-800 rounded-lg shadow-md cursor-pointer object-cover transition hover:scale-105"
+             onclick="zoom(this)" />
+        <!-- Imagen de Cámara 2 -->
+        <img src="https://via.placeholder.com/800x600" alt="Cámara 2"
+             class="camera w-full h-64 bg-gray-800 rounded-lg shadow-md cursor-pointer object-cover transition hover:scale-105"
+             onclick="zoom(this)" />
+        <!-- Imagen de Cámara 3 -->
+        <img src="https://via.placeholder.com/800x600" alt="Cámara 3"
+             class="camera w-full h-64 bg-gray-800 rounded-lg shadow-md cursor-pointer object-cover transition hover:scale-105"
+             onclick="zoom(this)" />
+        <!-- Imagen de Cámara 4 -->
+        <img src="https://via.placeholder.com/800x600" alt="Cámara 4"
+             class="camera w-full h-64 bg-gray-800 rounded-lg shadow-md cursor-pointer object-cover transition hover:scale-105"
+             onclick="zoom(this)" />
       </div>
     </main>
   </div>
 
-  <!-- Script para hacer zoom al hacer clic -->
-  <script> 
-    const cameras = document.querySelectorAll('.camera');
-    cameras.forEach(camera => {
-      camera.addEventListener('click', () => {
-        camera.classList.toggle('fixed');
-        camera.classList.toggle('top-0');
-        camera.classList.toggle('left-0');
-        camera.classList.toggle('w-screen');
-        camera.classList.toggle('h-screen');
-        camera.classList.toggle('z-50');
-        camera.classList.toggle('bg-black');
-        camera.classList.toggle('p-8');
-        camera.classList.toggle('rounded-none');
-      });
+
+  <!-- SCRIPTS -->
+  <script>
+    // ► Muestra u oculta el dropdown de Ubicación
+    function toggleDropdown() {
+      const dropdown = document.getElementById('dropdownUbicacion');
+      dropdown.classList.toggle('hidden');
+    }
+
+    // ► Cambia la ubicación o muestra alerta si no está disponible
+    function cambiarUbicacion(opcion) {
+      const ubicacion = document.getElementById('ubicacionActual');
+      const dropdown = document.getElementById('dropdownUbicacion');
+
+      if (opcion === 'hogar') {
+        ubicacion.textContent = '🏠 Hogar - Av. Libertador 6798';
+      } else {
+        alert("⚠️ Cambio a trabajo no disponible aún.");
+        ubicacion.textContent = '🏠 Hogar - Av. Libertador 6798';
+      }
+      dropdown.classList.add('hidden');
+    }
+
+    // ► Cierra el dropdown si se hace clic fuera
+    window.addEventListener('click', function(e) {
+      const btn = document.getElementById('ubicacionBtn');
+      const dropdown = document.getElementById('dropdownUbicacion');
+      if (!btn.contains(e.target)) {
+        dropdown.classList.add('hidden');
+      }
     });
+
+    // ► Zoom de cámaras con botón “×” y overlay
+    function zoom(img) {
+      // 1) Crear overlay semitransparente
+      const overlay = document.createElement("div");
+      overlay.className = "overlay";
+      overlay.onclick = closeZoom; // Cierra al clicar el fondo
+      document.body.appendChild(overlay);
+
+      // 2) Crear imagen ampliada
+      const zoomedImg = document.createElement("img");
+      zoomedImg.src = img.src;
+      zoomedImg.alt = img.alt;
+      zoomedImg.className = "zoomed object-cover";
+      document.body.appendChild(zoomedImg);
+
+      // 3) Crear botón de cierre “×”
+      const closeBtn = document.createElement("button");
+      closeBtn.innerHTML = "×";
+      closeBtn.className = `
+        absolute top-4 right-4 z-60 text-white text-3xl font-bold 
+        focus:outline-none
+      `;
+      closeBtn.style.background = "transparent";
+      closeBtn.onclick = closeZoom;
+      document.body.appendChild(closeBtn);
+
+      // 4) Guardar referencias en el overlay
+      overlay._zoomedImg = zoomedImg;
+      overlay._closeBtn = closeBtn;
+    }
+
+    // ► Función para cerrar zoom (elimina overlay, imagen y botón)
+    function closeZoom(event) {
+      let overlay;
+      if (event.currentTarget.classList.contains("overlay")) {
+        overlay = event.currentTarget;
+      } else {
+        overlay = document.querySelector(".overlay");
+      }
+      if (!overlay) return;
+      if (overlay._zoomedImg) overlay._zoomedImg.remove();
+      if (overlay._closeBtn) overlay._closeBtn.remove();
+      overlay.remove();
+    }
   </script>
 
 </body>

@@ -6,52 +6,149 @@
   <title>Comandos - EVA</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-950 text-white font-sans h-screen">
-  <div class="flex h-full">
-    <!-- Sidebar -->
-    <aside class="w-64 bg-gray-900 p-4 flex flex-col justify-between">
-      <div>
-        <div class="text-emerald-400 font-bold text-lg mb-4">
-          🏠 Hogar<br>
-          <span class="text-sm text-gray-400">Av. Libertador 6798</span>
-        </div>
-        <nav class="space-y-2">
-          <a href="inicio.html" class="block text-gray-300 hover:text-white">📹 Cámaras en vivo</a>
-          <a href="alertas.html" class="block text-gray-300 hover:text-white">🚨 Alertas</a>
-          <a href="#" class="block bg-emerald-400 text-gray-900 px-2 py-1 rounded">💻 Comandos</a>
-        </nav>
-        <div class="mt-8">
-          <p class="text-gray-400 text-sm mb-2">Otras cuentas:</p>
-          <ul class="space-y-1 text-gray-300 text-sm">
-            <li>1. Sofi</li>
-            <li>2. Eve</li>
-            <li>3. Male</li>
-          </ul>
-        </div>
-      </div>
-      <div class="text-sm text-gray-400">👤 Tomás<br><span class="text-xs">Sesión activa</span></div>
-    </aside>
+<body class="flex bg-gray-950 text-white font-sans">
 
-    <!-- Contenido -->
-    <main class="flex-1 p-8 overflow-y-auto">
-      <h1 class="text-2xl font-bold mb-6">Comandos del hogar</h1>
-      <div class="grid grid-cols-2 gap-6">
-        <div class="bg-gray-800 p-4 rounded shadow">
-          <h2 class="text-xl font-semibold mb-2">Puertas</h2>
-          <div class="space-x-2">
-            <button class="bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded">Abrir puertas</button>
-            <button class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">Cerrar puertas</button>
-          </div>
-        </div>
-        <div class="bg-gray-800 p-4 rounded shadow">
-          <h2 class="text-xl font-semibold mb-2">Ventanas</h2>
-          <div class="space-x-2">
-            <button class="bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded">Abrir ventanas</button>
-            <button class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">Cerrar ventanas</button>
-          </div>
+  <!-- Sidebar -->
+  <aside class="w-64 h-screen bg-gray-900 p-6 flex flex-col justify-between">
+    <div>
+      <!-- ► Dropdown Ubicación -->
+      <div class="relative mb-6">
+        <button id="ubicacionBtn"
+                onclick="toggleDropdown()"
+                class="w-full flex justify-between items-center bg-gray-800 text-white p-2 rounded hover:bg-gray-700">
+          <span id="ubicacionActual">🏠 Hogar - Av. Libertador 6798</span>
+          <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div id="dropdownUbicacion"
+             class="hidden absolute left-0 w-full mt-2 bg-gray-800 rounded shadow-lg z-10">
+          <button onclick="cambiarUbicacion('hogar')"
+                  class="block w-full text-left px-4 py-2 hover:bg-gray-700">
+            🏠 Hogar
+          </button>
+          <button onclick="cambiarUbicacion('trabajo')"
+                  class="block w-full text-left px-4 py-2 hover:bg-gray-700">
+            🏢 Trabajo
+          </button>
         </div>
       </div>
-    </main>
-  </div>
+
+      <!-- ► Menú del sidebar -->
+      <nav class="space-y-2 mb-6">
+        <a href="inicio.html" class="flex items-center px-4 py-2 rounded hover:bg-gray-800">
+          <span class="mr-2">📷</span>Cámaras en vivo
+        </a>
+        <a href="alertas.html" class="flex items-center px-4 py-2 rounded hover:bg-gray-800">
+          <span class="mr-2">🚨</span>Alertas
+        </a>
+        <a href="comandos.html" class="flex items-center px-4 py-2 rounded bg-emerald-500 text-gray-900">
+          <span class="mr-2">🛠️</span>Comandos
+        </a>
+      </nav>
+
+      <!-- ► Otras cuentas -->
+      <div class="text-sm text-gray-300">
+        <p class="mb-2 text-gray-400">Otras cuentas:</p>
+        <ul class="space-y-1">
+          <li>👤 Sofi</li>
+          <li>👤 Eve</li>
+          <li>👤 Male</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ► Pie del sidebar -->
+    <div class="text-sm text-gray-400">
+      Tomás - sesión activa
+    </div>
+  </aside>
+
+  <!-- Contenido -->
+  <main class="flex-1 p-10 space-y-8">
+    <h1 class="text-3xl font-bold text-emerald-400 mb-6">Control de Puertas y Ventanas</h1>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Cada ítem -->
+      <div class="space-y-2">
+        <p>🚪 Puerta principal <span id="estado-1">🔓</span></p>
+        <button onclick="toggle(this, 'estado-1')" class="btn px-4 py-2 bg-red-500 text-white rounded">Cerrar</button>
+      </div>
+
+      <div class="space-y-2">
+        <p>🚪 Puerta trasera <span id="estado-2">🔓</span></p>
+        <button onclick="toggle(this, 'estado-2')" class="btn px-4 py-2 bg-red-500 text-white rounded">Cerrar</button>
+      </div>
+
+      <div class="space-y-2">
+        <p>🚪 Puerta del lavadero <span id="estado-3">🔓</span></p>
+        <button onclick="toggle(this, 'estado-3')" class="btn px-4 py-2 bg-red-500 text-white rounded">Cerrar</button>
+      </div>
+
+      <div class="space-y-2">
+        <p>🪟 Ventana del living <span id="estado-4">🔓</span></p>
+        <button onclick="toggle(this, 'estado-4')" class="btn px-4 py-2 bg-red-500 text-white rounded">Cerrar</button>
+      </div>
+
+      <div class="space-y-2">
+        <p>🪟 Ventana del dormitorio <span id="estado-5">🔓</span></p>
+        <button onclick="toggle(this, 'estado-5')" class="btn px-4 py-2 bg-red-500 text-white rounded">Cerrar</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Script de estados de puertas/ventanas -->
+  <script>
+    function toggle(button, estadoId) {
+      const estado = document.getElementById(estadoId);
+      const texto = button.textContent.trim();
+
+      if (texto === "Cerrar") {
+        button.textContent = "Abrir";
+        button.classList.remove("bg-red-500");
+        button.classList.add("bg-green-500");
+        estado.textContent = "🔒";
+      } else {
+        button.textContent = "Cerrar";
+        button.classList.remove("bg-green-500");
+        button.classList.add("bg-red-500");
+        estado.textContent = "🔓";
+      }
+    }
+  </script>
+
+  <!-- Script para el dropdown -->
+  <script>
+    // Muestra u oculta el dropdown de Ubicación
+    function toggleDropdown() {
+      const dropdown = document.getElementById('dropdownUbicacion');
+      dropdown.classList.toggle('hidden');
+    }
+
+    // Cambia la ubicación o muestra alerta si no está disponible
+    function cambiarUbicacion(opcion) {
+      const ubicacion = document.getElementById('ubicacionActual');
+      const dropdown = document.getElementById('dropdownUbicacion');
+
+      if (opcion === 'hogar') {
+        ubicacion.textContent = '🏠 Hogar - Av. Libertador 6798';
+      } else {
+        alert("⚠️ Cambio a trabajo no disponible aún.");
+        ubicacion.textContent = '🏠 Hogar - Av. Libertador 6798';
+      }
+      dropdown.classList.add('hidden');
+    }
+
+    // Cierra el dropdown al hacer clic fuera
+    window.addEventListener('click', function(e) {
+      const btn = document.getElementById('ubicacionBtn');
+      const dropdown = document.getElementById('dropdownUbicacion');
+      if (!btn.contains(e.target)) {
+        dropdown.classList.add('hidden');
+      }
+    });
+  </script>
+
 </body>
 </html>
