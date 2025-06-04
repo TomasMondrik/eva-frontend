@@ -4,35 +4,69 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Registrarse - EVA</title>
-  <script src="https://cdn.tailwindcss.com"></script> <!-- Importa Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
+<body class="flex items-center justify-center min-h-screen bg-gray-950 text-white">
+  <div class="w-full max-w-sm p-6 bg-gray-900 rounded shadow-md">
+    <h2 class="text-2xl font-bold text-center text-emerald-400 mb-6">Crear cuenta</h2>
+    
+    <form onsubmit="registrar(event)" class="space-y-4">
+      <input type="text" placeholder="Nombre completo" class="w-full p-2 rounded bg-gray-800 text-white" required />
+      <input type="email" placeholder="Correo electrónico" class="w-full p-2 rounded bg-gray-800 text-white" required />
+      <input type="password" placeholder="Contraseña" class="w-full p-2 rounded bg-gray-800 text-white" required />
+      
+      <label class="flex items-center text-sm text-gray-300">
+        <input type="checkbox" id="terminos" class="mr-2" required />
+        Acepto los <button type="button" onclick="mostrarModal()" class="text-emerald-400 hover:underline ml-1">términos y condiciones</button>
+      </label>
 
-<body class="bg-gray-100 text-gray-800 flex items-center justify-center h-screen">
-  <div class="bg-white p-8 rounded shadow-md w-full max-w-md">
-    <h1 class="text-3xl font-bold mb-6 text-center">Registrarse</h1>
-
-    <div class="mb-6 flex justify-center">
-      <div class="w-20 h-20 bg-gray-300 rounded"></div>
-    </div>
-
-    <form id="registerForm" class="space-y-4">
-      <input type="text" placeholder="Nombre completo" class="w-full border rounded px-4 py-2" required />
-      <input type="email" placeholder="Email" class="w-full border rounded px-4 py-2" required />
-      <input type="password" placeholder="Contraseña" class="w-full border rounded px-4 py-2" required />
-      <input type="password" placeholder="Confirmar contraseña" class="w-full border rounded px-4 py-2" required />
-
-      <button type="submit" class="w-full bg-emerald-500 text-white py-2 rounded hover:bg-emerald-600 transition">
-        Crear cuenta
+      <button type="submit" class="w-full bg-emerald-400 text-black p-2 rounded hover:bg-emerald-300">
+        Registrarse
       </button>
     </form>
+
+    <p class="mt-4 text-center text-sm text-gray-400">
+      ¿Ya tenés cuenta? <a href="login.html" class="text-emerald-400 hover:underline">Iniciar sesión</a>
+    </p>
+
+    <p class="mt-2 text-center text-sm text-gray-400">
+      <a href="index.html" class="text-emerald-400 hover:underline">⬅️ Volver a pantalla principal</a>
+    </p>
   </div>
 
- <script>
-  const form = document.getElementById('registerForm'); // asumimos que tu formulario tiene ese ID
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    window.location.href = 'inicio.html';
-  });
-</script>
+  <!-- Modal -->
+  <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+    <div class="bg-gray-800 p-6 rounded max-w-md text-white text-sm">
+      <h3 class="text-lg font-bold mb-2 text-emerald-400">Términos y Condiciones</h3>
+      <p class="mb-4">
+        Al usar la plataforma EVA, aceptás que tus datos sean utilizados para mejorar la experiencia de usuario. 
+        No compartiremos tu información con terceros sin tu consentimiento.
+        Esta aplicación está en desarrollo y no implica responsabilidades legales.
+      </p>
+      <div class="text-right">
+        <button onclick="cerrarModal()" class="bg-emerald-400 text-black px-4 py-2 rounded hover:bg-emerald-300">Aprobar</button>
+      </div>
+    </div>
+  </div>
 
+  <script>
+    function registrar(event) {
+      event.preventDefault();
+      const checkbox = document.getElementById('terminos');
+      if (!checkbox.checked) {
+        alert('Debes aceptar los términos y condiciones para continuar.');
+        return;
+      }
+      window.location.href = "inicio.html";
+    }
+
+    function mostrarModal() {
+      document.getElementById('modal').classList.remove('hidden');
+    }
+
+    function cerrarModal() {
+      document.getElementById('modal').classList.add('hidden');
+    }
+  </script>
 </body>
+</html>

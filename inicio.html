@@ -3,201 +3,139 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Pantalla de inicio - EVA</title>
+  <title>Inicio - EVA</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    /* Estilos para el overlay semitransparente */
-    .overlay {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.8);
-      z-index: 40;
-    }
-    /* Imagen ampliada en el centro */
-    .zoomed {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      width: 90vw;
-      height: 90vh;
-      transform: translate(-50%, -50%);
-      z-index: 50;
-      box-shadow: 0 0 15px rgba(0,0,0,0.5);
-      border-radius: 1rem;
-    }
-  </style>
 </head>
-<body class="flex bg-gray-950 text-white font-sans h-screen">
+<body class="flex bg-gray-950 text-white font-sans">
 
-  <!-- CONTENEDOR PRINCIPAL: Sidebar + Contenido -->
-  <div class="flex h-full w-full">
-    
-    <!-- SIDEBAR -->
-    <aside class="w-64 bg-gray-900 p-6 flex flex-col justify-between">
-      <div>
-        <!-- ► Dropdown Ubicación -->
-        <div class="relative mb-6">
-          <button id="ubicacionBtn"
-                  onclick="toggleDropdown()"
-                  class="w-full flex justify-between items-center bg-gray-800 text-white p-2 rounded hover:bg-gray-700">
-            <span id="ubicacionActual">🏠 Hogar - Av. Libertador 6798</span>
-            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M19 9l-7 7-7-7" />
-            </svg>
-          </button>
-          <div id="dropdownUbicacion"
-               class="hidden absolute left-0 w-full mt-2 bg-gray-800 rounded shadow-lg z-10">
-            <button onclick="cambiarUbicacion('hogar')"
-                    class="block w-full text-left px-4 py-2 hover:bg-gray-700">
-              🏠 Hogar
-            </button>
-            <button onclick="cambiarUbicacion('trabajo')"
-                    class="block w-full text-left px-4 py-2 hover:bg-gray-700">
-              🏢 Trabajo
-            </button>
-          </div>
-        </div>
-
-        <!-- ► Enlaces del menú -->
-        <nav class="space-y-2">
-          <a href="inicio.html"
-             class="flex items-center px-4 py-2 rounded bg-emerald-500 text-gray-900">
-            <span class="mr-2">📷</span>Cámaras en vivo
-          </a>
-          <a href="alertas.html"
-             class="flex items-center px-4 py-2 rounded hover:bg-gray-800">
-            <span class="mr-2">🚨</span>Alertas
-          </a>
-          <a href="comandos.html"
-             class="flex items-center px-4 py-2 rounded hover:bg-gray-800">
-            <span class="mr-2">🛠️</span>Comandos
-          </a>
-        </nav>
-
-        <!-- ► Otras cuentas -->
-        <div class="mt-8 text-sm">
-          <p class="text-gray-400 mb-2">Otras cuentas:</p>
-          <ul class="space-y-1 text-gray-300">
-            <li>👤 Sofi</li>
-            <li>👤 Eve</li>
-            <li>👤 Male</li>
-          </ul>
+  <!-- Sidebar -->
+  <aside class="w-64 h-screen bg-gray-900 p-6 flex flex-col justify-between">
+    <div>
+      <!-- Dropdown de ubicación -->
+      <div class="relative mb-6">
+        <button id="ubicacionBtn" onclick="toggleDropdown()" class="w-full flex justify-between items-center bg-gray-800 text-white p-2 rounded hover:bg-gray-700">
+          <span id="ubicacionActual">🏠 Hogar - Av. Libertador 6798</span>
+          <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div id="dropdownUbicacion" class="hidden absolute left-0 w-full mt-2 bg-gray-800 rounded shadow-lg z-10">
+          <button onclick="cambiarUbicacion('hogar')" class="block w-full text-left px-4 py-2 hover:bg-gray-700">🏠 Hogar</button>
+          <button onclick="cambiarUbicacion('trabajo')" class="block w-full text-left px-4 py-2 hover:bg-gray-700">🏢 Trabajo</button>
         </div>
       </div>
 
-      <!-- ► Pie del sidebar -->
-      <div class="text-sm text-gray-400">
-        👤 Tomás<br>
-        <span class="text-xs">Sesión activa</span>
+      <!-- Menú de navegación -->
+      <nav class="space-y-2">
+        <a href="inicio.html" class="block px-4 py-2 rounded hover:bg-gray-800">📷 Cámaras en vivo</a>
+        <a href="alertas.html" class="block px-4 py-2 rounded hover:bg-gray-800">🚨 Alertas</a>
+        <a href="comandos.html" class="block px-4 py-2 rounded hover:bg-gray-800">🛠️ Comandos</a>
+      </nav>
+    </div>
+    <div class="text-sm text-gray-400">Tomás - sesión activa</div>
+  </aside>
+
+  <!-- Contenido principal -->
+  <main class="flex-1 p-10 space-y-8">
+    <h1 class="text-3xl font-bold text-emerald-400 mb-6">Cámaras en vivo</h1>
+
+    <!-- Cámaras -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <img src="https://placehold.co/600x350?text=Cámara+1" class="rounded-lg shadow-lg cursor-pointer hover:scale-105 transition" alt="Cámara 1">
+      <img src="https://placehold.co/600x350?text=Cámara+2" class="rounded-lg shadow-lg cursor-pointer hover:scale-105 transition" alt="Cámara 2">
+      <img src="https://placehold.co/600x350?text=Cámara+3" class="rounded-lg shadow-lg cursor-pointer hover:scale-105 transition" alt="Cámara 3">
+      <img src="https://placehold.co/600x350?text=Cámara+4" class="rounded-lg shadow-lg cursor-pointer hover:scale-105 transition" alt="Cámara 4">
+    </div>
+
+    <!-- Usuarios -->
+    <h2 class="text-xl text-emerald-300 mt-10">👥 Usuarios conectados</h2>
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mt-4">
+      <button onclick="verActividad('Martina')" class="bg-gray-800 hover:bg-gray-700 p-4 rounded">👩 Martina</button>
+      <button onclick="verActividad('Sofía')" class="bg-gray-800 hover:bg-gray-700 p-4 rounded">👩 Sofía</button>
+      <button onclick="verActividad('Julián')" class="bg-gray-800 hover:bg-gray-700 p-4 rounded">👨 Julián</button>
+    </div>
+  </main>
+
+  <!-- Modal de actividad -->
+  <div id="modalActividad" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+    <div class="bg-gray-800 p-6 rounded text-white max-w-sm w-full">
+      <h3 class="text-lg font-bold mb-2 text-emerald-400" id="modalNombre"></h3>
+      <p id="infoActividad" class="mb-4 text-sm"></p>
+      <div class="text-right">
+        <button onclick="cerrarActividad()" class="bg-emerald-400 text-black px-4 py-2 rounded hover:bg-emerald-300">Cerrar</button>
       </div>
-    </aside>
-
-
-    <!-- CONTENIDO PRINCIPAL -->
-    <main class="flex-1 p-8 overflow-y-auto">
-      <h1 class="text-3xl font-bold text-emerald-400 mb-6">Cámaras en vivo</h1>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
-        <!-- Imagen de Cámara 1 -->
-        <img src="https://via.placeholder.com/800x600" alt="Cámara 1"
-             class="camera w-full h-64 bg-gray-800 rounded-lg shadow-md cursor-pointer object-cover transition hover:scale-105"
-             onclick="zoom(this)" />
-        <!-- Imagen de Cámara 2 -->
-        <img src="https://via.placeholder.com/800x600" alt="Cámara 2"
-             class="camera w-full h-64 bg-gray-800 rounded-lg shadow-md cursor-pointer object-cover transition hover:scale-105"
-             onclick="zoom(this)" />
-        <!-- Imagen de Cámara 3 -->
-        <img src="https://via.placeholder.com/800x600" alt="Cámara 3"
-             class="camera w-full h-64 bg-gray-800 rounded-lg shadow-md cursor-pointer object-cover transition hover:scale-105"
-             onclick="zoom(this)" />
-        <!-- Imagen de Cámara 4 -->
-        <img src="https://via.placeholder.com/800x600" alt="Cámara 4"
-             class="camera w-full h-64 bg-gray-800 rounded-lg shadow-md cursor-pointer object-cover transition hover:scale-105"
-             onclick="zoom(this)" />
-      </div>
-    </main>
+    </div>
   </div>
 
-
-  <!-- SCRIPTS -->
+  <!-- Script -->
   <script>
-    // ► Muestra u oculta el dropdown de Ubicación
+    // Ubicación
     function toggleDropdown() {
-      const dropdown = document.getElementById('dropdownUbicacion');
-      dropdown.classList.toggle('hidden');
+      const dropdown = document.getElementById("dropdownUbicacion");
+      dropdown.classList.toggle("hidden");
     }
 
-    // ► Cambia la ubicación o muestra alerta si no está disponible
-    function cambiarUbicacion(opcion) {
-      const ubicacion = document.getElementById('ubicacionActual');
-      const dropdown = document.getElementById('dropdownUbicacion');
-
-      if (opcion === 'hogar') {
-        ubicacion.textContent = '🏠 Hogar - Av. Libertador 6798';
+    function cambiarUbicacion(ubicacion) {
+      const ubicacionActual = document.getElementById("ubicacionActual");
+      if (ubicacion === "hogar") {
+        ubicacionActual.textContent = "🏠 Hogar - Av. Libertador 6798";
       } else {
-        alert("⚠️ Cambio a trabajo no disponible aún.");
-        ubicacion.textContent = '🏠 Hogar - Av. Libertador 6798';
+        ubicacionActual.textContent = "🏢 Trabajo - Monroe 2456";
       }
-      dropdown.classList.add('hidden');
+      toggleDropdown();
     }
 
-    // ► Cierra el dropdown si se hace clic fuera
-    window.addEventListener('click', function(e) {
-      const btn = document.getElementById('ubicacionBtn');
-      const dropdown = document.getElementById('dropdownUbicacion');
-      if (!btn.contains(e.target)) {
-        dropdown.classList.add('hidden');
+    // Usuarios y actividad
+    const usuarios = {
+      Martina: {
+        entrada: "2025-06-03T18:30:00",
+        salida: "2025-06-04T10:15:00"
+      },
+      Sofía: {
+        entrada: "2025-06-01T09:00:00",
+        salida: "2025-06-03T20:00:00"
+      },
+      Julián: {
+        entrada: "2025-06-04T08:00:00",
+        salida: "2025-06-02T17:45:00"
       }
-    });
+    };
 
-    // ► Zoom de cámaras con botón “×” y overlay
-    function zoom(img) {
-      // 1) Crear overlay semitransparente
-      const overlay = document.createElement("div");
-      overlay.className = "overlay";
-      overlay.onclick = closeZoom; // Cierra al clicar el fondo
-      document.body.appendChild(overlay);
+    function verActividad(nombre) {
+      const datos = usuarios[nombre];
+      const entrada = new Date(datos.entrada);
+      const salida = new Date(datos.salida);
+      let ultimoMovimiento = "";
 
-      // 2) Crear imagen ampliada
-      const zoomedImg = document.createElement("img");
-      zoomedImg.src = img.src;
-      zoomedImg.alt = img.alt;
-      zoomedImg.className = "zoomed object-cover";
-      document.body.appendChild(zoomedImg);
+      if (entrada > salida) {
+        ultimoMovimiento = `Entró hace ${diasDesde(entrada)}.`;
+      } else {
+        ultimoMovimiento = `Salió hace ${diasDesde(salida)}.`;
+      }
 
-      // 3) Crear botón de cierre “×”
-      const closeBtn = document.createElement("button");
-      closeBtn.innerHTML = "×";
-      closeBtn.className = `
-        absolute top-4 right-4 z-60 text-white text-3xl font-bold 
-        focus:outline-none
+      document.getElementById("modalNombre").textContent = `Actividad de ${nombre}`;
+      document.getElementById("infoActividad").innerHTML = `
+        🟢 Última entrada: ${entrada.toLocaleString()}<br>
+        🔴 Última salida: ${salida.toLocaleString()}<br><br>
+        <strong>Último movimiento:</strong> ${ultimoMovimiento}
       `;
-      closeBtn.style.background = "transparent";
-      closeBtn.onclick = closeZoom;
-      document.body.appendChild(closeBtn);
-
-      // 4) Guardar referencias en el overlay
-      overlay._zoomedImg = zoomedImg;
-      overlay._closeBtn = closeBtn;
+      document.getElementById("modalActividad").classList.remove("hidden");
     }
 
-    // ► Función para cerrar zoom (elimina overlay, imagen y botón)
-    function closeZoom(event) {
-      let overlay;
-      if (event.currentTarget.classList.contains("overlay")) {
-        overlay = event.currentTarget;
-      } else {
-        overlay = document.querySelector(".overlay");
+    function cerrarActividad() {
+      document.getElementById("modalActividad").classList.add("hidden");
+    }
+
+    function diasDesde(fecha) {
+      const ahora = new Date();
+      const diffMs = ahora - fecha;
+      const diffHoras = Math.floor(diffMs / 1000 / 60 / 60);
+      if (diffHoras < 24) {
+        return `${diffHoras} horas`;
       }
-      if (!overlay) return;
-      if (overlay._zoomedImg) overlay._zoomedImg.remove();
-      if (overlay._closeBtn) overlay._closeBtn.remove();
-      overlay.remove();
+      const dias = Math.floor(diffHoras / 24);
+      return `${dias} día${dias !== 1 ? "s" : ""}`;
     }
   </script>
-
 </body>
 </html>
