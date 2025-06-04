@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pantalla de inicio - EVA</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-950 text-white font-sans h-screen">
+
+  <!-- CONTENEDOR PRINCIPAL: Sidebar + contenido -->
+  <div class="flex h-full">
+    
+    <!-- SIDEBAR -->
+    <aside class="w-64 bg-gray-900 p-4 flex flex-col justify-between">
+      <div>
+        <div class="text-emerald-400 font-bold text-lg mb-4">
+          🏠 Hogar<br>
+          <span class="text-sm text-gray-400">Av. Libertador 6798</span>
+        </div>
+
+        <!-- Menú Sidebar -->
+        <nav class="space-y-2">
+          <a href="#" class="block text-gray-300 hover:text-white">📹 Cámaras en vivo</a>
+          <a href="#" class="block bg-emerald-400 text-gray-900 px-2 py-1 rounded">📁 Menú</a>
+          <a href="alertas.html" class="block text-gray-300 hover:text-white">🚨 Alertas</a>
+          <a href="comandos.html" class="block text-gray-300 hover:text-white">💻 Comandos</a>
+        </nav>
+
+        <!-- Otras cuentas -->
+        <div class="mt-8">
+          <p class="text-gray-400 text-sm mb-2">Otras cuentas:</p>
+          <ul class="space-y-1 text-gray-300 text-sm">
+            <li>1. Sofi</li>
+            <li>2. Eve</li>
+            <li>3. Male</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Pie -->
+      <div class="text-sm text-gray-400">
+        👤 Tomás<br>
+        <span class="text-xs">Sesión activa</span>
+      </div>
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="flex-1 p-8 overflow-y-auto">
+      <div class="grid grid-cols-2 gap-6">
+        <!-- Cámaras con clase 'camera' para zoom -->
+        <div class="camera bg-gray-800 rounded-lg p-4 shadow text-center cursor-pointer transition duration-300">
+          <div class="bg-gray-600 h-48 rounded mb-2"></div>
+          <p class="text-sm text-gray-300">Puerta principal</p>
+        </div>
+
+        <div class="camera bg-gray-800 rounded-lg p-4 shadow text-center cursor-pointer transition duration-300">
+          <div class="bg-gray-600 h-48 rounded mb-2"></div>
+          <p class="text-sm text-gray-300">Puerta lateral izquierda</p>
+        </div>
+
+        <div class="camera bg-gray-800 rounded-lg p-4 shadow text-center cursor-pointer transition duration-300">
+          <div class="bg-gray-600 h-48 rounded mb-2"></div>
+          <p class="text-sm text-gray-300">Puerta lateral derecha</p>
+        </div>
+
+        <div class="camera bg-gray-800 rounded-lg p-4 shadow text-center cursor-pointer transition duration-300">
+          <div class="bg-gray-600 h-48 rounded mb-2"></div>
+          <p class="text-sm text-gray-300">Puerta de atrás</p>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Script para hacer zoom al hacer clic -->
+  <script> 
+    const cameras = document.querySelectorAll('.camera');
+    cameras.forEach(camera => {
+      camera.addEventListener('click', () => {
+        camera.classList.toggle('fixed');
+        camera.classList.toggle('top-0');
+        camera.classList.toggle('left-0');
+        camera.classList.toggle('w-screen');
+        camera.classList.toggle('h-screen');
+        camera.classList.toggle('z-50');
+        camera.classList.toggle('bg-black');
+        camera.classList.toggle('p-8');
+        camera.classList.toggle('rounded-none');
+      });
+    });
+  </script>
+
+</body>
+</html>

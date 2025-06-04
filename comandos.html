@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Comandos - EVA</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-950 text-white font-sans h-screen">
+  <div class="flex h-full">
+    <!-- Sidebar -->
+    <aside class="w-64 bg-gray-900 p-4 flex flex-col justify-between">
+      <div>
+        <div class="text-emerald-400 font-bold text-lg mb-4">
+          🏠 Hogar<br>
+          <span class="text-sm text-gray-400">Av. Libertador 6798</span>
+        </div>
+        <nav class="space-y-2">
+          <a href="inicio.html" class="block text-gray-300 hover:text-white">📹 Cámaras en vivo</a>
+          <a href="alertas.html" class="block text-gray-300 hover:text-white">🚨 Alertas</a>
+          <a href="#" class="block bg-emerald-400 text-gray-900 px-2 py-1 rounded">💻 Comandos</a>
+        </nav>
+        <div class="mt-8">
+          <p class="text-gray-400 text-sm mb-2">Otras cuentas:</p>
+          <ul class="space-y-1 text-gray-300 text-sm">
+            <li>1. Sofi</li>
+            <li>2. Eve</li>
+            <li>3. Male</li>
+          </ul>
+        </div>
+      </div>
+      <div class="text-sm text-gray-400">👤 Tomás<br><span class="text-xs">Sesión activa</span></div>
+    </aside>
+
+    <!-- Contenido -->
+    <main class="flex-1 p-8 overflow-y-auto">
+      <h1 class="text-2xl font-bold mb-6">Comandos del hogar</h1>
+      <div class="grid grid-cols-2 gap-6">
+        <div class="bg-gray-800 p-4 rounded shadow">
+          <h2 class="text-xl font-semibold mb-2">Puertas</h2>
+          <div class="space-x-2">
+            <button class="bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded">Abrir puertas</button>
+            <button class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">Cerrar puertas</button>
+          </div>
+        </div>
+        <div class="bg-gray-800 p-4 rounded shadow">
+          <h2 class="text-xl font-semibold mb-2">Ventanas</h2>
+          <div class="space-x-2">
+            <button class="bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded">Abrir ventanas</button>
+            <button class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">Cerrar ventanas</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
