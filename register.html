@@ -5,46 +5,118 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Registrarse - EVA</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'emerald': {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              200: '#a7f3d0',
+              300: '#6ee7b7',
+              400: '#34d399',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              800: '#065f46',
+              900: '#064e3b',
+              950: '#022c22'
+            },
+            'slate': {
+              950: '#020617',
+              900: '#0f172a',
+              800: '#1e293b',
+              700: '#334155',
+              600: '#475569',
+              500: '#64748b',
+              400: '#94a3b8',
+              300: '#cbd5e1',
+              200: '#e2e8f0',
+              100: '#f1f5f9',
+              50: '#f8fafc'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    .gradient-bg {
+      background: linear-gradient(135deg, #020617 0%, #0f172a 50%, #022c22 100%);
+    }
+    .glass-effect {
+      backdrop-filter: blur(16px);
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(16, 185, 129, 0.1);
+    }
+  </style>
 </head>
-<body class="flex items-center justify-center min-h-screen bg-gray-950 text-white">
-  <div class="w-full max-w-sm p-6 bg-gray-900 rounded shadow-md">
-    <h2 class="text-2xl font-bold text-center text-emerald-400 mb-6">Crear cuenta</h2>
+<body class="flex items-center justify-center min-h-screen gradient-bg text-slate-100 font-sans antialiased p-4">
+  <div class="w-full max-w-md p-8 glass-effect rounded-2xl shadow-2xl">
+    <div class="text-center mb-8">
+      <h1 class="text-3xl font-bold text-emerald-400 mb-2">EVA</h1>
+      <h2 class="text-xl font-medium text-slate-200">Crear cuenta</h2>
+      <p class="text-slate-400 text-sm mt-2">Únete al futuro de la seguridad</p>
+    </div>
     
-    <form onsubmit="registrar(event)" class="space-y-4">
-      <input type="text" placeholder="Nombre completo" class="w-full p-2 rounded bg-gray-800 text-white" required />
-      <input type="email" placeholder="Correo electrónico" class="w-full p-2 rounded bg-gray-800 text-white" required />
-      <input type="password" placeholder="Contraseña" class="w-full p-2 rounded bg-gray-800 text-white" required />
+    <form onsubmit="registrar(event)" class="space-y-6">
+      <div class="space-y-4">
+        <input type="text" placeholder="Nombre completo" 
+               class="w-full p-4 rounded-xl bg-slate-800/50 border border-slate-700/50 text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500/50 transition-all duration-300" 
+               required />
+        <input type="email" placeholder="Correo electrónico" 
+               class="w-full p-4 rounded-xl bg-slate-800/50 border border-slate-700/50 text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500/50 transition-all duration-300" 
+               required />
+        <input type="password" placeholder="Contraseña" 
+               class="w-full p-4 rounded-xl bg-slate-800/50 border border-slate-700/50 text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500/50 transition-all duration-300" 
+               required />
+      </div>
       
-      <label class="flex items-center text-sm text-gray-300">
-        <input type="checkbox" id="terminos" class="mr-2" required />
-        Acepto los <button type="button" onclick="mostrarModal()" class="text-emerald-400 hover:underline ml-1">términos y condiciones</button>
+      <label class="flex items-start text-sm text-slate-300 cursor-pointer">
+        <input type="checkbox" id="terminos" class="mt-1 mr-3 w-4 h-4 text-emerald-600 bg-slate-800 border-slate-600 rounded focus:ring-emerald-500 focus:ring-2" required />
+        <span>Acepto los 
+          <button type="button" onclick="mostrarModal()" class="text-emerald-400 hover:text-emerald-300 underline transition-colors">términos y condiciones</button>
+        </span>
       </label>
 
-      <button type="submit" class="w-full bg-emerald-400 text-black p-2 rounded hover:bg-emerald-300">
+      <button type="submit" 
+              class="w-full bg-gradient-to-r from-emerald-600 to-emerald-500 text-slate-900 p-4 rounded-xl hover:from-emerald-500 hover:to-emerald-400 transition-all duration-300 font-semibold shadow-lg hover:shadow-emerald-500/25 transform hover:scale-[1.02]">
         Registrarse
       </button>
     </form>
 
-    <p class="mt-4 text-center text-sm text-gray-400">
-      ¿Ya tenés cuenta? <a href="login.html" class="text-emerald-400 hover:underline">Iniciar sesión</a>
-    </p>
-
-    <p class="mt-2 text-center text-sm text-gray-400">
-      <a href="index.html" class="text-emerald-400 hover:underline">⬅️ Volver a pantalla principal</a>
-    </p>
+    <div class="mt-8 text-center space-y-4">
+      <p class="text-slate-400 text-sm">
+        ¿Ya tenés cuenta? 
+        <a href="login.html" class="text-emerald-400 hover:text-emerald-300 font-medium transition-colors">Iniciar sesión</a>
+      </p>
+      <p class="text-slate-500 text-sm">
+        <a href="index.html" class="hover:text-emerald-400 transition-colors flex items-center justify-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+          </svg>
+          Volver a inicio
+        </a>
+      </p>
+    </div>
   </div>
 
   <!-- Modal -->
-  <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
-    <div class="bg-gray-800 p-6 rounded max-w-md text-white text-sm">
-      <h3 class="text-lg font-bold mb-2 text-emerald-400">Términos y Condiciones</h3>
-      <p class="mb-4">
-        Al usar la plataforma EVA, aceptás que tus datos sean utilizados para mejorar la experiencia de usuario. 
-        No compartiremos tu información con terceros sin tu consentimiento.
-        Esta aplicación está en desarrollo y no implica responsabilidades legales.
-      </p>
+  <div id="modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center hidden z-50 p-4">
+    <div class="glass-effect p-8 rounded-2xl max-w-lg text-slate-100 shadow-2xl">
+      <h3 class="text-2xl font-bold mb-4 text-emerald-400">Términos y Condiciones</h3>
+      <div class="text-slate-300 text-sm leading-relaxed mb-6 space-y-3">
+        <p>Al usar la plataforma EVA, aceptás que tus datos sean utilizados para mejorar la experiencia de usuario.</p>
+        <p>No compartiremos tu información con terceros sin tu consentimiento expreso.</p>
+        <p class="text-slate-400">Esta aplicación está en desarrollo y no implica responsabilidades legales.</p>
+      </div>
       <div class="text-right">
-        <button onclick="cerrarModal()" class="bg-emerald-400 text-black px-4 py-2 rounded hover:bg-emerald-300">Aprobar</button>
+        <button onclick="cerrarModal()" 
+                class="bg-gradient-to-r from-emerald-600 to-emerald-500 text-slate-900 px-6 py-3 rounded-xl hover:from-emerald-500 hover:to-emerald-400 transition-all duration-300 font-semibold">
+          Entendido
+        </button>
       </div>
     </div>
   </div>

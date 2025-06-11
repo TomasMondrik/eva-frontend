@@ -4,47 +4,126 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>EVA</title>
-  <script src="https://cdn.tailwindcss.com"></script> <!-- Importa Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'emerald': {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              200: '#a7f3d0',
+              300: '#6ee7b7',
+              400: '#34d399',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              800: '#065f46',
+              900: '#064e3b',
+              950: '#022c22'
+            },
+            'slate': {
+              950: '#020617',
+              900: '#0f172a',
+              800: '#1e293b',
+              700: '#334155',
+              600: '#475569',
+              500: '#64748b',
+              400: '#94a3b8',
+              300: '#cbd5e1',
+              200: '#e2e8f0',
+              100: '#f1f5f9',
+              50: '#f8fafc'
+            }
+          },
+          fontFamily: {
+            'sans': ['Inter', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    .gradient-bg {
+      background: linear-gradient(135deg, #020617 0%, #0f172a 50%, #022c22 100%);
+    }
+    .glass-effect {
+      backdrop-filter: blur(16px);
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(16, 185, 129, 0.1);
+    }
+    .glow-emerald {
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+    }
+  </style>
 </head>
 
-<body class="bg-gray-950 text-white font-sans">
+<body class="gradient-bg text-slate-100 font-sans antialiased min-h-screen">
   <!-- Navbar -->
-  <nav class="flex items-center justify-between p-4 bg-gray-900 shadow-md">
+  <nav class="flex items-center justify-between p-6 glass-effect shadow-2xl relative z-10">
     <!-- Logo -->
-    <div class="text-2xl font-bold text-emerald-400">
+    <div class="text-3xl font-bold text-emerald-400 tracking-tight">
       EVA
+      <span class="text-xs font-normal text-slate-400 ml-2">Security System</span>
     </div>
 
     <!-- Botones -->
-    <div class="space-x-4">
-      <a href="login.html" class="px-4 py-2 border border-emerald-400 text-emerald-400 rounded hover:bg-emerald-400 hover:text-gray-900 transition">
-  Iniciar sesión
-</a>
-
-     <!-- Botón REGISTRARSE   -->
-<a href="register.html"                                   
-   class="px-4 py-2 bg-emerald-400 text-gray-900 rounded  
-          hover:bg-emerald-500 transition">
-  Registrarse
-</a>
-
+    <div class="flex items-center space-x-4">
+      <a href="login.html" class="px-6 py-2.5 border border-emerald-500/30 text-emerald-400 rounded-lg hover:bg-emerald-500/10 hover:border-emerald-400 transition-all duration-300 font-medium">
+        Iniciar sesión
+      </a>
+      <a href="register.html" class="px-6 py-2.5 bg-gradient-to-r from-emerald-600 to-emerald-500 text-slate-900 rounded-lg hover:from-emerald-500 hover:to-emerald-400 transition-all duration-300 font-medium shadow-lg hover:shadow-emerald-500/25">
+        Registrarse
+      </a>
     </div>
   </nav>
 
-  <!-- Bienvenida -->
-  <section class="text-center mt-32">
-    <h1 class="text-4xl font-bold mb-4 text-emerald-400">Bienvenido a EVA</h1>
-    <p class="text-gray-400 text-lg">Tu hogar más seguro, inteligente y accesible.</p>
-
-    <!--ACA VAN LAS FOTOS. NO SE DEFINIERON CUALES. Pegar source -->
-
- <!--   <div class="mt-10 flex justify-center gap-4">
-  <img src="https://via.placeholder.com/150" alt="imagen1" class="rounded shadow-md w-32 h-32 object-cover">
-  <img src="https://via.placeholder.com/150" alt="imagen2" class="rounded shadow-md w-32 h-32 object-cover">
-  <img src="https://via.placeholder.com/150" alt="imagen3" class="rounded shadow-md w-32 h-32 object-cover">
-</div>
--->
-
+  <!-- Hero Section -->
+  <section class="text-center mt-24 px-6">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-6xl font-bold mb-6 bg-gradient-to-r from-emerald-400 via-emerald-300 to-emerald-500 bg-clip-text text-transparent leading-tight">
+        Bienvenido a EVA
+      </h1>
+      <p class="text-slate-400 text-xl leading-relaxed max-w-2xl mx-auto font-light">
+        Tu hogar más seguro, inteligente y accesible con tecnología de vanguardia.
+      </p>
+      
+      <!-- Feature highlights -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 max-w-4xl mx-auto">
+        <div class="glass-effect p-6 rounded-xl hover:bg-emerald-950/20 transition-all duration-300 group">
+          <div class="w-12 h-12 bg-emerald-500/20 rounded-lg flex items-center justify-center mb-4 mx-auto group-hover:bg-emerald-500/30 transition-colors">
+            <svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-slate-200 mb-2">Monitoreo 24/7</h3>
+          <p class="text-slate-400 text-sm">Vigilancia continua con cámaras de alta definición</p>
+        </div>
+        
+        <div class="glass-effect p-6 rounded-xl hover:bg-emerald-950/20 transition-all duration-300 group">
+          <div class="w-12 h-12 bg-emerald-500/20 rounded-lg flex items-center justify-center mb-4 mx-auto group-hover:bg-emerald-500/30 transition-colors">
+            <svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-slate-200 mb-2">Control Inteligente</h3>
+          <p class="text-slate-400 text-sm">Gestión remota de puertas y ventanas</p>
+        </div>
+        
+        <div class="glass-effect p-6 rounded-xl hover:bg-emerald-950/20 transition-all duration-300 group">
+          <div class="w-12 h-12 bg-emerald-500/20 rounded-lg flex items-center justify-center mb-4 mx-auto group-hover:bg-emerald-500/30 transition-colors">
+            <svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5 5v-5zM9 17H4l5 5v-5zM12 3l7 7-7 7-7-7 7-7z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-slate-200 mb-2">Alertas Instantáneas</h3>
+          <p class="text-slate-400 text-sm">Notificaciones en tiempo real de actividad sospechosa</p>
+        </div>
+      </div>
+    </div>
   </section>
 </body>
 </html>

@@ -5,94 +5,303 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Comandos - EVA</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'emerald': {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              200: '#a7f3d0',
+              300: '#6ee7b7',
+              400: '#34d399',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              800: '#065f46',
+              900: '#064e3b',
+              950: '#022c22'
+            },
+            'slate': {
+              950: '#020617',
+              900: '#0f172a',
+              800: '#1e293b',
+              700: '#334155',
+              600: '#475569',
+              500: '#64748b',
+              400: '#94a3b8',
+              300: '#cbd5e1',
+              200: '#e2e8f0',
+              100: '#f1f5f9',
+              50: '#f8fafc'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    .gradient-bg {
+      background: linear-gradient(135deg, #020617 0%, #0f172a 50%, #022c22 100%);
+    }
+    .glass-effect {
+      backdrop-filter: blur(16px);
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(16, 185, 129, 0.1);
+    }
+    .control-card {
+      transition: all 0.3s ease;
+      background: linear-gradient(145deg, rgba(30, 41, 59, 0.5), rgba(15, 23, 42, 0.8));
+    }
+    .control-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(16, 185, 129, 0.1);
+    }
+  </style>
 </head>
-<body class="flex bg-gray-950 text-white font-sans">
+<body class="flex gradient-bg text-slate-100 font-sans antialiased min-h-screen">
 
   <!-- Sidebar izquierda -->
-  <aside class="w-64 h-screen bg-gray-900 p-6 flex flex-col justify-between relative">
+  <aside class="w-72 glass-effect p-6 flex flex-col justify-between shadow-2xl relative">
     <div>
+      <!-- Logo -->
+      <div class="mb-8">
+        <h1 class="text-2xl font-bold text-emerald-400 mb-1">EVA</h1>
+        <p class="text-xs text-slate-400">Security Dashboard</p>
+      </div>
+
       <!-- Dropdown ubicación -->
-      <div class="relative mb-6">
-        <button class="w-full flex justify-between items-center bg-gray-800 text-white p-2 rounded hover:bg-gray-700" disabled>
-          <span id="ubicacionActual">🏢 Trabajo - No disponible</span>
+      <div class="relative mb-8">
+        <button class="w-full flex justify-between items-center bg-slate-800/50 border border-slate-700/50 text-slate-400 p-4 rounded-xl cursor-not-allowed" disabled>
+          <div class="flex items-center gap-3">
+            <div class="w-2 h-2 bg-slate-600 rounded-full"></div>
+            <div class="text-left">
+              <div class="text-sm font-medium" id="ubicacionActual">Trabajo</div>
+              <div class="text-xs text-slate-500">No disponible</div>
+            </div>
+          </div>
         </button>
       </div>
 
       <!-- Menú navegación -->
-      <nav class="space-y-2 mb-6">
-        <a href="inicio.html" class="block px-4 py-2 rounded hover:bg-gray-800">📷 Cámaras en vivo</a>
-        <a href="alertas.html" class="block px-4 py-2 rounded hover:bg-gray-800">🚨 Alertas</a>
-        <a href="comandos.html" class="block px-4 py-2 rounded bg-emerald-600">🛠️ Comandos</a>
+      <nav class="space-y-2 mb-8">
+        <a href="inicio.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-800/50 text-slate-300 hover:text-slate-200 transition-all duration-200">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+          </svg>
+          <span>Cámaras</span>
+        </a>
+        <a href="alertas.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-800/50 text-slate-300 hover:text-slate-200 transition-all duration-200">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+          </svg>
+          <span>Alertas</span>
+        </a>
+        <a href="comandos.html" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4"></path>
+          </svg>
+          <span class="font-medium">Comandos</span>
+        </a>
       </nav>
 
       <!-- Lista de usuarios -->
-      <div class="space-y-2">
-        <p class="text-sm text-gray-400 mb-2">Usuarios:</p>
-        <button onclick="mostrarInfo('Sofi', this)" class="block w-full text-left px-4 py-2 rounded hover:bg-gray-800">👤 Sofi</button>
-        <button onclick="mostrarInfo('Eve', this)" class="block w-full text-left px-4 py-2 rounded hover:bg-gray-800">👤 Eve</button>
-        <button onclick="mostrarInfo('Malena', this)" class="block w-full text-left px-4 py-2 rounded hover:bg-gray-800">👤 Malena</button>
+      <div>
+        <h2 class="text-sm font-semibold text-slate-400 mb-4 uppercase tracking-wider">Usuarios</h2>
+        <div class="space-y-2">
+          <button onclick="mostrarInfo('Sofi', this)" class="w-full text-left bg-slate-800/30 border border-slate-700/30 px-4 py-3 rounded-xl hover:bg-slate-700/50 transition-all duration-200 flex items-center gap-3">
+            <div class="w-6 h-6 bg-slate-700 rounded-full flex items-center justify-center text-xs font-medium">S</div>
+            <span class="text-slate-200">Sofi</span>
+          </button>
+          <button onclick="mostrarInfo('Eve', this)" class="w-full text-left bg-slate-800/30 border border-slate-700/30 px-4 py-3 rounded-xl hover:bg-slate-700/50 transition-all duration-200 flex items-center gap-3">
+            <div class="w-6 h-6 bg-slate-700 rounded-full flex items-center justify-center text-xs font-medium">E</div>
+            <span class="text-slate-200">Eve</span>
+          </button>
+          <button onclick="mostrarInfo('Malena', this)" class="w-full text-left bg-slate-800/30 border border-slate-700/30 px-4 py-3 rounded-xl hover:bg-slate-700/50 transition-all duration-200 flex items-center gap-3">
+            <div class="w-6 h-6 bg-slate-700 rounded-full flex items-center justify-center text-xs font-medium">M</div>
+            <span class="text-slate-200">Malena</span>
+          </button>
+        </div>
       </div>
     </div>
 
-    <div class="text-sm text-gray-400 mt-6">
-      Tomás - sesión activa
+    <div class="pt-6 border-t border-slate-700/50">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 bg-emerald-500/20 rounded-full flex items-center justify-center">
+          <span class="text-emerald-400 text-sm font-semibold">T</span>
+        </div>
+        <div>
+          <div class="text-sm font-medium text-slate-200">Tomás</div>
+          <div class="text-xs text-slate-400">Sesión activa</div>
+        </div>
+      </div>
     </div>
   </aside>
 
   <!-- Contenido principal -->
-  <main class="flex-1 p-10 space-y-8 relative">
-    <h1 class="text-3xl font-bold text-emerald-400 mb-6">Control de Puertas y Ventanas</h1>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <!-- Ítems -->
-      <div class="space-y-2">
-        <p>🚪 Puerta principal <span id="estado-1">🔓</span></p>
-        <button onclick="toggle(this, 'estado-1')" class="px-4 py-2 bg-red-500 text-white rounded">Cerrar</button>
+  <main class="flex-1 p-8 space-y-8 relative overflow-y-auto">
+    <div class="max-w-6xl mx-auto">
+      <div class="mb-8">
+        <h1 class="text-3xl font-bold text-slate-100 mb-2">Control de Puertas y Ventanas</h1>
+        <p class="text-slate-400">Gestión remota de accesos y seguridad</p>
       </div>
 
-      <div class="space-y-2">
-        <p>🚪 Puerta trasera <span id="estado-2">🔓</span></p>
-        <button onclick="toggle(this, 'estado-2')" class="px-4 py-2 bg-red-500 text-white rounded">Cerrar</button>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Control items -->
+        <div class="control-card p-6 rounded-2xl border border-slate-700/50">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 bg-slate-700/50 rounded-lg flex items-center justify-center">
+                <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-slate-200">Puerta Principal</h3>
+                <p class="text-sm text-slate-400">Entrada frontal</p>
+              </div>
+            </div>
+            <div class="text-2xl" id="estado-1">🔓</div>
+          </div>
+          <button onclick="toggle(this, 'estado-1')" class="w-full px-4 py-3 bg-red-500/20 border border-red-500/30 text-red-400 rounded-xl hover:bg-red-500/30 transition-all duration-300 font-medium">
+            Cerrar
+          </button>
+        </div>
+
+        <div class="control-card p-6 rounded-2xl border border-slate-700/50">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 bg-slate-700/50 rounded-lg flex items-center justify-center">
+                <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-slate-200">Puerta Trasera</h3>
+                <p class="text-sm text-slate-400">Acceso jardín</p>
+              </div>
+            </div>
+            <div class="text-2xl" id="estado-2">🔓</div>
+          </div>
+          <button onclick="toggle(this, 'estado-2')" class="w-full px-4 py-3 bg-red-500/20 border border-red-500/30 text-red-400 rounded-xl hover:bg-red-500/30 transition-all duration-300 font-medium">
+            Cerrar
+          </button>
+        </div>
+
+        <div class="control-card p-6 rounded-2xl border border-slate-700/50">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 bg-slate-700/50 rounded-lg flex items-center justify-center">
+                <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-slate-200">Puerta Lavadero</h3>
+                <p class="text-sm text-slate-400">Acceso lateral</p>
+              </div>
+            </div>
+            <div class="text-2xl" id="estado-3">🔓</div>
+          </div>
+          <button onclick="toggle(this, 'estado-3')" class="w-full px-4 py-3 bg-red-500/20 border border-red-500/30 text-red-400 rounded-xl hover:bg-red-500/30 transition-all duration-300 font-medium">
+            Cerrar
+          </button>
+        </div>
+
+        <div class="control-card p-6 rounded-2xl border border-slate-700/50">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 bg-slate-700/50 rounded-lg flex items-center justify-center">
+                <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-slate-200">Ventana Living</h3>
+                <p class="text-sm text-slate-400">Sala principal</p>
+              </div>
+            </div>
+            <div class="text-2xl" id="estado-4">🔓</div>
+          </div>
+          <button onclick="toggle(this, 'estado-4')" class="w-full px-4 py-3 bg-red-500/20 border border-red-500/30 text-red-400 rounded-xl hover:bg-red-500/30 transition-all duration-300 font-medium">
+            Cerrar
+          </button>
+        </div>
+
+        <div class="control-card p-6 rounded-2xl border border-slate-700/50">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 bg-slate-700/50 rounded-lg flex items-center justify-center">
+                <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-slate-200">Ventana Dormitorio</h3>
+                <p class="text-sm text-slate-400">Habitación principal</p>
+              </div>
+            </div>
+            <div class="text-2xl" id="estado-5">🔓</div>
+          </div>
+          <button onclick="toggle(this, 'estado-5')" class="w-full px-4 py-3 bg-red-500/20 border border-red-500/30 text-red-400 rounded-xl hover:bg-red-500/30 transition-all duration-300 font-medium">
+            Cerrar
+          </button>
+        </div>
       </div>
 
-      <div class="space-y-2">
-        <p>🚪 Puerta del lavadero <span id="estado-3">🔓</span></p>
-        <button onclick="toggle(this, 'estado-3')" class="px-4 py-2 bg-red-500 text-white rounded">Cerrar</button>
-      </div>
-
-      <div class="space-y-2">
-        <p>🪟 Ventana del living <span id="estado-4">🔓</span></p>
-        <button onclick="toggle(this, 'estado-4')" class="px-4 py-2 bg-red-500 text-white rounded">Cerrar</button>
-      </div>
-
-      <div class="space-y-2">
-        <p>🪟 Ventana del dormitorio <span id="estado-5">🔓</span></p>
-        <button onclick="toggle(this, 'estado-5')" class="px-4 py-2 bg-red-500 text-white rounded">Cerrar</button>
+      <!-- Estado general -->
+      <div class="mt-8 glass-effect p-6 rounded-2xl">
+        <h2 class="text-xl font-semibold text-slate-200 mb-4">Estado General del Sistema</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="text-center">
+            <div class="text-2xl font-bold text-red-400">5</div>
+            <p class="text-sm text-slate-400">Accesos Abiertos</p>
+          </div>
+          <div class="text-center">
+            <div class="text-2xl font-bold text-emerald-400">0</div>
+            <p class="text-sm text-slate-400">Accesos Cerrados</p>
+          </div>
+          <div class="text-center">
+            <div class="text-2xl font-bold text-slate-400">5</div>
+            <p class="text-sm text-slate-400">Total Monitoreados</p>
+          </div>
+        </div>
       </div>
     </div>
 
     <!-- Info usuarios -->
-    <div id="infoUsuario" class="hidden absolute bg-green-600 text-white p-4 rounded shadow-lg top-20 left-80 w-64 z-20">
-      <p id="textoUsuario"></p>
-    </div>
+    <div id="infoUsuario" class="hidden absolute glass-effect text-slate-100 p-4 rounded-xl shadow-2xl top-20 left-80 w-64 z-20 border border-emerald-500/20"></div>
   </main>
 
   <!-- Botón flotante -->
   <div class="fixed bottom-6 right-6 z-30">
-    <button id="toggleMenu" onclick="toggleBotonesExtras()" class="bg-emerald-500 hover:bg-emerald-600 text-white p-4 rounded-full text-xl shadow-lg">☰</button>
+    <button id="toggleMenu" onclick="toggleBotonesExtras()" class="bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-slate-900 p-4 rounded-full text-xl shadow-2xl transition-all duration-300 transform hover:scale-110">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+    </button>
 
     <div id="botonesExtras" class="hidden flex flex-col items-center space-y-3 mt-4">
-      <button class="relative bg-emerald-500 hover:bg-emerald-600 text-white p-4 rounded-full shadow-lg" onmouseover="mostrarTooltip('Agregar comando', this)" onmouseout="ocultarTooltip()">
-        ➕
+      <button class="relative bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-slate-900 p-4 rounded-full shadow-2xl transition-all duration-300 transform hover:scale-110" 
+              onmouseover="mostrarTooltip('Agregar comando', this)" onmouseout="ocultarTooltip()">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+        </svg>
       </button>
-      <button class="relative bg-emerald-500 hover:bg-emerald-600 text-white p-4 rounded-full shadow-lg" onmouseover="mostrarTooltip('Historial de comandos', this)" onmouseout="ocultarTooltip()">
-        🕒
+      <button class="relative bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-slate-900 p-4 rounded-full shadow-2xl transition-all duration-300 transform hover:scale-110" 
+              onmouseover="mostrarTooltip('Historial de comandos', this)" onmouseout="ocultarTooltip()">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
       </button>
     </div>
   </div>
 
   <!-- Tooltip -->
-  <div id="tooltip" class="hidden fixed text-sm bg-gray-800 text-white px-2 py-1 rounded z-50"></div>
+  <div id="tooltip" class="hidden fixed text-sm glass-effect text-slate-100 px-3 py-2 rounded-lg z-50 pointer-events-none"></div>
 
   <!-- Scripts -->
   <script>
@@ -104,22 +313,33 @@
 
     function mostrarInfo(nombre, boton) {
       const info = document.getElementById("infoUsuario");
-      const texto = document.getElementById("textoUsuario");
-
       const datos = usuarios[nombre];
       let mensaje = "";
 
       if (datos.entrada && datos.salida) {
         mensaje = (datos.entrada > datos.salida)
-          ? `${nombre} entró hace: ${datos.entrada}`
-          : `${nombre} salió hace: ${datos.salida}`;
+          ? `${nombre} entró: ${datos.entrada}`
+          : `${nombre} salió: ${datos.salida}`;
       }
 
-      texto.innerText = mensaje;
+      info.innerHTML = `
+        <div class="flex items-center gap-3 mb-2">
+          <div class="w-8 h-8 bg-emerald-500/20 rounded-full flex items-center justify-center">
+            <span class="text-emerald-400 text-sm font-semibold">${nombre.charAt(0)}</span>
+          </div>
+          <strong class="text-slate-200">${nombre}</strong>
+        </div>
+        <p class="text-sm text-slate-300">${mensaje}</p>
+      `;
+      
       const rect = boton.getBoundingClientRect();
       info.style.top = `${rect.top + window.scrollY}px`;
       info.style.left = `${rect.right + 10}px`;
       info.classList.remove("hidden");
+
+      setTimeout(() => {
+        info.classList.add("hidden");
+      }, 5000);
     }
 
     function toggle(button, estadoId) {
@@ -128,13 +348,13 @@
 
       if (texto === "Cerrar") {
         button.textContent = "Abrir";
-        button.classList.remove("bg-red-500");
-        button.classList.add("bg-green-500");
+        button.classList.remove("bg-red-500/20", "border-red-500/30", "text-red-400", "hover:bg-red-500/30");
+        button.classList.add("bg-emerald-500/20", "border-emerald-500/30", "text-emerald-400", "hover:bg-emerald-500/30");
         estado.textContent = "🔒";
       } else {
         button.textContent = "Cerrar";
-        button.classList.remove("bg-green-500");
-        button.classList.add("bg-red-500");
+        button.classList.remove("bg-emerald-500/20", "border-emerald-500/30", "text-emerald-400", "hover:bg-emerald-500/30");
+        button.classList.add("bg-red-500/20", "border-red-500/30", "text-red-400", "hover:bg-red-500/30");
         estado.textContent = "🔓";
       }
     }
@@ -146,18 +366,18 @@
       const abierto = !panel.classList.contains("hidden");
       if (abierto) {
         panel.classList.add("hidden");
-        boton.innerText = "☰";
+        boton.innerHTML = '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>';
       } else {
         panel.classList.remove("hidden");
-        boton.innerText = "❌";
+        boton.innerHTML = '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>';
       }
     }
 
     function mostrarTooltip(texto, boton) {
       const tooltip = document.getElementById("tooltip");
-      tooltip.innerText = texto;
+      tooltip.textContent = texto;
       const rect = boton.getBoundingClientRect();
-      tooltip.style.top = `${rect.top - 30}px`;
+      tooltip.style.top = `${rect.top - 40}px`;
       tooltip.style.left = `${rect.left}px`;
       tooltip.classList.remove("hidden");
     }

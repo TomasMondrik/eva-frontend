@@ -5,90 +5,276 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Alertas - EVA</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'emerald': {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              200: '#a7f3d0',
+              300: '#6ee7b7',
+              400: '#34d399',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              800: '#065f46',
+              900: '#064e3b',
+              950: '#022c22'
+            },
+            'slate': {
+              950: '#020617',
+              900: '#0f172a',
+              800: '#1e293b',
+              700: '#334155',
+              600: '#475569',
+              500: '#64748b',
+              400: '#94a3b8',
+              300: '#cbd5e1',
+              200: '#e2e8f0',
+              100: '#f1f5f9',
+              50: '#f8fafc'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    .gradient-bg {
+      background: linear-gradient(135deg, #020617 0%, #0f172a 50%, #022c22 100%);
+    }
+    .glass-effect {
+      backdrop-filter: blur(16px);
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(16, 185, 129, 0.1);
+    }
+    .alert-card {
+      transition: all 0.3s ease;
+      background: linear-gradient(145deg, rgba(30, 41, 59, 0.5), rgba(15, 23, 42, 0.8));
+    }
+    .alert-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(239, 68, 68, 0.1);
+    }
+  </style>
 </head>
-<body class="bg-gray-950 text-white font-sans h-screen">
+<body class="gradient-bg text-slate-100 font-sans antialiased h-screen">
 
   <div class="flex h-full w-full">
     
     <!-- Sidebar -->
-    <aside class="w-64 bg-gray-900 p-6 flex flex-col justify-between">
+    <aside class="w-72 glass-effect p-6 flex flex-col justify-between shadow-2xl">
       <div>
-        <!-- ► Dropdown Ubicación -->
-        <div class="relative mb-6">
-          <button id="ubicacionBtn"
-                  onclick="toggleDropdown()"
-                  class="w-full flex justify-between items-center bg-gray-800 text-white p-2 rounded hover:bg-gray-700">
-            <span id="ubicacionActual">🏠 Hogar - Av. Libertador 6798</span>
-            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M19 9l-7 7-7-7" />
+        <!-- Logo -->
+        <div class="mb-8">
+          <h1 class="text-2xl font-bold text-emerald-400 mb-1">EVA</h1>
+          <p class="text-xs text-slate-400">Security Dashboard</p>
+        </div>
+
+        <!-- Dropdown Ubicación -->
+        <div class="relative mb-8">
+          <button id="ubicacionBtn" onclick="toggleDropdown()" 
+                  class="w-full flex justify-between items-center bg-slate-800/50 border border-slate-700/50 text-slate-200 p-4 rounded-xl hover:bg-slate-700/50 transition-all duration-300">
+            <div class="flex items-center gap-3">
+              <div class="w-2 h-2 bg-emerald-400 rounded-full"></div>
+              <div class="text-left">
+                <div class="text-sm font-medium" id="ubicacionActual">Hogar</div>
+                <div class="text-xs text-slate-400">Av. Libertador 6798</div>
+              </div>
+            </div>
+            <svg class="w-4 h-4 text-slate-400 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
           </button>
-          <div id="dropdownUbicacion"
-               class="hidden absolute left-0 w-full mt-2 bg-gray-800 rounded shadow-lg z-10">
-            <button onclick="cambiarUbicacion('hogar')"
-                    class="block w-full text-left px-4 py-2 hover:bg-gray-700">
-              🏠 Hogar
+          <div id="dropdownUbicacion" class="hidden absolute left-0 w-full mt-2 glass-effect rounded-xl shadow-2xl z-20 overflow-hidden">
+            <button onclick="cambiarUbicacion('hogar')" class="block w-full text-left px-4 py-3 hover:bg-emerald-500/10 transition-colors text-sm">
+              <div class="flex items-center gap-3">
+                <div class="w-2 h-2 bg-emerald-400 rounded-full"></div>
+                <span>Hogar</span>
+              </div>
             </button>
-            <button onclick="cambiarUbicacion('trabajo')"
-                    class="block w-full text-left px-4 py-2 hover:bg-gray-700">
-              🏢 Trabajo
+            <button onclick="cambiarUbicacion('trabajo')" class="block w-full text-left px-4 py-3 hover:bg-slate-700/50 transition-colors text-sm text-slate-400">
+              <div class="flex items-center gap-3">
+                <div class="w-2 h-2 bg-slate-600 rounded-full"></div>
+                <span>Trabajo</span>
+              </div>
             </button>
           </div>
         </div>
 
-        <!-- ► Menú del sidebar -->
-        <nav class="space-y-2">
-          <a href="inicio.html" class="block px-4 py-2 rounded hover:bg-gray-800">📷 Cámaras en vivo</a>
-          <a href="alertas.html" class="block px-4 py-2 rounded hover:bg-gray-800">🚨 Alertas</a>
-          <a href="comandos.html" class="block px-4 py-2 rounded hover:bg-gray-800">🛠️ Comandos</a>
+        <!-- Menú del sidebar -->
+        <nav class="space-y-2 mb-8">
+          <a href="inicio.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-800/50 text-slate-300 hover:text-slate-200 transition-all duration-200">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+            </svg>
+            <span>Cámaras</span>
+          </a>
+          <a href="alertas.html" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-red-500/10 text-red-400 border border-red-500/20">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+            </svg>
+            <span class="font-medium">Alertas</span>
+          </a>
+          <a href="comandos.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-800/50 text-slate-300 hover:text-slate-200 transition-all duration-200">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4"></path>
+            </svg>
+            <span>Comandos</span>
+          </a>
         </nav>
 
-        <!-- ► Otras cuentas -->
-        <div class="mt-8 text-sm">
-          <p class="text-gray-400 mb-2">Otras cuentas:</p>
-          <ul class="space-y-1 text-gray-300">
-            <li>👤 Sofi</li>
-            <li>👤 Eve</li>
-            <li>👤 Male</li>
-          </ul>
+        <!-- Otras cuentas -->
+        <div>
+          <h2 class="text-sm font-semibold text-slate-400 mb-4 uppercase tracking-wider">Usuarios</h2>
+          <div class="space-y-2">
+            <div class="flex items-center gap-3 px-4 py-2 text-slate-300">
+              <div class="w-6 h-6 bg-slate-700 rounded-full flex items-center justify-center text-xs">S</div>
+              <span class="text-sm">Sofi</span>
+            </div>
+            <div class="flex items-center gap-3 px-4 py-2 text-slate-300">
+              <div class="w-6 h-6 bg-slate-700 rounded-full flex items-center justify-center text-xs">E</div>
+              <span class="text-sm">Eve</span>
+            </div>
+            <div class="flex items-center gap-3 px-4 py-2 text-slate-300">
+              <div class="w-6 h-6 bg-slate-700 rounded-full flex items-center justify-center text-xs">M</div>
+              <span class="text-sm">Male</span>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- ► Pie del sidebar -->
-      <div class="text-sm text-gray-400">
-        👤 Tomás<br>
-        <span class="text-xs">Sesión activa</span>
+      <!-- Pie del sidebar -->
+      <div class="pt-6 border-t border-slate-700/50">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 bg-emerald-500/20 rounded-full flex items-center justify-center">
+            <span class="text-emerald-400 text-sm font-semibold">T</span>
+          </div>
+          <div>
+            <div class="text-sm font-medium text-slate-200">Tomás</div>
+            <div class="text-xs text-slate-400">Sesión activa</div>
+          </div>
+        </div>
       </div>
     </aside>
 
     <!-- Contenido -->
     <main class="flex-1 p-8 overflow-y-auto">
-      <h1 class="text-2xl font-bold mb-6">Actividad sospechosa detectada</h1>
-      <div class="grid grid-cols-2 gap-6">
-        <div class="bg-gray-800 p-4 rounded shadow">
-          <video controls class="w-full h-48 mb-2 rounded">
-            <source src="#" type="video/mp4" />
-            Tu navegador no soporta el video.
-          </video>
-          <p class="text-gray-300 text-sm">Puerta principal - 04/06/2025 - 03:45 AM</p>
+      <div class="max-w-6xl mx-auto">
+        <div class="mb-8">
+          <div class="flex items-center gap-3 mb-2">
+            <div class="w-3 h-3 bg-red-400 rounded-full animate-pulse"></div>
+            <h1 class="text-3xl font-bold text-slate-100">Actividad Sospechosa Detectada</h1>
+          </div>
+          <p class="text-slate-400">Eventos de seguridad recientes que requieren atención</p>
         </div>
-        <div class="bg-gray-800 p-4 rounded shadow">
-          <video controls class="w-full h-48 mb-2 rounded">
-            <source src="#" type="video/mp4" />
-            Tu navegador no soporta el video.
-          </video>
-          <p class="text-gray-300 text-sm">Ventana lateral - 03/06/2025 - 11:12 PM</p>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div class="alert-card p-6 rounded-2xl border border-red-500/20">
+            <div class="aspect-video bg-slate-800 rounded-xl mb-4 overflow-hidden">
+              <video controls class="w-full h-full object-cover">
+                <source src="#" type="video/mp4" />
+                <div class="w-full h-full bg-slate-800 flex items-center justify-center">
+                  <div class="text-center">
+                    <svg class="w-16 h-16 text-slate-600 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                    </svg>
+                    <p class="text-slate-500 text-sm">Video no disponible</p>
+                  </div>
+                </div>
+              </video>
+            </div>
+            <div class="flex items-center justify-between">
+              <div>
+                <h3 class="font-semibold text-slate-200 mb-1">Puerta Principal</h3>
+                <p class="text-sm text-slate-400">04/06/2025 - 03:45 AM</p>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="w-2 h-2 bg-red-400 rounded-full"></div>
+                <span class="text-xs text-red-400 font-medium">ALTA PRIORIDAD</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="alert-card p-6 rounded-2xl border border-orange-500/20">
+            <div class="aspect-video bg-slate-800 rounded-xl mb-4 overflow-hidden">
+              <video controls class="w-full h-full object-cover">
+                <source src="#" type="video/mp4" />
+                <div class="w-full h-full bg-slate-800 flex items-center justify-center">
+                  <div class="text-center">
+                    <svg class="w-16 h-16 text-slate-600 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                    </svg>
+                    <p class="text-slate-500 text-sm">Video no disponible</p>
+                  </div>
+                </div>
+              </video>
+            </div>
+            <div class="flex items-center justify-between">
+              <div>
+                <h3 class="font-semibold text-slate-200 mb-1">Ventana Lateral</h3>
+                <p class="text-sm text-slate-400">03/06/2025 - 11:12 PM</p>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="w-2 h-2 bg-orange-400 rounded-full"></div>
+                <span class="text-xs text-orange-400 font-medium">MEDIA PRIORIDAD</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Resumen de alertas -->
+        <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="glass-effect p-4 rounded-xl">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 bg-red-500/20 rounded-lg flex items-center justify-center">
+                <span class="text-red-400 font-bold text-lg">2</span>
+              </div>
+              <div>
+                <p class="text-slate-200 font-medium">Alertas Activas</p>
+                <p class="text-slate-400 text-sm">Últimas 24 horas</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="glass-effect p-4 rounded-xl">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 bg-emerald-500/20 rounded-lg flex items-center justify-center">
+                <span class="text-emerald-400 font-bold text-lg">8</span>
+              </div>
+              <div>
+                <p class="text-slate-200 font-medium">Resueltas</p>
+                <p class="text-slate-400 text-sm">Esta semana</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="glass-effect p-4 rounded-xl">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 bg-slate-500/20 rounded-lg flex items-center justify-center">
+                <span class="text-slate-400 font-bold text-lg">15</span>
+              </div>
+              <div>
+                <p class="text-slate-200 font-medium">Total</p>
+                <p class="text-slate-400 text-sm">Este mes</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </main>
   </div>
 
-  <!-- Script para el dropdown (idéntico a inicio.html) -->
   <script>
     function toggleDropdown() {
       const dropdown = document.getElementById('dropdownUbicacion');
+      const icon = document.querySelector("#ubicacionBtn svg");
       dropdown.classList.toggle('hidden');
+      icon.style.transform = dropdown.classList.contains("hidden") ? "rotate(0deg)" : "rotate(180deg)";
     }
 
     function cambiarUbicacion(opcion) {
@@ -96,12 +282,13 @@
       const dropdown = document.getElementById('dropdownUbicacion');
 
       if (opcion === 'hogar') {
-        ubicacion.textContent = '🏠 Hogar - Av. Libertador 6798';
+        ubicacion.textContent = 'Hogar';
       } else {
         alert("⚠️ Cambio a trabajo no disponible aún.");
-        ubicacion.textContent = '🏠 Hogar - Av. Libertador 6798';
+        ubicacion.textContent = 'Hogar';
       }
       dropdown.classList.add('hidden');
+      document.querySelector("#ubicacionBtn svg").style.transform = "rotate(0deg)";
     }
 
     window.addEventListener('click', function(e) {
@@ -109,6 +296,7 @@
       const dropdown = document.getElementById('dropdownUbicacion');
       if (!btn.contains(e.target)) {
         dropdown.classList.add('hidden');
+        document.querySelector("#ubicacionBtn svg").style.transform = "rotate(0deg)";
       }
     });
   </script>
