@@ -5,103 +5,104 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Iniciar sesión - EVA</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            'emerald': {
-              50: '#ecfdf5',
-              100: '#d1fae5',
-              200: '#a7f3d0',
-              300: '#6ee7b7',
-              400: '#34d399',
-              500: '#10b981',
-              600: '#059669',
-              700: '#047857',
-              800: '#065f46',
-              900: '#064e3b',
-              950: '#022c22'
-            },
-            'slate': {
-              950: '#020617',
-              900: '#0f172a',
-              800: '#1e293b',
-              700: '#334155',
-              600: '#475569',
-              500: '#64748b',
-              400: '#94a3b8',
-              300: '#cbd5e1',
-              200: '#e2e8f0',
-              100: '#f1f5f9',
-              50: '#f8fafc'
-            }
-          }
-        }
-      }
-    }
-  </script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <style>
-    .gradient-bg {
-      background: linear-gradient(135deg, #020617 0%, #0f172a 50%, #022c22 100%);
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0f172a;
     }
-    .glass-effect {
-      backdrop-filter: blur(16px);
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(16, 185, 129, 0.1);
+    input:focus {
+      outline: none;
+      border-color: #10b981;
     }
   </style>
 </head>
-<body class="flex items-center justify-center min-h-screen gradient-bg text-slate-100 font-sans antialiased">
-  <div class="w-full max-w-md p-8 glass-effect rounded-2xl shadow-2xl">
-    <div class="text-center mb-8">
-      <h1 class="text-3xl font-bold text-emerald-400 mb-2">EVA</h1>
-      <h2 class="text-xl font-medium text-slate-200">Iniciar sesión</h2>
-      <p class="text-slate-400 text-sm mt-2">Accede a tu sistema de seguridad</p>
-    </div>
-    
-    <form onsubmit="redirigirInicio(event)" class="space-y-6">
-      <div class="space-y-4">
-        <div>
-          <input type="text" placeholder="Usuario" 
-                 class="w-full p-4 rounded-xl bg-slate-800/50 border border-slate-700/50 text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500/50 transition-all duration-300" 
-                 required />
-        </div>
-        <div>
-          <input type="password" placeholder="Contraseña" 
-                 class="w-full p-4 rounded-xl bg-slate-800/50 border border-slate-700/50 text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500/50 transition-all duration-300" 
-                 required />
-        </div>
+<body class="flex items-center justify-center min-h-screen text-slate-100">
+
+  <!-- Contenedor principal del formulario -->
+  <div class="bg-slate-900 p-8 rounded-2xl shadow-xl w-full max-w-md">
+    <h1 class="text-2xl font-bold mb-2 text-emerald-400">Iniciar sesión</h1>
+    <p class="text-slate-400 text-sm mb-6">Ingresá tus datos para acceder a EVA</p>
+
+    <!-- Formulario de login -->
+    <form id="loginForm" class="space-y-4">
+      <!-- Campo Email -->
+      <div>
+        <label for="email" class="text-sm font-medium">Email</label>
+        <input type="email" id="email" name="email" required placeholder="Ej: tomas@gmail.com"
+          class="w-full mt-1 p-3 rounded-lg bg-slate-800 text-slate-100 border border-slate-700 focus:border-emerald-500" />
       </div>
-      
-      <button type="submit" 
-              class="w-full bg-gradient-to-r from-emerald-600 to-emerald-500 text-slate-900 p-4 rounded-xl hover:from-emerald-500 hover:to-emerald-400 transition-all duration-300 font-semibold shadow-lg hover:shadow-emerald-500/25 transform hover:scale-[1.02]">
-        Ingresar
+
+      <!-- Campo Contraseña -->
+      <div>
+        <label for="password" class="text-sm font-medium">Contraseña</label>
+        <input type="password" id="password" name="password" required placeholder="••••••"
+          class="w-full mt-1 p-3 rounded-lg bg-slate-800 text-slate-100 border border-slate-700 focus:border-emerald-500" />
+      </div>
+
+      <!-- Botón -->
+      <button type="submit"
+        class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-semibold py-3 rounded-lg transition duration-300">
+        Iniciar sesión
       </button>
     </form>
 
-    <div class="mt-8 text-center space-y-4">
-      <p class="text-slate-400 text-sm">
-        ¿No tenés cuenta? 
-        <a href="register.html" class="text-emerald-400 hover:text-emerald-300 font-medium transition-colors">Registrate</a>
-      </p>
-      <p class="text-slate-500 text-sm">
-        <a href="index.html" class="hover:text-emerald-400 transition-colors flex items-center justify-center gap-2">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-          </svg>
-          Volver a inicio
-        </a>
-      </p>
-    </div>
+    <!-- Enlace a registro -->
+    <p class="text-sm text-center mt-6 text-slate-400">
+      ¿No tenés cuenta?
+      <a href="register.html" class="text-emerald-400 hover:underline">Registrate</a>
+    </p>
   </div>
 
+  <!-- Script JS -->
   <script>
-    function redirigirInicio(event) {
-      event.preventDefault();
-      window.location.href = "inicio.html";
-    }
+    document.getElementById("loginForm").addEventListener("submit", function (e) {
+      e.preventDefault(); // Previene recarga
+
+      // Obtener datos
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+
+      // Validación simple
+      if (!email || !password) {
+        alert("⚠️ Por favor completá todos los campos.");
+        return;
+      }
+
+      // Construir el cuerpo del request
+      const data = {
+        email,
+        password,
+      };
+
+      // Enviar al backend
+      fetch("https://eva-back-end.vercel.app/user/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data),
+      })
+        .then(response => {
+          console.log("Código respuesta:", response.status);
+          return response.json();
+        })
+        .then(result => {
+          console.log("Respuesta:", result);
+          if (result.token) {
+            // Guardar token y redirigir
+            localStorage.setItem("token", result.token);
+            alert("✅ Sesión iniciada correctamente");
+            window.location.href = "inicio.html";
+          } else {
+            throw new Error(result.message || "No se pudo iniciar sesión");
+          }
+        })
+        .catch(error => {
+          console.error("Error:", error);
+          alert("❌ Error: " + error.message);
+        });
+    });
   </script>
 </body>
 </html>
