@@ -57,25 +57,21 @@
   <!-- Script JS -->
   <script>
     document.getElementById("loginForm").addEventListener("submit", function (e) {
-      e.preventDefault(); // Previene recarga
+      e.preventDefault();
 
-      // Obtener datos
       const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value;
 
-      // Validación simple
       if (!email || !password) {
         alert("⚠️ Por favor completá todos los campos.");
         return;
       }
 
-      // Construir el cuerpo del request
       const data = {
         email,
-        password,
+        contra: password
       };
 
-      // Enviar al backend
       fetch("https://eva-back-end.vercel.app/user/login", {
         method: "POST",
         headers: {
@@ -83,25 +79,24 @@
         },
         body: JSON.stringify(data),
       })
-        .then(response => {
-          console.log("Código respuesta:", response.status);
-          return response.json();
-        })
-        .then(result => {
-          console.log("Respuesta:", result);
-          if (result.token) {
-            // Guardar token y redirigir
-            localStorage.setItem("token", result.token);
-            alert("✅ Sesión iniciada correctamente");
-            window.location.href = "inicio.html";
-          } else {
-            throw new Error(result.message || "No se pudo iniciar sesión");
-          }
-        })
-        .catch(error => {
-          console.error("Error:", error);
-          alert("❌ Error: " + error.message);
-        });
+      .then(response => {
+        console.log("Código respuesta:", response.status);
+        return response.json();
+      })
+      .then(result => {
+        console.log("Respuesta:", result);
+        if (result.token) {
+          localStorage.setItem("token", result.token);
+          alert("✅ Sesión iniciada correctamente");
+          window.location.href = "inicio.html";
+        } else {
+          throw new Error(result.message || "No se pudo iniciar sesión");
+        }
+      })
+      .catch(error => {
+        console.error("Error:", error);
+        alert("❌ Error: " + error.message);
+      });
     });
   </script>
 </body>

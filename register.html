@@ -111,7 +111,12 @@
           headers: {
             "Content-Type": "application/json"
           },
-          body: JSON.stringify({ nombre, email, password }) // envía JSON
+          body: JSON.stringify({
+  usuario: nombre,
+  email: email,
+  contra: password
+})
+ // envía JSON
         });
 
         if (respuesta.ok) {
