@@ -1,0 +1,24 @@
+{
+  "name": "eva-frontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TomasMondrik/eva-frontend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TomasMondrik/eva-frontend/issues"
+  },
+  "homepage": "https://github.com/TomasMondrik/eva-frontend#readme",
+  "dependencies": {
+    "vite": "^7.0.5"
+  }
+}
