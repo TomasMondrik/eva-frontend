@@ -187,10 +187,14 @@
                   </div>
                 </div>
               </video>
+
+
             </div>
             <div class="flex items-center justify-between">
               <div>
-                <h3 class="font-semibold text-slate-200 mb-1">Puerta Principal</h3>
+                <div id="alertasContainer" class="grid grid-cols-1 lg:grid-cols-2 gap-6"></div>
+                <h3 clas
+                s="font-semibold text-slate-200 mb-1">Puerta Principal</h3>
                 <p class="text-sm text-slate-400">04/06/2025 - 03:45 AM</p>
               </div>
               <div class="flex items-center gap-2">
@@ -270,36 +274,88 @@
   </div>
 
   <script>
-    function toggleDropdown() {
-      const dropdown = document.getElementById('dropdownUbicacion');
-      const icon = document.querySelector("#ubicacionBtn svg");
-      dropdown.classList.toggle('hidden');
-      icon.style.transform = dropdown.classList.contains("hidden") ? "rotate(0deg)" : "rotate(180deg)";
-    }
-
-    function cambiarUbicacion(opcion) {
-      const ubicacion = document.getElementById('ubicacionActual');
-      const dropdown = document.getElementById('dropdownUbicacion');
-
-      if (opcion === 'hogar') {
-        ubicacion.textContent = 'Hogar';
-      } else {
-        alert("⚠️ Cambio a trabajo no disponible aún.");
-        ubicacion.textContent = 'Hogar';
+    async function cargarAlertas() {
+      try {
+        const response = await fetch("https://eva-back-end.vercel.app/deteccion", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json"
+          }
+        });
+    
+        console.log("Código de respuesta:", response.status);
+        if (!response.ok) {
+          throw new Error("Error al obtener las alertas");
+        }
+    
+        const datos = await response.json();
+        console.log("Respuesta:", datos);
+    
+        const container = document.getElementById("alertasContainer");
+        container.innerHTML = ""; // Limpiar antes de renderizar
+    
+        datos.forEach(alerta => {
+          // Formatear la fecha
+          const fecha = new Date(alerta.fecha);
+          const fechaFormateada = fecha.toLocaleString("es-ES", {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: true
+          });
+    
+          // Definir color según prioridad
+          let borderColor = "border-slate-500/20";
+          let dotColor = "bg-slate-400";
+          let textColor = "text-slate-400";
+          if (alerta.prioridad === "alta") {
+            borderColor = "border-red-500/20";
+            dotColor = "bg-red-400";
+            textColor = "text-red-400";
+          } else if (alerta.prioridad === "media") {
+            borderColor = "border-orange-500/20";
+            dotColor = "bg-orange-400";
+            textColor = "text-orange-400";
+          } else if (alerta.prioridad === "baja") {
+            borderColor = "border-yellow-500/20";
+            dotColor = "bg-yellow-400";
+            textColor = "text-yellow-400";
+          }
+    
+          // Crear tarjeta
+          const card = document.createElement("div");
+          card.className = `alert-card p-6 rounded-2xl ${borderColor}`;
+          card.innerHTML = `
+            <div class="aspect-video bg-slate-800 rounded-xl mb-4 overflow-hidden">
+              <video controls class="w-full h-full object-cover">
+                <source src="${alerta.videoUrl}" type="video/mp4" />
+                Tu navegador no soporta video.
+              </video>
+            </div>
+            <div class="flex items-center justify-between">
+              <div>
+                <h3 class="font-semibold text-slate-200 mb-1">${alerta.ubicacion}</h3>
+                <p class="text-sm text-slate-400">${fechaFormateada}</p>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="w-2 h-2 ${dotColor} rounded-full"></div>
+                <span class="text-xs ${textColor} font-medium">${alerta.prioridad.toUpperCase()} PRIORIDAD</span>
+              </div>
+            </div>
+          `;
+          container.appendChild(card);
+        });
+      } catch (error) {
+        console.error("Error al cargar alertas:", error.message);
       }
-      dropdown.classList.add('hidden');
-      document.querySelector("#ubicacionBtn svg").style.transform = "rotate(0deg)";
     }
+    
+    // Llamar a la función para cargar las alertas al cargar la página
+    cargarAlertas();
+    </script>
 
-    window.addEventListener('click', function(e) {
-      const btn = document.getElementById('ubicacionBtn');
-      const dropdown = document.getElementById('dropdownUbicacion');
-      if (!btn.contains(e.target)) {
-        dropdown.classList.add('hidden');
-        document.querySelector("#ubicacionBtn svg").style.transform = "rotate(0deg)";
-      }
-    });
-  </script>
 
 </body>
 </html>
