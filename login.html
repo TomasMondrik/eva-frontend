@@ -1,27 +1,42 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <!-- Declaración del tipo de documento y lenguaje -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  
+  <!-- Título de la pestaña -->
   <title>Iniciar sesión - EVA</title>
+
+  <!-- Importación de Tailwind CSS desde CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fuente principal: Inter -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+
+  <!-- Estilos personalizados -->
   <style>
+    /* Fuente y color de fondo general */
     body {
       font-family: 'Inter', sans-serif;
-      background-color: #0f172a;
+      background-color: #0f172a; /* Fondo azul oscuro */
     }
+
+    /* Efecto visual en los inputs al hacer foco */
     input:focus {
-      outline: none;
-      border-color: #10b981;
+      outline: none;              /* Quita borde por defecto */
+      border-color: #10b981;      /* Color verde esmeralda al enfocar */
     }
   </style>
 </head>
-<body class="flex items-center justify-center min-h-screen text-slate-100">
 
+<!-- Cuerpo de la página -->
+<body class="flex items-center justify-center min-h-screen text-slate-100">
   <!-- Contenedor principal del formulario -->
   <div class="bg-slate-900 p-8 rounded-2xl shadow-xl w-full max-w-md">
+    <!-- Título -->
     <h1 class="text-2xl font-bold mb-2 text-emerald-400">Iniciar sesión</h1>
+    <!-- Subtítulo -->
     <p class="text-slate-400 text-sm mb-6">Ingresá tus datos para acceder a EVA</p>
 
     <!-- Formulario de login -->
@@ -29,20 +44,35 @@
       <!-- Campo Email -->
       <div>
         <label for="email" class="text-sm font-medium">Email</label>
-        <input type="email" id="email" name="email" required placeholder="Ej: tomas@gmail.com"
-          class="w-full mt-1 p-3 rounded-lg bg-slate-800 text-slate-100 border border-slate-700 focus:border-emerald-500" />
+        <input 
+          type="email" 
+          id="email" 
+          name="email" 
+          required 
+          placeholder="Ej: tomas@gmail.com"
+          class="w-full mt-1 p-3 rounded-lg bg-slate-800 text-slate-100 border border-slate-700 focus:border-emerald-500" 
+        />
       </div>
 
       <!-- Campo Contraseña -->
       <div>
         <label for="password" class="text-sm font-medium">Contraseña</label>
-        <input type="password" id="password" name="password" required placeholder="••••••"
-          class="w-full mt-1 p-3 rounded-lg bg-slate-800 text-slate-100 border border-slate-700 focus:border-emerald-500" />
+        <input 
+          type="password" 
+          id="password" 
+          name="password" 
+          required 
+          placeholder="••••••"
+          class="w-full mt-1 p-3 rounded-lg bg-slate-800 text-slate-100 border border-slate-700 focus:border-emerald-500" 
+        />
       </div>
 
-      <!-- Botón -->
-      <button type="submit"
-        class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-semibold py-3 rounded-lg transition duration-300">
+      <!-- Botón de envío -->
+      <button 
+        type="submit"
+        id="loginButton"
+        class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-semibold py-3 rounded-lg transition duration-300"
+      >
         Iniciar sesión
       </button>
     </form>
@@ -54,49 +84,70 @@
     </p>
   </div>
 
-  <!-- Script JS -->
+  <!-- Script JavaScript -->
   <script>
-    document.getElementById("loginForm").addEventListener("submit", function (e) {
-      e.preventDefault();
+    // Se obtiene el formulario por su ID
+    document.getElementById("loginForm").addEventListener("submit", async function (e) {
+      e.preventDefault(); // Evita recargar la página al enviar
 
+      // Se obtienen los valores de los campos
       const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value;
+      const button = document.getElementById("loginButton");
 
+      // Validación simple: campos vacíos
       if (!email || !password) {
         alert("⚠️ Por favor completá todos los campos.");
         return;
       }
 
+      // Datos a enviar al backend
       const data = {
         email,
-        contra: password
+        password // ✅ Campo correcto según el backend CHEQUEAR CON JUANI NOMBRE DE VARIABLES
       };
 
-      fetch("https://eva-back-end.vercel.app/user/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data),
-      })
-      .then(response => {
-        console.log("Código respuesta:", response.status);
-        return response.json();
-      })
-      .then(result => {
-        console.log("Respuesta:", result);
+      try {
+        // Desactiva el botón y muestra estado de carga
+        button.disabled = true;
+        button.textContent = "Ingresando...";
+
+        // Petición POST al endpoint de login
+        const response = await fetch("https://eva-back-end.vercel.app/user/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(data),
+        });
+
+        console.log("Código de respuesta:", response.status);
+
+        // Convierte la respuesta a JSON
+        const result = await response.json();
+        console.log("Respuesta del servidor:", result);
+
+        // Si el login es exitoso y hay token
         if (result.token) {
-          localStorage.setItem("token", result.token);
+          localStorage.setItem("token", result.token); // Guarda token en localStorage
           alert("✅ Sesión iniciada correctamente");
-          window.location.href = "inicio.html";
-        } else {
+          window.location.href = "inicio.html"; // Redirige al panel principal
+        } 
+        else {
+          // Si no hay token, muestra mensaje de error
           throw new Error(result.message || "No se pudo iniciar sesión");
         }
-      })
-      .catch(error => {
+
+      } catch (error) {
+        // Manejo de errores en caso de fallar la conexión o credenciales inválidas
         console.error("Error:", error);
         alert("❌ Error: " + error.message);
-      });
+
+      } finally {
+        // Restaura el botón sin importar el resultado
+        button.disabled = false;
+        button.textContent = "Iniciar sesión";
+      }
     });
   </script>
 </body>
