@@ -1,193 +1,104 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <!-- Declaración del tipo de documento y lenguaje -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-  <!-- Título de la pestaña -->
   <title>Registro - EVA</title>
-
-  <!-- Importación de Tailwind CSS desde CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Configuración personalizada de Tailwind -->
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            emerald: {
-              400: '#34d399', // Verde claro
-              500: '#10b981'  // Verde principal EVA
-            },
-            slate: {
-              900: '#0f172a', // Azul oscuro
-              800: '#1e293b',
-              700: '#334155',
-              600: '#475569',
-              400: '#94a3b8',
-              300: '#cbd5e1'
-            }
-          }
-        }
-      }
-    }
-  </script>
-
-  <!-- Fuente principal: Inter -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-
-  <!-- Estilos personalizados -->
   <style>
-    /* Se aplica la fuente principal */
-    body {
-      font-family: 'Inter', sans-serif;
-    }
-
-    /* Fondo con degradado oscuro */
-    .gradient-bg {
-      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-    }
+    body{ font-family:'Inter',sans-serif; }
+    .gradient-bg{ background: linear-gradient(135deg,#0f172a 0%,#1e293b 100%); }
   </style>
 </head>
-
-<!-- Cuerpo de la página -->
 <body class="gradient-bg text-white min-h-screen flex items-center justify-center px-4">
-
-  <!-- Contenedor del formulario de registro -->
   <div class="bg-slate-800 p-8 rounded-2xl shadow-xl w-full max-w-md">
-    <!-- Título principal -->
     <h1 class="text-2xl font-bold text-emerald-400 mb-2 text-center">Crear cuenta</h1>
-    <!-- Subtítulo -->
     <p class="text-slate-400 text-sm mb-6 text-center">Completá los datos para registrarte en EVA</p>
 
-    <!-- Formulario -->
     <form id="registroForm" class="space-y-4">
-      <!-- Campo: Nombre -->
       <div>
         <label for="nombre" class="block text-sm font-medium mb-1">Nombre</label>
-        <input 
-          type="text" 
-          id="nombre" 
-          name="nombre" 
-          required 
-          placeholder="Ej: Tomás"
-          class="w-full px-4 py-2 rounded-lg bg-slate-700 text-white border border-slate-600 focus:outline-none focus:ring-2 focus:ring-emerald-400"
-        >
+        <input id="nombre" type="text" required placeholder="Ej: Tomás"
+          class="w-full px-4 py-2 rounded-lg bg-slate-700 text-white border border-slate-600 focus:outline-none focus:ring-2 focus:ring-emerald-400">
       </div>
-
-      <!-- Campo: Email -->
       <div>
         <label for="email" class="block text-sm font-medium mb-1">Email</label>
-        <input 
-          type="email" 
-          id="email" 
-          name="email" 
-          required 
-          placeholder="Ej: xxxxxxxx@gmail.com"
-          class="w-full px-4 py-2 rounded-lg bg-slate-700 text-white border border-slate-600 focus:outline-none focus:ring-2 focus:ring-emerald-400"
-        >
+        <input id="email" type="email" required placeholder="Ej: xxxxxxxx@gmail.com"
+          class="w-full px-4 py-2 rounded-lg bg-slate-700 text-white border border-slate-600 focus:outline-none focus:ring-2 focus:ring-emerald-400">
       </div>
-
-      <!-- Campo: Contraseña -->
       <div>
         <label for="password" class="block text-sm font-medium mb-1">Contraseña</label>
-        <input 
-          type="password" 
-          id="password" 
-          name="password" 
-          required 
-          placeholder="••••••••"
-          class="w-full px-4 py-2 rounded-lg bg-slate-700 text-white border border-slate-600 focus:outline-none focus:ring-2 focus:ring-emerald-400"
-        >
+        <input id="password" type="password" required placeholder="••••••••"
+          class="w-full px-4 py-2 rounded-lg bg-slate-700 text-white border border-slate-600 focus:outline-none focus:ring-2 focus:ring-emerald-400">
       </div>
 
-      <!-- Botón de registro -->
-      <button 
-        type="submit"
-        id="registerButton"
-        class="w-full bg-emerald-500 hover:bg-emerald-400 text-white font-semibold py-2 rounded-lg transition duration-200"
-      >
+      <button id="registerButton" type="submit"
+        class="w-full bg-emerald-500 hover:bg-emerald-400 text-white font-semibold py-2 rounded-lg transition duration-200">
         Registrarse
       </button>
+
+      <p id="msg" class="text-sm mt-2 text-center"></p>
     </form>
 
-    <!-- Enlace a login -->
     <p class="text-sm text-center text-slate-400 mt-4">
       ¿Ya tenés cuenta?
       <a href="login.html" class="text-emerald-400 hover:underline">Iniciá sesión</a>
     </p>
   </div>
 
-  <!-- Script JavaScript -->
   <script>
-    // Captura del formulario por su ID
+    const API_BASE = "https://eva-back-end.vercel.app";
+
     const form = document.getElementById("registroForm");
+    const msg  = document.getElementById("msg");
+    const btn  = document.getElementById("registerButton");
 
-    // Evento al enviar el formulario
-    form.addEventListener("submit", async function (e) {
-      e.preventDefault(); // Previene el envío tradicional
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
 
-      // Captura los valores de los campos
-      const nombre = document.getElementById("nombre").value.trim();
-      const email = document.getElementById("email").value.trim();
+      const nombre   = document.getElementById("nombre").value.trim();
+      const email    = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value;
-      const button = document.getElementById("registerButton");
 
-      // Validación simple de campos vacíos
       if (!nombre || !email || !password) {
-        alert("⚠️ Por favor completá todos los campos.");
+        msg.textContent = "Completá todos los campos.";
+        msg.className = "text-sm mt-2 text-center text-red-400";
         return;
       }
 
-      // Cuerpo de la solicitud (JSON)
-      const data = {
-        usuario: nombre,   // Campo que espera el backend para el nombre
-        email: email,
-        password: password // ✅ Campo correcto (antes era 'contra')
-      };
-
       try {
-        // Desactiva el botón y muestra estado de carga
-        button.disabled = true;
-        button.textContent = "Registrando...";
+        btn.disabled = true; btn.textContent = "Registrando…";
+        msg.textContent = ""; msg.className = "text-sm mt-2 text-center";
 
-        // Petición al backend
-        const respuesta = await fetch("https://eva-back-end.vercel.app/user/registro", {
+        const url = `${API_BASE}/user/registro`;
+        console.log("POST", url, { nombre, email, password });
+
+        const res  = await fetch(url, {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(data) // Envío en formato JSON
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ nombre, email, password })
         });
 
-        console.log("Código de respuesta:", respuesta.status);
+        let data = null;
+        try { data = await res.json(); } catch { /* no body */ }
 
-        // Si el registro es exitoso (status 200 o 201)
-        if (respuesta.ok) {
-          const resultado = await respuesta.json();
-          console.log("Respuesta del servidor:", resultado);
-
-          alert("✅ Registro exitoso");
-          window.location.href = "inicio.html"; // Redirección al dashboard
-        } 
-        else {
-          // Si hay error del servidor, se obtiene el mensaje
-          const error = await respuesta.json();
-          alert("❌ Error: " + (error.message || "No se pudo registrar"));
-          console.error("Detalle del error:", error);
+        if (!res.ok) {
+          console.error("Registro falló:", res.status, data);
+          msg.textContent = (data && data.message) ? data.message : `Error ${res.status} al registrar.`;
+          msg.className = "text-sm mt-2 text-center text-red-400";
+          return;
         }
 
-      } catch (error) {
-        // Error de red o conexión
-        console.error("Error en la solicitud:", error);
-        alert("❌ Error: No se pudo conectar con el servidor");
-
+        msg.textContent = "¡Cuenta creada! Te redirigimos al login…";
+        msg.className = "text-sm mt-2 text-center text-emerald-400";
+        setTimeout(() => { window.location.href = "login.html"; }, 900);
+      } catch (err) {
+        console.error(err);
+        msg.textContent = "Error de red. Intentá nuevamente.";
+        msg.className = "text-sm mt-2 text-center text-red-400";
       } finally {
-        // Siempre se restaura el botón
-        button.disabled = false;
-        button.textContent = "Registrarse";
+        btn.disabled = false; btn.textContent = "Registrarse";
       }
     });
   </script>
