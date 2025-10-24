@@ -7,101 +7,96 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <style>
-    body { font-family:'Inter',sans-serif; background-color:#0f172a; }
-    input:focus { outline:none; border-color:#10b981; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0f172a;
+    }
+    input:focus {
+      outline: none;
+      border-color: #10b981;
+    }
   </style>
 </head>
 <body class="flex items-center justify-center min-h-screen text-slate-100">
+
+  <!-- Contenedor principal del formulario -->
   <div class="bg-slate-900 p-8 rounded-2xl shadow-xl w-full max-w-md">
     <h1 class="text-2xl font-bold mb-2 text-emerald-400">Iniciar sesión</h1>
     <p class="text-slate-400 text-sm mb-6">Ingresá tus datos para acceder a EVA</p>
 
+    <!-- Formulario de login -->
     <form id="loginForm" class="space-y-4">
+      <!-- Campo Email -->
       <div>
         <label for="email" class="text-sm font-medium">Email</label>
-        <input id="email" type="email" required placeholder="Ej: tomas@gmail.com"
-          class="w-full mt-1 p-3 rounded-lg bg-slate-800 text-slate-100 border border-slate-700 focus:border-emerald-500" />
-      </div>
-      <div>
-        <label for="password" class="text-sm font-medium">Contraseña</label>
-        <input id="password" type="password" required placeholder="••••••"
+        <input type="email" id="email" name="email" required placeholder="Ej: tomas@gmail.com"
           class="w-full mt-1 p-3 rounded-lg bg-slate-800 text-slate-100 border border-slate-700 focus:border-emerald-500" />
       </div>
 
-      <button id="loginButton" type="submit"
+      <!-- Campo Contraseña -->
+      <div>
+        <label for="password" class="text-sm font-medium">Contraseña</label>
+        <input type="password" id="password" name="password" required placeholder="••••••"
+          class="w-full mt-1 p-3 rounded-lg bg-slate-800 text-slate-100 border border-slate-700 focus:border-emerald-500" />
+      </div>
+
+      <!-- Botón -->
+      <button type="submit"
         class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-semibold py-3 rounded-lg transition duration-300">
         Iniciar sesión
       </button>
-
-      <p id="msg" class="text-sm mt-2 text-center"></p>
     </form>
 
+    <!-- Enlace a registro -->
     <p class="text-sm text-center mt-6 text-slate-400">
       ¿No tenés cuenta?
       <a href="register.html" class="text-emerald-400 hover:underline">Registrate</a>
     </p>
   </div>
 
+  <!-- Script JS -->
   <script>
-    const API_BASE = "https://eva-back-end.vercel.app";
-
-    const form = document.getElementById("loginForm");
-    const msg  = document.getElementById("msg");
-    const btn  = document.getElementById("loginButton");
-
-    form.addEventListener("submit", async (e) => {
+    document.getElementById("loginForm").addEventListener("submit", function (e) {
       e.preventDefault();
 
-      const email    = document.getElementById("email").value.trim();
+      const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value;
 
       if (!email || !password) {
-        msg.textContent = "Completá todos los campos.";
-        msg.className = "text-sm mt-2 text-center text-red-400";
+        alert("⚠️ Por favor completá todos los campos.");
         return;
       }
 
-      try {
-        btn.disabled = true; btn.textContent = "Ingresando…";
-        msg.textContent = ""; msg.className = "text-sm mt-2 text-center";
+      const data = {
+        email,
+        contra: password
+      };
 
-        const url = `${API_BASE}/user/login`;
-        console.log("POST", url, { email, password });
-
-        const res  = await fetch(url, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, password })
-        });
-
-        let data = null;
-        try { data = await res.json(); } catch { /* no body */ }
-
-        if (!res.ok) {
-          console.error("Login falló:", res.status, data);
-          msg.textContent = (data && data.message) ? data.message : `Error ${res.status} al iniciar sesión.`;
-          msg.className = "text-sm mt-2 text-center text-red-400";
-          return;
+      fetch("https://eva-back-end.vercel.app/user/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data),
+      })
+      .then(response => {
+        console.log("Código respuesta:", response.status);
+        return response.json();
+      })
+      .then(result => {
+        console.log("Respuesta:", result);
+        if (result.token) {
+          localStorage.setItem("token", result.token);
+          alert("✅ Sesión iniciada correctamente");
+          window.location.href = "inicio.html";
+        } else {
+          throw new Error(result.message || "No se pudo iniciar sesión");
         }
-
-        const token = data?.token || data?.accessToken || data?.jwt;
-        if (!token) {
-          msg.textContent = "No se recibió token del servidor.";
-          msg.className = "text-sm mt-2 text-center text-red-400";
-          return;
-        }
-
-        localStorage.setItem("token", token);
-        msg.textContent = "¡Listo! Redirigiendo…";
-        msg.className = "text-sm mt-2 text-center text-emerald-400";
-        window.location.href = "alertas.html";
-      } catch (err) {
-        console.error(err);
-        msg.textContent = "Error de red. Intentá nuevamente.";
-        msg.className = "text-sm mt-2 text-center text-red-400";
-      } finally {
-        btn.disabled = false; btn.textContent = "Iniciar sesión";
-      }
+      })
+      .catch(error => {
+        console.error("Error:", error);
+        alert("❌ Error: " + error.message);
+      });
     });
   </script>
 </body>
