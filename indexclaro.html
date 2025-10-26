@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EVA - Modo Claro</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Configuración Tailwind personalizada para modo claro -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            emerald: {
+              50: '#022c22',
+              100: '#064e3b',
+              200: '#10b981',
+              300: '#34d399',
+              400: '#6ee7b7',
+              500: '#a7f3d0',
+            },
+            slate: {
+              50: '#ffffff',
+              100: '#f9fafb',
+              200: '#f3f4f6',
+              300: '#e5e7eb',
+              400: '#9ca3af',
+              500: '#6b7280',
+              600: '#4b5563',
+              700: '#374151',
+              800: '#1f2937',
+              900: '#111827'
+            }
+          },
+          fontFamily: {
+            'sans': ['Inter', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Estilos claros -->
+  <style>
+    .gradient-bg {
+      background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 50%, #d1fae5 100%);
+    }
+    .glass-effect {
+      backdrop-filter: blur(16px);
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+    }
+  </style>
+</head>
+
+<body class="gradient-bg text-slate-800 font-sans antialiased min-h-screen">
+
+  <!-- Navbar -->
+  <nav class="flex items-center justify-between p-6 glass-effect shadow-2xl relative z-10">
+    <div class="text-3xl font-bold text-emerald-700 tracking-tight">
+      EVA
+      <span class="text-xs font-normal text-slate-500 ml-2">Security System</span>
+    </div>
+
+    <div class="flex items-center space-x-4">
+      <!-- Botón de cambio de modo -->
+      <button id="modoBtn" class="p-2 rounded-full border border-emerald-300 text-emerald-700 hover:bg-emerald-100 transition-all duration-300" title="Cambiar modo oscuro">
+        <!-- Ícono de sol -->
+        <svg id="iconoModo" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2v2m0 16v2m8-8h2M2 12H4m15.364 6.364l1.414 1.414M4.222 4.222l1.414 1.414M18.364 5.636l1.414-1.414M4.222 19.778l1.414-1.414"></path>
+        </svg>
+      </button>
+
+      <!-- Botones de login y registro -->
+      <a href="loginclaro.html" class="px-6 py-2.5 border border-emerald-300 text-emerald-700 rounded-lg hover:bg-emerald-100 transition-all duration-300 font-medium">
+        Iniciar sesión
+      </a>
+      <a href="registerclaro.html" class="px-6 py-2.5 bg-gradient-to-r from-emerald-400 to-emerald-300 text-slate-900 rounded-lg hover:from-emerald-300 hover:to-emerald-200 transition-all duration-300 font-medium shadow-lg hover:shadow-emerald-300/25">
+        Registrarse
+      </a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="text-center mt-24 px-6">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-6xl font-bold mb-6 bg-gradient-to-r from-emerald-600 via-emerald-400 to-emerald-300 bg-clip-text text-transparent leading-tight">
+        Bienvenido a EVA
+      </h1>
+      <p class="text-slate-600 text-xl leading-relaxed max-w-2xl mx-auto font-light">
+        Tu hogar más seguro, inteligente y accesible con tecnología de vanguardia.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 max-w-4xl mx-auto">
+        <div class="glass-effect p-6 rounded-xl hover:bg-emerald-50 transition-all duration-300 group">
+          <div class="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center mb-4 mx-auto group-hover:bg-emerald-200 transition-colors">
+            <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-slate-800 mb-2">Monitoreo 24/7</h3>
+          <p class="text-slate-600 text-sm">Vigilancia continua con cámaras de alta definición</p>
+        </div>
+
+        <div class="glass-effect p-6 rounded-xl hover:bg-emerald-50 transition-all duration-300 group">
+          <div class="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center mb-4 mx-auto group-hover:bg-emerald-200 transition-colors">
+            <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-slate-800 mb-2">Control Inteligente</h3>
+          <p class="text-slate-600 text-sm">Gestión remota de puertas y ventanas</p>
+        </div>
+
+        <div class="glass-effect p-6 rounded-xl hover:bg-emerald-50 transition-all duration-300 group">
+          <div class="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center mb-4 mx-auto group-hover:bg-emerald-200 transition-colors">
+            <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5 5v-5zM9 17H4l5 5v-5zM12 3l7 7-7 7-7-7 7-7z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-slate-800 mb-2">Alertas Instantáneas</h3>
+          <p class="text-slate-600 text-sm">Notificaciones en tiempo real de actividad sospechosa</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const boton = document.getElementById('modoBtn');
+
+    boton.addEventListener('click', () => {
+      localStorage.setItem('modo', 'oscuro');
+      window.location.href = 'index.html';
+    });
+
+    if (localStorage.getItem('modo') === 'oscuro') {
+      window.location.href = 'index.html';
+    }
+  </script>
+
+</body>
+</html>

@@ -3,53 +3,49 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Iniciar sesión - EVA</title>
-
-  <!-- Tailwind CSS -->
+  <title>Iniciar sesión - EVA (Claro)</title>
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Fuente principal -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
-
   <style>
     body {
       font-family: 'Inter', sans-serif;
-      background-color: #0f172a; /* Fondo oscuro */
+      background-color: #f8fafc; /* Fondo claro */
+      color: #1e293b;
     }
     input:focus {
       outline: none;
-      border-color: #10b981; /* Verde esmeralda al enfocar */
+      border-color: #059669; /* Verde esmeralda oscuro */
     }
   </style>
 </head>
-<body class="flex items-center justify-center min-h-screen text-slate-100 relative">
+<body class="flex items-center justify-center min-h-screen relative">
 
   <!-- 🔘 Botón modo claro/oscuro -->
-  <button id="modoBtn" class="absolute top-6 right-6 bg-slate-800 hover:bg-slate-700 text-emerald-400 p-2 rounded-full transition-all duration-300">
-    <!-- Ícono de sol/luna -->
+  <button id="modoBtn" class="absolute top-6 right-6 bg-slate-200 hover:bg-slate-300 text-emerald-600 p-2 rounded-full transition-all duration-300">
+    <!-- Ícono de luna -->
     <svg id="iconoModo" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-        d="M12 3v1m0 16v1m8.66-8.66h1M3.34 12.34h1M16.95 7.05l.7-.7M6.34 17.66l.7-.7M16.95 16.95l.7.7M6.34 6.34l.7.7M12 8a4 4 0 100 8 4 4 0 000-8z" />
+        d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
     </svg>
   </button>
 
-  <!-- Contenedor principal -->
-  <div class="bg-slate-900 p-8 rounded-2xl shadow-xl w-full max-w-md">
-    <h1 class="text-2xl font-bold mb-2 text-emerald-400">Iniciar sesión</h1>
-    <p class="text-slate-400 text-sm mb-6">Ingresá tus datos para acceder a EVA</p>
+  <!-- Contenedor -->
+  <div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md border border-slate-200">
+    <h1 class="text-2xl font-bold mb-2 text-emerald-600">Iniciar sesión</h1>
+    <p class="text-slate-600 text-sm mb-6">Ingresá tus datos para acceder a EVA</p>
 
     <!-- Formulario -->
     <form id="loginForm" class="space-y-4">
       <div>
-        <label for="email" class="text-sm font-medium">Email</label>
+        <label for="email" class="text-sm font-medium text-slate-800">Email</label>
         <input type="email" id="email" name="email" required placeholder="Ej: tomas@gmail.com"
-          class="w-full mt-1 p-3 rounded-lg bg-slate-800 text-slate-100 border border-slate-700 focus:border-emerald-500" />
+          class="w-full mt-1 p-3 rounded-lg bg-slate-100 text-slate-800 border border-slate-300 focus:border-emerald-500" />
       </div>
 
       <div>
-        <label for="password" class="text-sm font-medium">Contraseña</label>
+        <label for="password" class="text-sm font-medium text-slate-800">Contraseña</label>
         <input type="password" id="password" name="password" required placeholder="••••••"
-          class="w-full mt-1 p-3 rounded-lg bg-slate-800 text-slate-100 border border-slate-700 focus:border-emerald-500" />
+          class="w-full mt-1 p-3 rounded-lg bg-slate-100 text-slate-800 border border-slate-300 focus:border-emerald-500" />
       </div>
 
       <button type="submit"
@@ -58,24 +54,23 @@
       </button>
     </form>
 
-    <p class="text-sm text-center mt-6 text-slate-400">
+    <p class="text-sm text-center mt-6 text-slate-600">
       ¿No tenés cuenta?
-      <a href="register.html" class="text-emerald-400 hover:underline">Registrate</a>
+      <a href="registerclaro.html" class="text-emerald-600 hover:underline">Registrate</a>
     </p>
   </div>
 
-  <!-- Script de login + modo oscuro -->
+  <!-- Script -->
   <script>
     // ✅ Cambio de modo
     const boton = document.getElementById('modoBtn');
     boton.addEventListener('click', () => {
-      localStorage.setItem('modo', 'claro');
-      window.location.href = 'loginclaro.html';
+      localStorage.setItem('modo', 'oscuro');
+      window.location.href = 'login.html';
     });
 
-    // Si el modo guardado es "claro", redirige automáticamente
-    if (localStorage.getItem('modo') === 'claro') {
-      window.location.href = 'loginclaro.html';
+    if (localStorage.getItem('modo') === 'oscuro') {
+      window.location.href = 'login.html';
     }
 
     // ✅ Login al backend

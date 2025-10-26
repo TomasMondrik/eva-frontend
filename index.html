@@ -4,7 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>EVA</title>
+
+  <!-- Tailwind CSS vía CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Configuración personalizada de Tailwind -->
   <script>
     tailwind.config = {
       theme: {
@@ -44,23 +48,32 @@
       }
     }
   </script>
+
+  <!-- Fuente Inter -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Estilos personalizados -->
   <style>
+    /* Fondo degradado del modo oscuro */
     .gradient-bg {
       background: linear-gradient(135deg, #020617 0%, #0f172a 50%, #022c22 100%);
     }
+    /* Efecto vidrio */
     .glass-effect {
       backdrop-filter: blur(16px);
       background: rgba(15, 23, 42, 0.8);
       border: 1px solid rgba(16, 185, 129, 0.1);
     }
+    /* Brillo verde */
     .glow-emerald {
       box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
     }
   </style>
 </head>
 
+<!-- Cuerpo del sitio -->
 <body class="gradient-bg text-slate-100 font-sans antialiased min-h-screen">
+
   <!-- Navbar -->
   <nav class="flex items-center justify-between p-6 glass-effect shadow-2xl relative z-10">
     <!-- Logo -->
@@ -69,8 +82,18 @@
       <span class="text-xs font-normal text-slate-400 ml-2">Security System</span>
     </div>
 
-    <!-- Botones -->
+    <!-- Contenedor de botones -->
     <div class="flex items-center space-x-4">
+
+      <!-- Botón de cambio de modo -->
+      <button id="modoBtn" class="p-2 rounded-full border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/10 transition-all duration-300" title="Cambiar modo">
+        <!-- Ícono de luna -->
+        <svg id="iconoModo" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 0112.21 3 7 7 0 0021 12.79z"></path>
+        </svg>
+      </button>
+
+      <!-- Botones normales -->
       <a href="login.html" class="px-6 py-2.5 border border-emerald-500/30 text-emerald-400 rounded-lg hover:bg-emerald-500/10 hover:border-emerald-400 transition-all duration-300 font-medium">
         Iniciar sesión
       </a>
@@ -90,7 +113,7 @@
         Tu hogar más seguro, inteligente y accesible con tecnología de vanguardia.
       </p>
       
-      <!-- Feature highlights -->
+      <!-- Sección de características -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 max-w-4xl mx-auto">
         <div class="glass-effect p-6 rounded-xl hover:bg-emerald-950/20 transition-all duration-300 group">
           <div class="w-12 h-12 bg-emerald-500/20 rounded-lg flex items-center justify-center mb-4 mx-auto group-hover:bg-emerald-500/30 transition-colors">
@@ -125,5 +148,22 @@
       </div>
     </div>
   </section>
+
+  <!-- Script del botón de modo -->
+  <script>
+    const boton = document.getElementById('modoBtn');
+    const icono = document.getElementById('iconoModo');
+
+    boton.addEventListener('click', () => {
+      // Guardar modo en localStorage y redirigir
+      localStorage.setItem('modo', 'claro');
+      window.location.href = 'indexclaro.html';
+    });
+
+    // Si el usuario tenía guardado modo claro, redirigir directamente
+    if (localStorage.getItem('modo') === 'claro') {
+      window.location.href = 'indexclaro.html';
+    }
+  </script>
 </body>
 </html>

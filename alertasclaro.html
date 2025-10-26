@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Alertas - EVA</title>
+  <title>Alertas - EVA (Claro)</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -12,7 +12,7 @@
           fontFamily: { sans: ["Inter", "ui-sans-serif", "system-ui"] },
           colors: {
             emerald: { 400:"#34d399", 500:"#10b981" },
-            slate: { 950:"#020617", 900:"#0f172a", 800:"#1e293b", 700:"#334155", 600:"#475569", 400:"#94a3b8", 300:"#cbd5e1", 200:"#e2e8f0", 100:"#f1f5f9", 50:"#f8fafc" }
+            slate: { 50:"#f8fafc", 100:"#f1f5f9", 200:"#e2e8f0", 300:"#cbd5e1", 400:"#94a3b8", 600:"#475569", 700:"#334155", 800:"#1e293b", 900:"#0f172a", 950:"#020617" }
           }
         }
       }
@@ -20,41 +20,41 @@
   </script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
-    .gradient-bg { background: linear-gradient(135deg, #020617 0%, #0f172a 50%, #022c22 100%); }
-    .glass-effect { backdrop-filter: blur(16px); background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(16, 185, 129, 0.1); }
-    .alert-card { transition: all 0.3s ease; background: linear-gradient(145deg, rgba(30, 41, 59, 0.5), rgba(15, 23, 42, 0.8)); border: 1px solid rgba(16,185,129,0.15); }
+    .gradient-bg { background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f0fdf4 100%); }
+    .glass-effect { backdrop-filter: blur(16px); background: rgba(255, 255, 255, 0.8); border: 1px solid rgba(16, 185, 129, 0.1); }
+    .alert-card { transition: all 0.3s ease; background: linear-gradient(145deg, rgba(226, 232, 240, 0.5), rgba(248, 250, 252, 0.8)); border: 1px solid rgba(16,185,129,0.15); }
     .alert-card:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(16, 185, 129, 0.1); }
   </style>
 </head>
-<body id="body" class="gradient-bg text-slate-100 font-sans antialiased min-h-screen">
+<body id="body" class="gradient-bg text-slate-950 font-sans antialiased min-h-screen">
 
   <!-- Botón de cambio de modo -->
-  <button onclick="toggleModo()" class="fixed top-6 right-6 bg-slate-800 text-slate-100 px-4 py-2 rounded-lg border border-slate-700 hover:bg-slate-700 transition z-50">🌙 / ☀️</button>
+  <button onclick="toggleModo()" class="fixed top-6 right-6 bg-slate-200 text-slate-900 px-4 py-2 rounded-lg border border-slate-300 hover:bg-slate-300 transition z-50">🌙 / ☀️</button>
 
   <div class="flex min-h-screen">
     <!-- Sidebar -->
     <aside class="w-72 glass-effect p-6 flex flex-col justify-between shadow-2xl">
       <div>
         <div class="mb-8">
-          <h1 class="text-2xl font-bold text-emerald-400 mb-1">EVA</h1>
-          <p class="text-xs text-slate-400">Security Dashboard</p>
+          <h1 class="text-2xl font-bold text-emerald-600 mb-1">EVA</h1>
+          <p class="text-xs text-slate-700">Security Dashboard</p>
         </div>
 
         <nav class="space-y-2 mb-8">
-          <a href="inicio.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-800/50 text-slate-300 hover:text-slate-200 transition-all duration-200">
+          <a href="inicio.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-200/50 text-slate-900 hover:text-slate-950 transition-all duration-200">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
             </svg>
             <span>Cámaras</span>
           </a>
-          <a href="alertas.html" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+          <a href="alertas.html" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-emerald-500/10 text-emerald-600 border border-emerald-500/20">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
             </svg>
             <span class="font-medium">Alertas</span>
           </a>
-          <a href="comandos.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-800/50 text-slate-300 hover:text-slate-200 transition-all duration-200">
+          <a href="comandos.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-200/50 text-slate-900 hover:text-slate-950 transition-all duration-200">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4"></path>
             </svg>
@@ -63,20 +63,18 @@
         </nav>
       </div>
 
-      <div class="pt-6 border-t border-slate-700/50">
+      <div class="pt-6 border-t border-slate-300/50">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-3">
             <div class="w-8 h-8 bg-emerald-500/20 rounded-full flex items-center justify-center">
-              <span class="text-emerald-400 text-sm font-semibold">U</span>
+              <span class="text-emerald-600 text-sm font-semibold">U</span>
             </div>
             <div>
-              <div class="text-sm font-medium text-slate-200">Usuario</div>
-              <div class="text-xs text-slate-400">Sesión activa</div>
+              <div class="text-sm font-medium text-slate-900">Usuario</div>
+              <div class="text-xs text-slate-600">Sesión activa</div>
             </div>
           </div>
-          <button id="logoutBtn" class="text-xs text-slate-300 hover:text-red-400 transition">
-            Salir
-          </button>
+          <button id="logoutBtn" class="text-xs text-slate-900 hover:text-red-600 transition">Salir</button>
         </div>
       </div>
     </aside>
@@ -86,18 +84,16 @@
       <div class="max-w-6xl mx-auto">
         <div class="mb-6">
           <div class="flex items-center gap-3 mb-2">
-            <div class="w-3 h-3 bg-emerald-400 rounded-full animate-pulse"></div>
-            <h1 class="text-3xl font-bold text-slate-100">Detecciones</h1>
+            <div class="w-3 h-3 bg-emerald-600 rounded-full animate-pulse"></div>
+            <h1 class="text-3xl font-bold text-slate-900">Detecciones</h1>
           </div>
-          <p class="text-slate-400">Últimas capturas registradas por el sistema</p>
+          <p class="text-slate-600">Últimas capturas registradas por el sistema</p>
         </div>
 
         <!-- Filtros / Acciones -->
         <div class="mb-6 flex items-center gap-3">
-          <button id="refreshBtn" class="px-4 py-2 rounded-xl bg-slate-800 border border-slate-700 hover:border-emerald-500 transition">
-            Actualizar
-          </button>
-          <span id="status" class="text-sm text-slate-400"></span>
+          <button id="refreshBtn" class="px-4 py-2 rounded-xl bg-slate-100 border border-slate-300 hover:border-emerald-500 transition">Actualizar</button>
+          <span id="status" class="text-sm text-slate-600"></span>
         </div>
 
         <!-- Contenedor dinámico -->
@@ -105,9 +101,9 @@
 
         <!-- Paginación simple -->
         <div class="mt-8 flex items-center justify-center gap-2">
-          <button id="prevBtn" class="px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 disabled:opacity-40">Anterior</button>
-          <span id="pageInfo" class="text-sm text-slate-300"></span>
-          <button id="nextBtn" class="px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 disabled:opacity-40">Siguiente</button>
+          <button id="prevBtn" class="px-3 py-2 rounded-lg bg-slate-100 border border-slate-300 disabled:opacity-40">Anterior</button>
+          <span id="pageInfo" class="text-sm text-slate-900"></span>
+          <button id="nextBtn" class="px-3 py-2 rounded-lg bg-slate-100 border border-slate-300 disabled:opacity-40">Siguiente</button>
         </div>
       </div>
     </main>
@@ -147,23 +143,23 @@
         const items = Array.isArray(payload?.data) ? payload.data : [];
         container.innerHTML = "";
         if (items.length === 0) {
-          container.innerHTML = `<div class="glass-effect p-6 rounded-2xl border border-slate-700/50"><p class="text-slate-400">No hay detecciones en esta página.</p></div>`;
+          container.innerHTML = `<div class="glass-effect p-6 rounded-2xl border border-slate-300/50"><p class="text-slate-600">No hay detecciones en esta página.</p></div>`;
         } else {
           for (const det of items) {
             const card = document.createElement("div");
             card.className = "alert-card p-6 rounded-2xl";
             card.innerHTML = `
-              <div class="aspect-video bg-slate-800 rounded-xl mb-4 overflow-hidden">
+              <div class="aspect-video bg-slate-100 rounded-xl mb-4 overflow-hidden">
                 <img src="${det.imagen}" alt="Detección ${det.id}" class="w-full h-full object-cover"/>
               </div>
               <div class="flex items-center justify-between">
                 <div>
-                  <h3 class="font-semibold text-slate-200 mb-1">Detección #${det.id}</h3>
-                  <p class="text-sm text-slate-400">${formatearFechaISO(det.hora)}</p>
+                  <h3 class="font-semibold text-slate-900 mb-1">Detección #${det.id}</h3>
+                  <p class="text-sm text-slate-600">${formatearFechaISO(det.hora)}</p>
                 </div>
                 <div class="flex items-center gap-2">
-                  <div class="w-2 h-2 bg-emerald-400 rounded-full"></div>
-                  <span class="text-xs text-emerald-400 font-medium">OK</span>
+                  <div class="w-2 h-2 bg-emerald-600 rounded-full"></div>
+                  <span class="text-xs text-emerald-600 font-medium">OK</span>
                 </div>
               </div>`;
             container.appendChild(card);
@@ -184,7 +180,6 @@
     document.getElementById("nextBtn").addEventListener("click", () => { page++; cargarDetecciones(); });
     document.getElementById("logoutBtn").addEventListener("click", () => { localStorage.removeItem("token"); window.location.href = "login.html"; });
 
-    // Cambio de modo
     function toggleModo() { document.getElementById("body").classList.toggle("gradient-bg"); }
 
     cargarDetecciones();

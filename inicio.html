@@ -61,7 +61,10 @@
     }
   </style>
 </head>
-<body class="flex gradient-bg text-slate-100 font-sans antialiased min-h-screen">
+<body id="body" class="flex gradient-bg text-slate-100 font-sans antialiased min-h-screen">
+
+  <!-- Botón de cambio de modo -->
+  <button onclick="toggleModo()" class="fixed top-6 right-6 bg-slate-800 text-slate-300 px-4 py-2 rounded-lg border border-slate-700 hover:bg-slate-700 transition z-50">🌙 / ☀️</button>
 
   <!-- Sidebar -->
   <aside class="w-72 glass-effect p-6 flex flex-col justify-between shadow-2xl">
@@ -258,36 +261,19 @@
     }
 
     const usuarios = {
-      Sofi: {
-        entrada: "2025-06-03T18:30:00",
-        salida: "2025-06-04T10:15:00"
-      },
-      Eve: {
-        entrada: "2025-06-01T09:00:00",
-        salida: "2025-06-03T20:00:00"
-      },
-      Male: {
-        entrada: "2025-06-04T08:00:00",
-        salida: "2025-06-02T17:45:00"
-      }
+      Sofi: { entrada: "2025-06-03T18:30:00", salida: "2025-06-04T10:15:00" },
+      Eve: { entrada: "2025-06-01T09:00:00", salida: "2025-06-03T20:00:00" },
+      Male: { entrada: "2025-06-04T08:00:00", salida: "2025-06-02T17:45:00" }
     };
 
     function mostrarUsuarios() {
       const contenedor = document.getElementById("usuariosSidebar");
       contenedor.innerHTML = "";
-
       for (const nombre in usuarios) {
         const btn = document.createElement("button");
         btn.className = "w-full text-left bg-slate-800/30 border border-slate-700/30 px-4 py-3 rounded-xl hover:bg-slate-700/50 transition-all duration-200 flex items-center gap-3";
-        
         const inicial = nombre.charAt(0);
-        btn.innerHTML = `
-          <div class="w-8 h-8 bg-slate-700 rounded-full flex items-center justify-center text-sm font-medium">
-            ${inicial}
-          </div>
-          <span class="text-slate-200">${nombre}</span>
-        `;
-        
+        btn.innerHTML = `<div class="w-8 h-8 bg-slate-700 rounded-full flex items-center justify-center text-sm font-medium">${inicial}</div><span class="text-slate-200">${nombre}</span>`;
         btn.onclick = () => mostrarInfoUsuario(nombre);
         contenedor.appendChild(btn);
       }
@@ -298,25 +284,11 @@
       const entrada = new Date(datos.entrada);
       const salida = new Date(datos.salida);
       const esEntradaReciente = entrada > salida;
-      const mensaje = esEntradaReciente
-        ? `Entró hace: ${tiempoDesde(entrada)}`
-        : `Salió hace: ${tiempoDesde(salida)}`;
-
+      const mensaje = esEntradaReciente ? `Entró hace: ${tiempoDesde(entrada)}` : `Salió hace: ${tiempoDesde(salida)}`;
       const panel = document.getElementById("infoUsuario");
-      panel.innerHTML = `
-        <div class="flex items-center gap-3 mb-2">
-          <div class="w-8 h-8 bg-emerald-500/20 rounded-full flex items-center justify-center">
-            <span class="text-emerald-400 text-sm font-semibold">${nombre.charAt(0)}</span>
-          </div>
-          <strong class="text-slate-200">${nombre}</strong>
-        </div>
-        <p class="text-sm text-slate-300">${mensaje}</p>
-      `;
+      panel.innerHTML = `<div class="flex items-center gap-3 mb-2"><div class="w-8 h-8 bg-emerald-500/20 rounded-full flex items-center justify-center"><span class="text-emerald-400 text-sm font-semibold">${nombre.charAt(0)}</span></div><strong class="text-slate-200">${nombre}</strong></div><p class="text-sm text-slate-300">${mensaje}</p>`;
       panel.classList.remove("hidden");
-
-      setTimeout(() => {
-        panel.classList.add("hidden");
-      }, 5000);
+      setTimeout(() => { panel.classList.add("hidden"); }, 5000);
     }
 
     function tiempoDesde(fecha) {
@@ -330,7 +302,6 @@
       return `${dias} día${dias !== 1 ? 's' : ''}`;
     }
 
-    // Close dropdown when clicking outside
     window.addEventListener('click', function(e) {
       const btn = document.getElementById('ubicacionBtn');
       const dropdown = document.getElementById('dropdownUbicacion');
@@ -341,6 +312,24 @@
     });
 
     mostrarUsuarios();
+
+    // Toggle modo oscuro/claro
+    function toggleModo() {
+      const body = document.getElementById("body");
+      const esOscuro = body.classList.contains("text-slate-100");
+      if (esOscuro) {
+        body.classList.remove("gradient-bg","text-slate-100");
+        body.classList.add("gradient-bg","text-slate-900");
+        localStorage.setItem("modo","claro");
+      } else {
+        body.classList.remove("gradient-bg","text-slate-900");
+        body.classList.add("gradient-bg","text-slate-100");
+        localStorage.setItem("modo","oscuro");
+      }
+    }
+    window.onload = () => {
+      if(localStorage.getItem("modo")==="claro") toggleModo();
+    }
   </script>
 </body>
 </html>
