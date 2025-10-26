@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EVA - Seguridad Inteligente</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fuente -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- AOS Animations -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+    }
+    .text-gradient {
+      background: linear-gradient(90deg, #00b894, #2ecc71);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-bg {
+      background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3QaIoY4RQPoUwYH4ApsGv4tvG2OLuNfikRA&s');
+      background-size: cover;
+      background-position: center;
+    }
+  </style>
+</head>
+<body class="bg-black text-white">
+
+  <!-- NAVBAR -->
+  <header class="absolute top-0 left-0 w-full flex justify-between items-center px-10 py-6 z-20" data-aos="fade-down" data-aos-duration="1000">
+    <div class="flex items-center space-x-2">
+      <h1 class="text-2xl font-extrabold text-green-400">EVA</h1>
+      <span class="text-sm text-gray-200 tracking-wide">Security System</span>
+    </div>
+
+    <div class="flex items-center space-x-6">
+      <a href="#" class="text-sm hover:text-green-400 transition">Iniciar sesión</a>
+      <a href="#" class="bg-green-400 hover:bg-green-500 text-black font-semibold py-2 px-5 rounded-full transition">Habla con nosotros</a>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero-bg h-screen flex flex-col justify-center items-center text-center relative">
+    <div class="absolute inset-0 bg-black bg-opacity-40"></div> <!-- Oscurecer fondo -->
+    
+    <div class="relative z-10 max-w-3xl px-6">
+      <h2 class="text-5xl md:text-6xl font-extrabold mb-4" data-aos="zoom-in" data-aos-duration="1000">
+        La seguridad del <span class="text-gradient">futuro</span>, hoy
+      </h2>
+      <p class="text-lg md:text-xl text-gray-200 mb-10" data-aos="fade-up" data-aos-delay="300">
+        Cuidá tu hogar con monitoreo inteligente, alertas instantáneas y control remoto
+      </p>
+
+      <a href="#" class="bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-10 rounded-xl text-xl transition transform hover:scale-105 inline-block shadow-lg"
+         data-aos="fade-up" data-aos-delay="500">
+        Habla con un asesor, hoy
+      </a>
+
+      <p class="mt-6 text-sm text-gray-100" data-aos="fade-up" data-aos-delay="700">
+        Cotizá ahora y respondemos por WhatsApp rápido
+      </p>
+
+      <!-- BOTÓN WHATSAPP (espacio reservado) -->
+      <!-- <a href="AQUÍ_TU_ENLACE_WHATSAPP" class="fixed bottom-8 right-8 bg-green-500 hover:bg-green-600 text-white rounded-full p-4 shadow-lg transition">
+        <img src="ICONO_WHATSAPP.svg" alt="WhatsApp" class="w-6 h-6">
+      </a> -->
+    </div>
+  </section>
+
+  <script>
+    AOS.init();
+  </script>
+
+<!-- =========================
+     SECCIÓN 2 - EVA, LA MEJOR SEGURIDAD
+     ========================= -->
+<section id="seguridad" class="py-20 bg-white text-center">
+  <h2 class="text-4xl font-bold text-gray-900 mb-12">Eva, la mejor seguridad</h2>
+
+  <!-- Contenedor de las tarjetas -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-6 md:px-20">
+    
+    <!-- Tarjeta 1 -->
+    <div class="relative rounded-2xl overflow-hidden shadow-lg group cursor-pointer">
+      <!-- FOTO: chica con celular -->
+      <!-- 🔸 Agregar link de imagen -->
+      <img src="ruta/a/la/imagen-chica-celular.jpg" alt="Controla tu casa en cualquier momento" 
+           class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-110">
+      <!-- Overlay -->
+      <div class="absolute inset-0 bg-black bg-opacity-30 group-hover:bg-opacity-60 transition-all duration-500 flex flex-col justify-end p-6 text-left">
+        <p class="text-white text-lg font-semibold mb-1">Controla tu casa en cualquier momento</p>
+        <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+          <ul class="text-white text-sm mb-2 list-disc list-inside">
+            <li>Mir&aacute; la actividad de tu casa</li>
+            <li>Sab&eacute; qui&eacute;n ingres&oacute; y cu&aacute;ndo</li>
+          </ul>
+          <a href="#" class="text-emerald-400 font-semibold hover:underline">Conoc&eacute; m&aacute;s sobre esto ></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tarjeta 2 -->
+    <div class="relative rounded-2xl overflow-hidden shadow-lg group cursor-pointer">
+      <!-- FOTO: pareja comiendo -->
+      <img src="https://create.vista.com/unlimited/stock-photos/225666050/stock-photo-attractive-smiling-couple-eating-together-sushi-rolls-restaurant/" 
+           alt="Disfrutá tranquilo, nosotros te avisamos"
+           class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-110">
+      <div class="absolute inset-0 bg-orange-800 bg-opacity-30 group-hover:bg-opacity-60 transition-all duration-500 flex flex-col justify-end p-6 text-left">
+        <p class="text-white text-lg font-semibold mb-1">Disfrut&aacute; tranquilo, nosotros te avisamos</p>
+        <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+          <p class="text-white text-sm mb-2">Nuestra <strong>inteligencia artificial</strong> est&aacute; activa 24/7, avisando de cualquier suceso a vos y a la polic&iacute;a.</p>
+          <a href="#" class="text-emerald-400 font-semibold hover:underline">Conoc&eacute; m&aacute;s de nuestra IA ></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tarjeta 3 -->
+    <div class="relative rounded-2xl overflow-hidden shadow-lg group cursor-pointer">
+      <!-- FOTO: mamá y bebé -->
+      <img src="https://es.123rf.com/imagenes-de-archivo/bebes_riendose.html?page=7" 
+           alt="Te cuidamos a vos y a tu familia"
+           class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-110">
+      <div class="absolute inset-0 bg-gray-700 bg-opacity-30 group-hover:bg-opacity-60 transition-all duration-500 flex flex-col justify-end p-6 text-left">
+        <p class="text-white text-lg font-semibold mb-1">Te cuidamos a vos y a tu familia</p>
+        <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+          <p class="text-white text-sm mb-2">Disfrut&aacute; los momentos con tu familia, que son &uacute;nicos. De cuidarlos nos encargamos nosotros.</p>
+          <a href="#" class="text-emerald-400 font-semibold hover:underline">Conoc&eacute; m&aacute;s de la seguridad ></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tarjeta 4 -->
+    <div class="relative rounded-2xl overflow-hidden shadow-lg group cursor-pointer">
+      <!-- FOTO: policía en moto -->
+      <img src="https://www.wallpaperflare.com/search?wallpaper=a+motorcycle+police+officer&sort=relevance" 
+           alt="Aviso instantáneo ante un problema"
+           class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-110">
+      <div class="absolute inset-0 bg-black bg-opacity-30 group-hover:bg-opacity-60 transition-all duration-500 flex flex-col justify-end p-6 text-left">
+        <p class="text-white text-lg font-semibold mb-1">Aviso instant&aacute;neo ante un problema</p>
+        <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+          <p class="text-white text-sm mb-2">Si sucede algo, <strong>avisamos al instante</strong> a la polic&iacute;a.</p>
+          <a href="#" class="text-emerald-400 font-semibold hover:underline">Conoc&eacute; m&aacute;s ></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tarjeta 5 -->
+    <div class="relative rounded-2xl overflow-hidden shadow-lg group cursor-pointer">
+      <!-- FOTO: sala de control -->
+      <img src="https://img.freepik.com/premium-photo/control-room-hd-8k-wallpaper-stock-photographic-image_853645-37405.jpg" 
+           alt="La seguridad más inteligente"
+           class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-110">
+      <div class="absolute inset-0 bg-gray-900 bg-opacity-30 group-hover:bg-opacity-60 transition-all duration-500 flex flex-col justify-end p-6 text-left">
+        <p class="text-white text-lg font-semibold mb-1">La seguridad m&aacute;s inteligente</p>
+        <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+          <p class="text-white text-sm mb-2">El mejor sistema de <strong>inteligencia artificial</strong> del mercado, entrenado para protegerte a vos.</p>
+          <a href="#" class="text-emerald-400 font-semibold hover:underline">Conoc&eacute; m&aacute;s del sistema ></a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Mensaje final -->
+  <div class="mt-16">
+    <h3 class="text-2xl font-bold text-gray-900">
+      ¡Dejanos cuidarte! 
+      <span class="text-emerald-500">Contactate</span> con nosotros
+    </h3>
+  </div>
+</section>
+
+
+<!-- =========================
+     SECCIÓN 3 - CÓMO FUNCIONA EVA
+     ========================= -->
+<section id="funcionamiento" class="py-24 bg-white text-center">
+  <h2 class="text-4xl font-bold text-gray-900 mb-4">
+    ¿Cómo funciona el sistema EVA?
+  </h2>
+  <p class="text-gray-600 max-w-2xl mx-auto mb-16">
+    Detectamos, verificamos, actuamos: tu propiedad está protegida 24/7 con la tecnología más inteligente.
+  </p>
+
+  <!-- Contenedor de pasos -->
+  <div class="flex flex-col md:flex-row justify-center items-start md:items-center gap-10 md:gap-16 px-6 md:px-20">
+    
+    <!-- Paso 1 -->
+    <div class="flex flex-col items-center text-center max-w-[220px]">
+      <div class="text-5xl mb-4">✨</div>
+      <h3 class="text-xl font-semibold mb-2">Control</h3>
+      <p class="text-gray-600 text-sm">
+        La <strong>IA</strong> observa y analiza todo el exterior, todo el tiempo.
+      </p>
+    </div>
+
+    <!-- Flecha -->
+    <div class="hidden md:block text-3xl text-gray-400">→</div>
+
+    <!-- Paso 2 -->
+    <div class="flex flex-col items-center text-center max-w-[220px]">
+      <div class="text-5xl mb-4">👁️‍🗨️</div>
+      <h3 class="text-xl font-semibold mb-2">Detección</h3>
+      <p class="text-gray-600 text-sm">
+        Al <strong>detectar</strong> algo inusual, el sistema pasa al <strong>instante</strong> al siguiente paso.
+      </p>
+    </div>
+
+    <div class="hidden md:block text-3xl text-gray-400">→</div>
+
+    <!-- Paso 3 -->
+    <div class="flex flex-col items-center text-center max-w-[220px]">
+      <div class="text-5xl mb-4">⚠️</div>
+      <h3 class="text-xl font-semibold mb-2">Alerta</h3>
+      <p class="text-gray-600 text-sm">
+        Se manda una <strong>alerta</strong> al momento al usuario y a la <strong>policía</strong>.
+      </p>
+    </div>
+
+    <div class="hidden md:block text-3xl text-gray-400">→</div>
+
+    <!-- Paso 4 -->
+    <div class="flex flex-col items-center text-center max-w-[220px]">
+      <div class="text-5xl mb-4">🛡️</div>
+      <h3 class="text-xl font-semibold mb-2">Acción</h3>
+      <p class="text-gray-600 text-sm">
+        La <strong>policía</strong> sabe qué sucedió y dónde, para que acudan a <strong>solucionar</strong>.
+      </p>
+    </div>
+  </div>
+
+  <!-- Botón -->
+  <div class="mt-16">
+    <a href="#" 
+       class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-lg py-4 px-10 rounded-full shadow-lg transition-all duration-300 hover:scale-105">
+       Quiero estar protegido
+    </a>
+  </div>
+</section>
+
+<!-- =========================
+     LANDING 4 - FOOTER
+     ========================= -->
+<footer class="bg-black text-white text-center py-16">
+  <div class="flex flex-col md:flex-row justify-center items-center gap-6 md:gap-24 mb-8 text-sm md:text-base font-semibold">
+    <a href="#" class="hover:text-emerald-400 transition-colors duration-300">
+      Términos Legales Promoción
+    </a>
+    <a href="#" class="hover:text-emerald-400 transition-colors duration-300">
+      Ley 25.326 - Protección de datos personales
+    </a>
+  </div>
+
+  <p class="text-white font-bold text-lg md:text-xl">
+    ® EVA. Todos los derechos reservados.
+  </p>
+</footer>
+</body>
+</html>
+
