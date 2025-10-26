@@ -3,17 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="EVA - Seguridad inteligente para tu hogar: monitoreo 24/7, alertas instantáneas y control remoto con IA.">
   <title>EVA - Seguridad Inteligente</title>
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico">
 
   <!-- Fuente -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
 
   <!-- AOS Animations -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
 
   <style>
     body {
@@ -21,6 +25,7 @@
     }
     .text-gradient {
       background: linear-gradient(90deg, #00b894, #2ecc71);
+      background-clip: text;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -29,9 +34,26 @@
       background-size: cover;
       background-position: center;
     }
+    /* Skip link - visible on keyboard focus */
+    .skip-link {
+      position: absolute;
+      left: -999px;
+      top: auto;
+      background: #ffffff;
+      color: #000000;
+      padding: 0.5rem 0.75rem;
+      border-radius: 4px;
+      z-index: 60;
+    }
+    .skip-link:focus {
+      left: 1rem;
+      top: 1rem;
+    }
   </style>
 </head>
 <body class="bg-black text-white">
+
+  <a href="#main-content" class="skip-link">Saltar al contenido</a>
 
   <!-- NAVBAR -->
   <header class="absolute top-0 left-0 w-full flex justify-between items-center px-10 py-6 z-20" data-aos="fade-down" data-aos-duration="1000">
@@ -47,6 +69,7 @@
   </header>
 
   <!-- HERO SECTION -->
+  <main id="main-content" role="main">
   <section class="hero-bg h-screen flex flex-col justify-center items-center text-center relative">
     <div class="absolute inset-0 bg-black bg-opacity-40"></div> <!-- Oscurecer fondo -->
     
@@ -75,7 +98,10 @@
   </section>
 
   <script>
-    AOS.init();
+    // Inicializar AOS cuando el DOM esté listo y AOS haya cargado (evita errores si el script está deferred)
+    document.addEventListener('DOMContentLoaded', function() {
+      if (window.AOS) AOS.init();
+    });
   </script>
 
 <!-- =========================
@@ -91,8 +117,8 @@
     <div class="relative rounded-2xl overflow-hidden shadow-lg group cursor-pointer">
       <!-- FOTO: chica con celular -->
       <!-- 🔸 Agregar link de imagen -->
-      <img src="ruta/a/la/imagen-chica-celular.jpg" alt="Controla tu casa en cualquier momento" 
-           class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-110">
+   <img src="https://via.placeholder.com/1200x720?text=Control+tu+casa" alt="Controla tu casa en cualquier momento" 
+     class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" decoding="async">
       <!-- Overlay -->
       <div class="absolute inset-0 bg-black bg-opacity-30 group-hover:bg-opacity-60 transition-all duration-500 flex flex-col justify-end p-6 text-left">
         <p class="text-white text-lg font-semibold mb-1">Controla tu casa en cualquier momento</p>
@@ -109,9 +135,9 @@
     <!-- Tarjeta 2 -->
     <div class="relative rounded-2xl overflow-hidden shadow-lg group cursor-pointer">
       <!-- FOTO: pareja comiendo -->
-      <img src="https://create.vista.com/unlimited/stock-photos/225666050/stock-photo-attractive-smiling-couple-eating-together-sushi-rolls-restaurant/" 
-           alt="Disfrutá tranquilo, nosotros te avisamos"
-           class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-110">
+   <img src="https://via.placeholder.com/1200x720?text=Disfruta+tranquilo" 
+     alt="Disfrutá tranquilo, nosotros te avisamos"
+     class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" decoding="async">
       <div class="absolute inset-0 bg-orange-800 bg-opacity-30 group-hover:bg-opacity-60 transition-all duration-500 flex flex-col justify-end p-6 text-left">
         <p class="text-white text-lg font-semibold mb-1">Disfrut&aacute; tranquilo, nosotros te avisamos</p>
         <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-500">
@@ -124,9 +150,9 @@
     <!-- Tarjeta 3 -->
     <div class="relative rounded-2xl overflow-hidden shadow-lg group cursor-pointer">
       <!-- FOTO: mamá y bebé -->
-      <img src="https://es.123rf.com/imagenes-de-archivo/bebes_riendose.html?page=7" 
-           alt="Te cuidamos a vos y a tu familia"
-           class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-110">
+   <img src="https://via.placeholder.com/1200x720?text=Familia+segura" 
+     alt="Te cuidamos a vos y a tu familia"
+     class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" decoding="async">
       <div class="absolute inset-0 bg-gray-700 bg-opacity-30 group-hover:bg-opacity-60 transition-all duration-500 flex flex-col justify-end p-6 text-left">
         <p class="text-white text-lg font-semibold mb-1">Te cuidamos a vos y a tu familia</p>
         <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-500">
@@ -139,9 +165,9 @@
     <!-- Tarjeta 4 -->
     <div class="relative rounded-2xl overflow-hidden shadow-lg group cursor-pointer">
       <!-- FOTO: policía en moto -->
-      <img src="https://www.wallpaperflare.com/search?wallpaper=a+motorcycle+police+officer&sort=relevance" 
-           alt="Aviso instantáneo ante un problema"
-           class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-110">
+   <img src="https://via.placeholder.com/1200x720?text=Aviso+instantaneo" 
+     alt="Aviso instantáneo ante un problema"
+     class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" decoding="async">
       <div class="absolute inset-0 bg-black bg-opacity-30 group-hover:bg-opacity-60 transition-all duration-500 flex flex-col justify-end p-6 text-left">
         <p class="text-white text-lg font-semibold mb-1">Aviso instant&aacute;neo ante un problema</p>
         <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-500">
@@ -154,9 +180,9 @@
     <!-- Tarjeta 5 -->
     <div class="relative rounded-2xl overflow-hidden shadow-lg group cursor-pointer">
       <!-- FOTO: sala de control -->
-      <img src="https://img.freepik.com/premium-photo/control-room-hd-8k-wallpaper-stock-photographic-image_853645-37405.jpg" 
-           alt="La seguridad más inteligente"
-           class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-110">
+   <img src="https://via.placeholder.com/1200x720?text=Sala+de+control" 
+     alt="La seguridad más inteligente"
+     class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" decoding="async">
       <div class="absolute inset-0 bg-gray-900 bg-opacity-30 group-hover:bg-opacity-60 transition-all duration-500 flex flex-col justify-end p-6 text-left">
         <p class="text-white text-lg font-semibold mb-1">La seguridad m&aacute;s inteligente</p>
         <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-500">
@@ -194,7 +220,7 @@
     
     <!-- Paso 1 -->
     <div class="flex flex-col items-center text-center max-w-[220px]">
-      <div class="text-5xl mb-4">✨</div>
+      <div class="text-5xl mb-4" aria-hidden="true">✨</div>
       <h3 class="text-xl font-semibold mb-2">Control</h3>
       <p class="text-gray-600 text-sm">
         La <strong>IA</strong> observa y analiza todo el exterior, todo el tiempo.
@@ -202,33 +228,33 @@
     </div>
 
     <!-- Flecha -->
-    <div class="hidden md:block text-3xl text-gray-400">→</div>
+  <div class="hidden md:block text-3xl text-gray-400" aria-hidden="true">→</div>
 
     <!-- Paso 2 -->
     <div class="flex flex-col items-center text-center max-w-[220px]">
-      <div class="text-5xl mb-4">👁️‍🗨️</div>
+      <div class="text-5xl mb-4" aria-hidden="true">👁️‍🗨️</div>
       <h3 class="text-xl font-semibold mb-2">Detección</h3>
       <p class="text-gray-600 text-sm">
         Al <strong>detectar</strong> algo inusual, el sistema pasa al <strong>instante</strong> al siguiente paso.
       </p>
     </div>
 
-    <div class="hidden md:block text-3xl text-gray-400">→</div>
+  <div class="hidden md:block text-3xl text-gray-400" aria-hidden="true">→</div>
 
     <!-- Paso 3 -->
     <div class="flex flex-col items-center text-center max-w-[220px]">
-      <div class="text-5xl mb-4">⚠️</div>
+      <div class="text-5xl mb-4" aria-hidden="true">⚠️</div>
       <h3 class="text-xl font-semibold mb-2">Alerta</h3>
       <p class="text-gray-600 text-sm">
         Se manda una <strong>alerta</strong> al momento al usuario y a la <strong>policía</strong>.
       </p>
     </div>
 
-    <div class="hidden md:block text-3xl text-gray-400">→</div>
+  <div class="hidden md:block text-3xl text-gray-400" aria-hidden="true">→</div>
 
     <!-- Paso 4 -->
     <div class="flex flex-col items-center text-center max-w-[220px]">
-      <div class="text-5xl mb-4">🛡️</div>
+      <div class="text-5xl mb-4" aria-hidden="true">🛡️</div>
       <h3 class="text-xl font-semibold mb-2">Acción</h3>
       <p class="text-gray-600 text-sm">
         La <strong>policía</strong> sabe qué sucedió y dónde, para que acudan a <strong>solucionar</strong>.
@@ -245,9 +271,11 @@
   </div>
 </section>
 
+</main>
+
 <!-- =========================
-     LANDING 4 - FOOTER
-     ========================= -->
+  LANDING 4 - FOOTER
+  ========================= -->
 <footer class="bg-black text-white text-center py-16">
   <div class="flex flex-col md:flex-row justify-center items-center gap-6 md:gap-24 mb-8 text-sm md:text-base font-semibold">
     <a href="#" class="hover:text-emerald-400 transition-colors duration-300">
