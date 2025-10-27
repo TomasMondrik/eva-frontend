@@ -32,50 +32,96 @@
   <button onclick="toggleModo()" class="fixed top-6 right-6 bg-slate-800 text-slate-100 px-4 py-2 rounded-lg border border-slate-700 hover:bg-slate-700 transition z-50">🌙 / ☀️</button>
 
   <div class="flex min-h-screen">
-    <!-- Sidebar -->
+    <!-- 🧭 Sidebar (reemplazada por la de inicio.html) -->
     <aside class="w-72 glass-effect p-6 flex flex-col justify-between shadow-2xl">
       <div>
+        <!-- Logo -->
         <div class="mb-8">
           <h1 class="text-2xl font-bold text-emerald-400 mb-1">EVA</h1>
           <p class="text-xs text-slate-400">Security Dashboard</p>
         </div>
 
+        <!-- Ubicación -->
+        <div class="relative mb-8">
+          <button id="ubicacionBtn" onclick="toggleDropdown()" 
+                  class="w-full flex justify-between items-center bg-slate-800/50 border border-slate-700/50 text-slate-200 p-4 rounded-xl hover:bg-slate-700/50 transition-all duration-300">
+            <div class="flex items-center gap-3">
+              <div class="w-2 h-2 bg-emerald-400 rounded-full"></div>
+              <div class="text-left">
+                <div class="text-sm font-medium" id="ubicacionActual">Hogar</div>
+                <div class="text-xs text-slate-400">Av. Libertador 6798</div>
+              </div>
+            </div>
+            <svg class="w-4 h-4 text-slate-400 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+
+          <!-- Dropdown -->
+          <div id="dropdownUbicacion" class="hidden absolute left-0 w-full mt-2 glass-effect rounded-xl shadow-2xl z-20 overflow-hidden">
+            <button onclick="cambiarUbicacion('hogar')" class="block w-full text-left px-4 py-3 hover:bg-emerald-500/10 transition-colors text-sm">
+              <div class="flex items-center gap-3">
+                <div class="w-2 h-2 bg-emerald-400 rounded-full"></div>
+                <span>Hogar</span>
+              </div>
+            </button>
+            <button onclick="mostrarNoDisponible()" class="block w-full text-left px-4 py-3 hover:bg-slate-700/50 transition-colors text-sm text-slate-400">
+              <div class="flex items-center gap-3">
+                <div class="w-2 h-2 bg-slate-600 rounded-full"></div>
+                <span>Trabajo</span>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Menú lateral -->
         <nav class="space-y-2 mb-8">
           <a href="inicio.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-800/50 text-slate-300 hover:text-slate-200 transition-all duration-200">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0zM2.458 12C3.732 7.943 7.523 5 12 5c4.478 
+                       0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 
+                       7-4.477 0-8.268-2.943-9.542-7z"></path>
             </svg>
-            <span>Cámaras</span>
+            <span class="font-medium">Cámaras</span>
           </a>
+
           <a href="alertas.html" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 
+                       2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 
+                       0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
             </svg>
-            <span class="font-medium">Alertas</span>
+            <span>Alertas</span>
           </a>
         </nav>
+
+        <!-- Usuarios -->
+        <div>
+          <h2 class="text-sm font-semibold text-slate-400 mb-4 uppercase tracking-wider">Usuarios</h2>
+          <div id="usuariosSidebar" class="space-y-2"></div>
+        </div>
       </div>
 
+      <!-- Sesión -->
       <div class="pt-6 border-t border-slate-700/50">
-        <div class="flex items-center justify-between">
-          <div class="flex items-center gap-3">
-            <div class="w-8 h-8 bg-emerald-500/20 rounded-full flex items-center justify-center">
-              <span class="text-emerald-400 text-sm font-semibold">U</span>
-            </div>
-            <div>
-              <div class="text-sm font-medium text-slate-200">Usuario</div>
-              <div class="text-xs text-slate-400">Sesión activa</div>
-            </div>
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 bg-emerald-500/20 rounded-full flex items-center justify-center">
+            <span id="userInitial" class="text-emerald-400 text-sm font-semibold">U</span>
           </div>
-          <button id="logoutBtn" class="text-xs text-slate-300 hover:text-red-400 transition">
+          <div>
+            <div id="userName" class="text-sm font-medium text-slate-200">Usuario</div>
+            <div class="text-xs text-slate-400">Sesión activa</div>
+          </div>
+          <button id="logoutBtn" class="ml-auto text-xs text-slate-300 hover:text-red-400 transition">
             Salir
           </button>
         </div>
       </div>
     </aside>
 
-    <!-- Contenido -->
+    <!-- Contenido principal -->
     <main class="flex-1 p-8 overflow-y-auto">
       <div class="max-w-6xl mx-auto">
         <div class="mb-6">
@@ -86,7 +132,7 @@
           <p class="text-slate-400">Últimas capturas registradas por el sistema</p>
         </div>
 
-        <!-- Filtros / Acciones -->
+        <!-- Filtros -->
         <div class="mb-6 flex items-center gap-3">
           <button id="refreshBtn" class="px-4 py-2 rounded-xl bg-slate-800 border border-slate-700 hover:border-emerald-500 transition">
             Actualizar
@@ -94,10 +140,10 @@
           <span id="status" class="text-sm text-slate-400"></span>
         </div>
 
-        <!-- Contenedor dinámico -->
+        <!-- Contenedor -->
         <div id="alertasContainer" class="grid grid-cols-1 lg:grid-cols-2 gap-6"></div>
 
-        <!-- Paginación simple -->
+        <!-- Paginación -->
         <div class="mt-8 flex items-center justify-center gap-2">
           <button id="prevBtn" class="px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 disabled:opacity-40">Anterior</button>
           <span id="pageInfo" class="text-sm text-slate-300"></span>
@@ -108,129 +154,95 @@
   </div>
 
   <script>
-    // ========= Helpers de Auth (token en localStorage) =========
-    function saveToken(t){ localStorage.setItem("token", t); }
-    function getToken(){ return localStorage.getItem("token"); }
-    function logout(){ localStorage.removeItem("token"); window.location.href = "login.html"; }
-    function requireTokenOrRedirect(){
-      const t = getToken();
-      if(!t){ window.location.href = "login.html"; return null; }
-      return t;
+    // ====== Sidebar funciones ======
+    function toggleDropdown(){
+      const dropdown = document.getElementById("dropdownUbicacion");
+      const icon = document.querySelector("#ubicacionBtn svg");
+      dropdown.classList.toggle("hidden");
+      icon.style.transform = dropdown.classList.contains("hidden") ? "rotate(0deg)" : "rotate(180deg)";
     }
-    async function authFetch(url, options = {}){
-      const t = getToken();
-      const headers = { ...(options.headers || {}), Authorization: `Bearer ${t}` };
-      const res = await fetch(url, { ...options, headers });
-      if(res.status === 401){ logout(); return res; }
-      return res;
+    function cambiarUbicacion(ubicacion){
+      document.getElementById("ubicacionActual").textContent = ubicacion.charAt(0).toUpperCase()+ubicacion.slice(1);
+      toggleDropdown();
     }
-
-    // ========= Decodificar payload del JWT (para mostrar datos del user) =========
-    function decodeJwtPayload(token){
-      try{
-        const base64Url = token.split('.')[1];
-        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-        const json = decodeURIComponent(atob(base64).split('').map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join(''));
-        return JSON.parse(json);
-      }catch{ return {}; }
+    function mostrarNoDisponible(){
+      alert("📍 Ubicación 'Trabajo' no disponible por el momento.");
+      toggleDropdown();
     }
-
-    // ========= UI: tema =========
-    function toggleModo(){ document.getElementById("body").classList.toggle("gradient-bg"); }
-
-    // ========= Lógica de Alertas =========
-    const API_BASE = "https://eva-back-end.vercel.app";
-    let page = 1;
-    const pageSize = 12;
-
-    function formatearFechaISO(iso){
-      const fecha = new Date(iso);
-      return fecha.toLocaleString("es-AR", { day:"2-digit", month:"2-digit", year:"numeric", hour:"2-digit", minute:"2-digit", hour12:false });
-    }
-
-    function pintarUsuario(){
-      const token = getToken();
-      if(!token) return;
-      const payload = decodeJwtPayload(token); // { id, email, nombre, iat, exp } según tu backend
-      const nombre = payload?.nombre || payload?.email || "Usuario";
-      const inicial = (nombre?.trim()[0] || "U").toUpperCase();
-      const nameEl = document.getElementById("userName");
-      const initEl = document.getElementById("userInitial");
-      if(nameEl) nameEl.textContent = nombre;
-      if(initEl) initEl.textContent = inicial;
-    }
-
-    async function cargarDetecciones(){
-      const token = requireTokenOrRedirect();
-      if(!token) return;
-
-      const status = document.getElementById("status");
-      const container = document.getElementById("alertasContainer");
-      const pageInfo = document.getElementById("pageInfo");
-
-      status.textContent = "Cargando...";
-
-      try{
-        const url = `${API_BASE}/deteccion?page=${page}&pageSize=${pageSize}`;
-        const res = await authFetch(url); // Authorization: Bearer <token>
-        if(!res.ok) throw new Error("No se pudieron obtener las detecciones");
-
-        const payload = await res.json();
-        const items = Array.isArray(payload?.data) ? payload.data : [];
-
-        container.innerHTML = "";
-        if(items.length === 0){
-          container.innerHTML = `
-            <div class="glass-effect p-6 rounded-2xl border border-slate-700/50">
-              <p class="text-slate-400">No hay detecciones en esta página.</p>
-            </div>`;
-        }else{
-          for(const det of items){
-            const card = document.createElement("div");
-            card.className = "alert-card p-6 rounded-2xl";
-            card.innerHTML = `
-              <div class="aspect-video bg-slate-800 rounded-xl mb-4 overflow-hidden">
-                <img src="${det.imagen}" alt="Detección ${det.id}" class="w-full h-full object-cover" loading="lazy"
-                     onerror="this.src='https://via.placeholder.com/1280x720?text=Imagen+no+disponible'"/>
-              </div>
-              <div class="flex items-center justify-between">
-                <div>
-                  <h3 class="font-semibold text-slate-200 mb-1">Detección #${det.id}</h3>
-                  <p class="text-sm text-slate-400">${formatearFechaISO(det.hora)}</p>
-                </div>
-                <div class="flex items-center gap-2">
-                  <div class="w-2 h-2 bg-emerald-400 rounded-full"></div>
-                  <span class="text-xs text-emerald-400 font-medium">OK</span>
-                </div>
-              </div>`;
-            container.appendChild(card);
-          }
-        }
-
-        const total = Number(payload?.total ?? 0);
-        const totalPages = Math.max(1, Math.ceil(total / pageSize));
-        document.getElementById("prevBtn").disabled = page <= 1;
-        document.getElementById("nextBtn").disabled = page >= totalPages;
-        pageInfo.textContent = `Página ${page} de ${totalPages} • Total: ${total}`;
-        status.textContent = "";
-      }catch(err){
-        console.error(err);
-        status.textContent = "Error al cargar. Intentá nuevamente.";
+    const usuarios = { Sofi:{}, Eve:{}, Male:{} };
+    function mostrarUsuarios(){
+      const cont = document.getElementById("usuariosSidebar");
+      cont.innerHTML="";
+      for(const nombre in usuarios){
+        const inicial = nombre.charAt(0);
+        cont.innerHTML += `
+          <button class="w-full text-left bg-slate-800/30 border border-slate-700/30 px-4 py-3 rounded-xl hover:bg-slate-700/50 transition-all duration-200 flex items-center gap-3">
+            <div class='w-8 h-8 bg-slate-700 rounded-full flex items-center justify-center text-sm font-medium'>${inicial}</div>
+            <span class='text-slate-200'>${nombre}</span>
+          </button>`;
       }
     }
+    mostrarUsuarios();
 
-    // ========= Eventos =========
-    document.getElementById("refreshBtn").addEventListener("click", cargarDetecciones);
-    document.getElementById("prevBtn").addEventListener("click", () => { if(page > 1){ page--; cargarDetecciones(); }});
-    document.getElementById("nextBtn").addEventListener("click", () => { page++; cargarDetecciones(); });
-    document.getElementById("logoutBtn").addEventListener("click", logout);
+    // ====== Auth helpers ======
+    function getToken(){ return localStorage.getItem("token"); }
+    function logout(){ localStorage.removeItem("token"); window.location.href="login.html"; }
+    function requireTokenOrRedirect(){ const t=getToken(); if(!t){window.location.href="login.html";return null;} return t;}
+    async function authFetch(url,opt={}){ const t=getToken(); const h={...(opt.headers||{}),Authorization:`Bearer ${t}`}; const r=await fetch(url,{...opt,headers:h}); if(r.status===401){logout();} return r; }
+    function decodeJwtPayload(t){try{const b=t.split('.')[1];const j=decodeURIComponent(atob(b.replace(/-/g,'+').replace(/_/g,'/')).split('').map(c=>'%'+('00'+c.charCodeAt(0).toString(16)).slice(-2)).join(''));return JSON.parse(j);}catch{return{};}}
 
-    // ========= Inicio =========
-    (function init(){
-      if(!requireTokenOrRedirect()) return;
-      pintarUsuario();
-      cargarDetecciones();
-    })();
+    // ====== Lógica de Alertas ======
+    const API_BASE="https://eva-back-end.vercel.app";
+    let page=1; const pageSize=12;
+    function formatearFechaISO(iso){const f=new Date(iso);return f.toLocaleString("es-AR",{day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit",hour12:false});}
+    function pintarUsuario(){const t=getToken();if(!t)return;const p=decodeJwtPayload(t);const n=p?.nombre||p?.email||"Usuario";const i=(n.trim()[0]||"U").toUpperCase();document.getElementById("userName").textContent=n;document.getElementById("userInitial").textContent=i;}
+
+    async function cargarDetecciones(){
+      const token=requireTokenOrRedirect(); if(!token)return;
+      const status=document.getElementById("status"); const container=document.getElementById("alertasContainer"); const pageInfo=document.getElementById("pageInfo");
+      status.textContent="Cargando...";
+      try{
+        const url=`${API_BASE}/deteccion?page=${page}&pageSize=${pageSize}`;
+        const res=await authFetch(url);
+        if(!res.ok) throw new Error("No se pudieron obtener las detecciones");
+        const payload=await res.json(); const items=Array.isArray(payload?.data)?payload.data:[];
+        container.innerHTML="";
+        if(items.length===0){
+          container.innerHTML=`<div class='glass-effect p-6 rounded-2xl border border-slate-700/50'><p class='text-slate-400'>No hay detecciones en esta página.</p></div>`;
+        }else{
+          for(const det of items){
+            container.innerHTML += `
+              <div class="alert-card p-6 rounded-2xl">
+                <div class="aspect-video bg-slate-800 rounded-xl mb-4 overflow-hidden">
+                  <img src="${det.imagen}" alt="Detección ${det.id}" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/1280x720?text=Imagen+no+disponible'"/>
+                </div>
+                <div class="flex items-center justify-between">
+                  <div>
+                    <h3 class="font-semibold text-slate-200 mb-1">Detección #${det.id}</h3>
+                    <p class="text-sm text-slate-400">${formatearFechaISO(det.hora)}</p>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <div class="w-2 h-2 bg-emerald-400 rounded-full"></div>
+                    <span class="text-xs text-emerald-400 font-medium">OK</span>
+                  </div>
+                </div>
+              </div>`;
+          }
+        }
+        const total=Number(payload?.total??0); const totalPages=Math.max(1,Math.ceil(total/pageSize));
+        document.getElementById("prevBtn").disabled=page<=1; document.getElementById("nextBtn").disabled=page>=totalPages;
+        pageInfo.textContent=`Página ${page} de ${totalPages} • Total: ${total}`; status.textContent="";
+      }catch(e){console.error(e);status.textContent="Error al cargar. Intentá nuevamente.";}
+    }
+
+    // ====== Eventos ======
+    document.getElementById("refreshBtn").addEventListener("click",cargarDetecciones);
+    document.getElementById("prevBtn").addEventListener("click",()=>{if(page>1){page--;cargarDetecciones();}});
+    document.getElementById("nextBtn").addEventListener("click",()=>{page++;cargarDetecciones();});
+    document.getElementById("logoutBtn").addEventListener("click",logout);
+
+    // ====== Inicio ======
+    (function init(){if(!requireTokenOrRedirect())return;pintarUsuario();cargarDetecciones();})();
   </script>
-  <body>
-    <html>
+</body>
+</html>
