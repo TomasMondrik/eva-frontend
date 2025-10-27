@@ -32,7 +32,7 @@
   <button onclick="toggleModo()" class="fixed top-6 right-6 bg-slate-800 text-slate-100 px-4 py-2 rounded-lg border border-slate-700 hover:bg-slate-700 transition z-50">🌙 / ☀️</button>
 
   <div class="flex min-h-screen">
-    <!-- 🧭 Sidebar (reemplazada por la de inicio.html) -->
+    <!-- 🧭 Sidebar -->
     <aside class="w-72 glass-effect p-6 flex flex-col justify-between shadow-2xl">
       <div>
         <!-- Logo -->
@@ -156,39 +156,37 @@
   <script>
     // ====== Sidebar funciones ======
     function toggleDropdown(){
-      const dropdown = document.getElementById("dropdownUbicacion");
-      const icon = document.querySelector("#ubicacionBtn svg");
+      const dropdown=document.getElementById("dropdownUbicacion");
+      const icon=document.querySelector("#ubicacionBtn svg");
       dropdown.classList.toggle("hidden");
-      icon.style.transform = dropdown.classList.contains("hidden") ? "rotate(0deg)" : "rotate(180deg)";
+      icon.style.transform=dropdown.classList.contains("hidden")?"rotate(0deg)":"rotate(180deg)";
     }
     function cambiarUbicacion(ubicacion){
-      document.getElementById("ubicacionActual").textContent = ubicacion.charAt(0).toUpperCase()+ubicacion.slice(1);
+      document.getElementById("ubicacionActual").textContent=ubicacion.charAt(0).toUpperCase()+ubicacion.slice(1);
       toggleDropdown();
     }
     function mostrarNoDisponible(){
       alert("📍 Ubicación 'Trabajo' no disponible por el momento.");
       toggleDropdown();
     }
-    const usuarios = { Sofi:{}, Eve:{}, Male:{} };
+    const usuarios={Sofi:{},Eve:{},Male:{}};
     function mostrarUsuarios(){
-      const cont = document.getElementById("usuariosSidebar");
+      const cont=document.getElementById("usuariosSidebar");
       cont.innerHTML="";
       for(const nombre in usuarios){
-        const inicial = nombre.charAt(0);
-        cont.innerHTML += `
-          <button class="w-full text-left bg-slate-800/30 border border-slate-700/30 px-4 py-3 rounded-xl hover:bg-slate-700/50 transition-all duration-200 flex items-center gap-3">
-            <div class='w-8 h-8 bg-slate-700 rounded-full flex items-center justify-center text-sm font-medium'>${inicial}</div>
-            <span class='text-slate-200'>${nombre}</span>
-          </button>`;
+        const inicial=nombre.charAt(0);
+        cont.innerHTML+=`<button class="w-full text-left bg-slate-800/30 border border-slate-700/30 px-4 py-3 rounded-xl hover:bg-slate-700/50 transition-all duration-200 flex items-center gap-3">
+          <div class='w-8 h-8 bg-slate-700 rounded-full flex items-center justify-center text-sm font-medium'>${inicial}</div>
+          <span class='text-slate-200'>${nombre}</span></button>`;
       }
     }
     mostrarUsuarios();
 
     // ====== Auth helpers ======
-    function getToken(){ return localStorage.getItem("token"); }
-    function logout(){ localStorage.removeItem("token"); window.location.href="login.html"; }
-    function requireTokenOrRedirect(){ const t=getToken(); if(!t){window.location.href="login.html";return null;} return t;}
-    async function authFetch(url,opt={}){ const t=getToken(); const h={...(opt.headers||{}),Authorization:`Bearer ${t}`}; const r=await fetch(url,{...opt,headers:h}); if(r.status===401){logout();} return r; }
+    function getToken(){return localStorage.getItem("token");}
+    function logout(){localStorage.removeItem("token");window.location.href="login.html";}
+    function requireTokenOrRedirect(){const t=getToken();if(!t){window.location.href="login.html";return null;}return t;}
+    async function authFetch(url,opt={}){const t=getToken();const h={...(opt.headers||{}),Authorization:`Bearer ${t}`};const r=await fetch(url,{...opt,headers:h});if(r.status===401){logout();}return r;}
     function decodeJwtPayload(t){try{const b=t.split('.')[1];const j=decodeURIComponent(atob(b.replace(/-/g,'+').replace(/_/g,'/')).split('').map(c=>'%'+('00'+c.charCodeAt(0).toString(16)).slice(-2)).join(''));return JSON.parse(j);}catch{return{};}}
 
     // ====== Lógica de Alertas ======
@@ -198,40 +196,38 @@
     function pintarUsuario(){const t=getToken();if(!t)return;const p=decodeJwtPayload(t);const n=p?.nombre||p?.email||"Usuario";const i=(n.trim()[0]||"U").toUpperCase();document.getElementById("userName").textContent=n;document.getElementById("userInitial").textContent=i;}
 
     async function cargarDetecciones(){
-      const token=requireTokenOrRedirect(); if(!token)return;
-      const status=document.getElementById("status"); const container=document.getElementById("alertasContainer"); const pageInfo=document.getElementById("pageInfo");
+      const token=requireTokenOrRedirect();if(!token)return;
+      const status=document.getElementById("status");const container=document.getElementById("alertasContainer");const pageInfo=document.getElementById("pageInfo");
       status.textContent="Cargando...";
       try{
         const url=`${API_BASE}/deteccion?page=${page}&pageSize=${pageSize}`;
         const res=await authFetch(url);
-        if(!res.ok) throw new Error("No se pudieron obtener las detecciones");
-        const payload=await res.json(); const items=Array.isArray(payload?.data)?payload.data:[];
+        if(!res.ok)throw new Error("No se pudieron obtener las detecciones");
+        const payload=await res.json();const items=Array.isArray(payload?.data)?payload.data:[];
         container.innerHTML="";
         if(items.length===0){
           container.innerHTML=`<div class='glass-effect p-6 rounded-2xl border border-slate-700/50'><p class='text-slate-400'>No hay detecciones en esta página.</p></div>`;
         }else{
           for(const det of items){
-            container.innerHTML += `
-              <div class="alert-card p-6 rounded-2xl">
-                <div class="aspect-video bg-slate-800 rounded-xl mb-4 overflow-hidden">
-                  <img src="${det.imagen}" alt="Detección ${det.id}" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/1280x720?text=Imagen+no+disponible'"/>
+            container.innerHTML+=`<div class="alert-card p-6 rounded-2xl">
+              <div class="aspect-video bg-slate-800 rounded-xl mb-4 overflow-hidden">
+                <img src="${det.imagen}" alt="Detección ${det.id}" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/1280x720?text=Imagen+no+disponible'"/>
+              </div>
+              <div class="flex items-center justify-between">
+                <div>
+                  <h3 class="font-semibold text-slate-200 mb-1">Detección #${det.id}</h3>
+                  <p class="text-sm text-slate-400">${formatearFechaISO(det.hora)}</p>
                 </div>
-                <div class="flex items-center justify-between">
-                  <div>
-                    <h3 class="font-semibold text-slate-200 mb-1">Detección #${det.id}</h3>
-                    <p class="text-sm text-slate-400">${formatearFechaISO(det.hora)}</p>
-                  </div>
-                  <div class="flex items-center gap-2">
-                    <div class="w-2 h-2 bg-emerald-400 rounded-full"></div>
-                    <span class="text-xs text-emerald-400 font-medium">OK</span>
-                  </div>
+                <div class="flex items-center gap-2">
+                  <div class="w-2 h-2 bg-emerald-400 rounded-full"></div>
+                  <span class="text-xs text-emerald-400 font-medium">OK</span>
                 </div>
-              </div>`;
+              </div></div>`;
           }
         }
-        const total=Number(payload?.total??0); const totalPages=Math.max(1,Math.ceil(total/pageSize));
-        document.getElementById("prevBtn").disabled=page<=1; document.getElementById("nextBtn").disabled=page>=totalPages;
-        pageInfo.textContent=`Página ${page} de ${totalPages} • Total: ${total}`; status.textContent="";
+        const total=Number(payload?.total??0);const totalPages=Math.max(1,Math.ceil(total/pageSize));
+        document.getElementById("prevBtn").disabled=page<=1;document.getElementById("nextBtn").disabled=page>=totalPages;
+        pageInfo.textContent=`Página ${page} de ${totalPages} • Total: ${total}`;status.textContent="";
       }catch(e){console.error(e);status.textContent="Error al cargar. Intentá nuevamente.";}
     }
 
@@ -243,6 +239,23 @@
 
     // ====== Inicio ======
     (function init(){if(!requireTokenOrRedirect())return;pintarUsuario();cargarDetecciones();})();
+  </script>
+
+  <!-- 🌗 Script para alternar entre modo oscuro y claro -->
+  <script>
+    function toggleModo() {
+      const pagina = window.location.pathname.split("/").pop();
+      const nuevoModo = pagina.includes("alertasclaro") ? "oscuro" : "claro";
+      localStorage.setItem("modo", nuevoModo);
+      window.location.href = nuevoModo === "claro" ? "alertasclaro.html" : "alertas.html";
+    }
+
+    window.onload = () => {
+      const modo = localStorage.getItem("modo");
+      if (modo === "claro" && !window.location.pathname.includes("alertasclaro")) {
+        window.location.href = "alertasclaro.html";
+      }
+    };
   </script>
 </body>
 </html>
