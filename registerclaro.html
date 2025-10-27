@@ -6,7 +6,6 @@
   <title>Registro - EVA (Claro)</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
-
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
@@ -40,7 +39,7 @@
   <!-- Botón de cambio de modo -->
   <button id="modoToggle" class="modo-btn">☀️ Modo Oscuro</button>
 
-  <!-- Contenedor -->
+  <!-- Contenedor principal -->
   <div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md border border-slate-300 transition duration-300">
     <h1 class="text-2xl font-bold text-emerald-600 mb-2 text-center">Crear cuenta</h1>
     <p class="text-slate-600 text-sm mb-6 text-center">Completá los datos para registrarte en EVA</p>
@@ -72,7 +71,7 @@
 
     <p class="text-sm text-center text-slate-600 mt-4">
       ¿Ya tenés cuenta?
-      <a href="login.html" class="text-emerald-600 hover:underline">Iniciá sesión</a>
+      <a href="loginclaro.html" class="text-emerald-600 hover:underline">Iniciá sesión</a>
     </p>
   </div>
 
@@ -83,17 +82,16 @@
 
     function aplicarModo(modo) {
       if (modo === 'dark') {
-        body.style.background = 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)';
-        body.style.color = 'white';
-        modoToggle.textContent = '🌙 Modo Claro';
-        modoToggle.style.backgroundColor = '#10b981';
+        // En modo oscuro, redirige a register.html si se desea
+        window.location.href = 'register.html';
       } else {
+        // Mantiene el modo claro
         body.style.background = 'linear-gradient(135deg, #e2e8f0 0%, #f8fafc 100%)';
         body.style.color = '#0f172a';
         modoToggle.textContent = '☀️ Modo Oscuro';
         modoToggle.style.backgroundColor = '#0f172a';
+        localStorage.setItem('modo', 'light');
       }
-      localStorage.setItem('modo', modo);
     }
 
     const modoGuardado = localStorage.getItem('modo') || 'light';
@@ -101,6 +99,7 @@
 
     modoToggle.addEventListener('click', () => {
       const nuevoModo = localStorage.getItem('modo') === 'light' ? 'dark' : 'light';
+      localStorage.setItem('modo', nuevoModo);
       aplicarModo(nuevoModo);
     });
 
@@ -117,7 +116,7 @@
         const respuesta = await fetch("https://eva-back-end.vercel.app/user/registro", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ usuario: nombre, email, contra: password })
+          body: JSON.stringify({ usuario: nombre, email: email, contra: password })
         });
 
         if (respuesta.ok) {
