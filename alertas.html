@@ -67,10 +67,10 @@
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-3">
             <div class="w-8 h-8 bg-emerald-500/20 rounded-full flex items-center justify-center">
-              <span class="text-emerald-400 text-sm font-semibold">U</span>
+              <span id="userInitial" class="text-emerald-400 text-sm font-semibold">U</span>
             </div>
             <div>
-              <div class="text-sm font-medium text-slate-200">Usuario</div>
+              <div id="userName" class="text-sm font-medium text-slate-200">Usuario</div>
               <div class="text-xs text-slate-400">Sesión activa</div>
             </div>
           </div>
@@ -114,47 +114,90 @@
   </div>
 
   <script>
+    // ========= Helpers de Auth (token en localStorage) =========
+    function saveToken(t){ localStorage.setItem("token", t); }
+    function getToken(){ return localStorage.getItem("token"); }
+    function logout(){ localStorage.removeItem("token"); window.location.href = "login.html"; }
+    function requireTokenOrRedirect(){
+      const t = getToken();
+      if(!t){ window.location.href = "login.html"; return null; }
+      return t;
+    }
+    async function authFetch(url, options = {}){
+      const t = getToken();
+      const headers = { ...(options.headers || {}), Authorization: `Bearer ${t}` };
+      const res = await fetch(url, { ...options, headers });
+      if(res.status === 401){ logout(); return res; }
+      return res;
+    }
+
+    // ========= Decodificar payload del JWT (para mostrar datos del user) =========
+    function decodeJwtPayload(token){
+      try{
+        const base64Url = token.split('.')[1];
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const json = decodeURIComponent(atob(base64).split('').map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join(''));
+        return JSON.parse(json);
+      }catch{ return {}; }
+    }
+
+    // ========= UI: tema =========
+    function toggleModo(){ document.getElementById("body").classList.toggle("gradient-bg"); }
+
+    // ========= Lógica de Alertas =========
     const API_BASE = "https://eva-back-end.vercel.app";
     let page = 1;
     const pageSize = 12;
 
-    function formatearFechaISO(iso) {
+    function formatearFechaISO(iso){
       const fecha = new Date(iso);
-      return fecha.toLocaleString("es-AR", { day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit", hour12: false });
+      return fecha.toLocaleString("es-AR", { day:"2-digit", month:"2-digit", year:"numeric", hour:"2-digit", minute:"2-digit", hour12:false });
     }
 
-    function requireTokenOrRedirect() {
-      const token = localStorage.getItem("token");
-      if (!token) { window.location.href = "login.html"; return null; }
-      return token;
+    function pintarUsuario(){
+      const token = getToken();
+      if(!token) return;
+      const payload = decodeJwtPayload(token); // { id, email, nombre, iat, exp } según tu backend
+      const nombre = payload?.nombre || payload?.email || "Usuario";
+      const inicial = (nombre?.trim()[0] || "U").toUpperCase();
+      const nameEl = document.getElementById("userName");
+      const initEl = document.getElementById("userInitial");
+      if(nameEl) nameEl.textContent = nombre;
+      if(initEl) initEl.textContent = inicial;
     }
 
-    async function cargarDetecciones() {
+    async function cargarDetecciones(){
       const token = requireTokenOrRedirect();
-      if (!token) return;
+      if(!token) return;
+
       const status = document.getElementById("status");
-      status.textContent = "Cargando...";
       const container = document.getElementById("alertasContainer");
       const pageInfo = document.getElementById("pageInfo");
 
-      try {
+      status.textContent = "Cargando...";
+
+      try{
         const url = `${API_BASE}/deteccion?page=${page}&pageSize=${pageSize}`;
-        const res = await fetch(url, { headers: { "Authorization": `Bearer ${token}` }});
-        if (res.status === 401) { localStorage.removeItem("token"); window.location.href = "login.html"; return; }
-        if (!res.ok) throw new Error("No se pudieron obtener las detecciones");
+        const res = await authFetch(url); // Authorization: Bearer <token>
+        if(!res.ok) throw new Error("No se pudieron obtener las detecciones");
 
         const payload = await res.json();
         const items = Array.isArray(payload?.data) ? payload.data : [];
+
         container.innerHTML = "";
-        if (items.length === 0) {
-          container.innerHTML = `<div class="glass-effect p-6 rounded-2xl border border-slate-700/50"><p class="text-slate-400">No hay detecciones en esta página.</p></div>`;
-        } else {
-          for (const det of items) {
+        if(items.length === 0){
+          container.innerHTML = `
+            <div class="glass-effect p-6 rounded-2xl border border-slate-700/50">
+              <p class="text-slate-400">No hay detecciones en esta página.</p>
+            </div>`;
+        }else{
+          for(const det of items){
             const card = document.createElement("div");
             card.className = "alert-card p-6 rounded-2xl";
             card.innerHTML = `
               <div class="aspect-video bg-slate-800 rounded-xl mb-4 overflow-hidden">
-                <img src="${det.imagen}" alt="Detección ${det.id}" class="w-full h-full object-cover"/>
+                <img src="${det.imagen}" alt="Detección ${det.id}" class="w-full h-full object-cover" loading="lazy"
+                     onerror="this.src='https://via.placeholder.com/1280x720?text=Imagen+no+disponible'"/>
               </div>
               <div class="flex items-center justify-between">
                 <div>
@@ -176,18 +219,25 @@
         document.getElementById("nextBtn").disabled = page >= totalPages;
         pageInfo.textContent = `Página ${page} de ${totalPages} • Total: ${total}`;
         status.textContent = "";
-      } catch (err) { status.textContent = "Error al cargar. Intentá nuevamente."; console.error(err); }
+      }catch(err){
+        console.error(err);
+        status.textContent = "Error al cargar. Intentá nuevamente.";
+      }
     }
 
+    // ========= Eventos =========
     document.getElementById("refreshBtn").addEventListener("click", cargarDetecciones);
-    document.getElementById("prevBtn").addEventListener("click", () => { if (page > 1) { page--; cargarDetecciones(); }});
+    document.getElementById("prevBtn").addEventListener("click", () => { if(page > 1){ page--; cargarDetecciones(); }});
     document.getElementById("nextBtn").addEventListener("click", () => { page++; cargarDetecciones(); });
-    document.getElementById("logoutBtn").addEventListener("click", () => { localStorage.removeItem("token"); window.location.href = "login.html"; });
+    document.getElementById("logoutBtn").addEventListener("click", logout);
 
-    // Cambio de modo
-    function toggleModo() { document.getElementById("body").classList.toggle("gradient-bg"); }
-
-    cargarDetecciones();
+    // ========= Inicio =========
+    (function init(){
+      if(!requireTokenOrRedirect()) return;
+      pintarUsuario();
+      cargarDetecciones();
+    })();
   </script>
 </body>
 </html>
+
