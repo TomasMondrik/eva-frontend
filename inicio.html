@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Inicio - EVA</title>
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Configuración Tailwind -->
   <script>
     tailwind.config = {
       theme: {
@@ -41,7 +43,9 @@
       }
     }
   </script>
+
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
   <style>
     .gradient-bg {
       background: linear-gradient(135deg, #020617 0%, #0f172a 50%, #022c22 100%);
@@ -61,12 +65,16 @@
     }
   </style>
 </head>
+
 <body id="body" class="flex gradient-bg text-slate-100 font-sans antialiased min-h-screen">
 
-  <!-- Botón de cambio de modo -->
-  <button onclick="toggleModo()" class="fixed top-6 right-6 bg-slate-800 text-slate-300 px-4 py-2 rounded-lg border border-slate-700 hover:bg-slate-700 transition z-50">🌙 / ☀️</button>
+  <!-- 🌙/☀️ Botón de cambio de modo -->
+  <button onclick="toggleModo()" 
+          class="fixed top-6 right-6 bg-slate-800 text-slate-300 px-4 py-2 rounded-lg border border-slate-700 hover:bg-slate-700 transition z-50">
+    🌙 / ☀️
+  </button>
 
-  <!-- Sidebar -->
+  <!-- 🧭 Sidebar -->
   <aside class="w-72 glass-effect p-6 flex flex-col justify-between shadow-2xl">
     <div>
       <!-- Logo -->
@@ -90,6 +98,8 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
           </svg>
         </button>
+
+        <!-- Dropdown -->
         <div id="dropdownUbicacion" class="hidden absolute left-0 w-full mt-2 glass-effect rounded-xl shadow-2xl z-20 overflow-hidden">
           <button onclick="cambiarUbicacion('hogar')" class="block w-full text-left px-4 py-3 hover:bg-emerald-500/10 transition-colors text-sm">
             <div class="flex items-center gap-3">
@@ -106,26 +116,26 @@
         </div>
       </div>
 
-      <!-- Navegación -->
+      <!-- Menú lateral -->
       <nav class="space-y-2 mb-8">
         <a href="inicio.html" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0zM2.458 12C3.732 7.943 7.523 5 12 5c4.478 
+                     0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 
+                     7-4.477 0-8.268-2.943-9.542-7z"></path>
           </svg>
           <span class="font-medium">Cámaras</span>
         </a>
+
         <a href="alertas.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-800/50 text-slate-300 hover:text-slate-200 transition-all duration-200">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                  d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 
+                     2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 
+                     0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
           </svg>
           <span>Alertas</span>
-        </a>
-        <a href="comandos.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-800/50 text-slate-300 hover:text-slate-200 transition-all duration-200">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4"></path>
-          </svg>
-          <span>Comandos</span>
         </a>
       </nav>
 
@@ -135,7 +145,8 @@
         <div id="usuariosSidebar" class="space-y-2"></div>
       </div>
     </div>
-    
+
+    <!-- Sesión -->
     <div class="pt-6 border-t border-slate-700/50">
       <div class="flex items-center gap-3">
         <div class="w-8 h-8 bg-emerald-500/20 rounded-full flex items-center justify-center">
@@ -149,77 +160,23 @@
     </div>
   </aside>
 
-  <!-- Panel flotante usuario -->
-  <div id="infoUsuario" class="fixed top-6 left-80 glass-effect text-slate-100 p-4 rounded-xl shadow-2xl hidden z-50 border border-emerald-500/20"></div>
-
-  <!-- Modal cámara -->
-  <div id="modalCamara" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
-    <div class="relative max-w-4xl w-full">
-      <button onclick="cerrarModal()" class="absolute -top-12 right-0 text-slate-400 hover:text-white text-2xl transition-colors">
-        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-        </svg>
-      </button>
-      <img id="imagenExpandida" src="" class="w-full h-auto rounded-2xl shadow-2xl">
-    </div>
-  </div>
-
-  <!-- Contenido principal -->
+  <!-- Panel de cámaras -->
   <main class="flex-1 p-8 overflow-y-auto">
     <div class="max-w-6xl mx-auto">
-      <div class="mb-8">
-        <h1 class="text-3xl font-bold text-slate-100 mb-2">Cámaras en vivo</h1>
-        <p class="text-slate-400">Monitoreo en tiempo real de tu hogar</p>
-      </div>
+      <h1 class="text-3xl font-bold text-slate-100 mb-2">Cámaras en vivo</h1>
+      <p class="text-slate-400 mb-8">Monitoreo en tiempo real de tu hogar</p>
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <!-- Cámaras -->
-        <div class="camera-card p-6 rounded-2xl border border-slate-700/50 cursor-pointer" onclick="abrirModal('https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=800')">
+        <!-- Ejemplo de cámara -->
+        <div class="camera-card p-6 rounded-2xl border border-slate-700/50 cursor-pointer"
+             onclick="abrirModal('https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=800')">
           <div class="aspect-video bg-slate-800 rounded-xl mb-4 overflow-hidden">
-            <img src="https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Cámara 1" class="w-full h-full object-cover">
+            <img src="https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=800"
+                 alt="Cámara 1" class="w-full h-full object-cover">
           </div>
           <div class="flex items-center justify-between">
             <div>
               <h3 class="font-semibold text-slate-200">Entrada Principal</h3>
-              <p class="text-sm text-slate-400">Activa • HD</p>
-            </div>
-            <div class="w-3 h-3 bg-emerald-400 rounded-full animate-pulse"></div>
-          </div>
-        </div>
-
-        <div class="camera-card p-6 rounded-2xl border border-slate-700/50 cursor-pointer" onclick="abrirModal('https://images.pexels.com/photos/1571463/pexels-photo-1571463.jpeg?auto=compress&cs=tinysrgb&w=800')">
-          <div class="aspect-video bg-slate-800 rounded-xl mb-4 overflow-hidden">
-            <img src="https://images.pexels.com/photos/1571463/pexels-photo-1571463.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Cámara 2" class="w-full h-full object-cover">
-          </div>
-          <div class="flex items-center justify-between">
-            <div>
-              <h3 class="font-semibold text-slate-200">Jardín Trasero</h3>
-              <p class="text-sm text-slate-400">Activa • HD</p>
-            </div>
-            <div class="w-3 h-3 bg-emerald-400 rounded-full animate-pulse"></div>
-          </div>
-        </div>
-
-        <div class="camera-card p-6 rounded-2xl border border-slate-700/50 cursor-pointer" onclick="abrirModal('https://images.pexels.com/photos/1571468/pexels-photo-1571468.jpeg?auto=compress&cs=tinysrgb&w=800')">
-          <div class="aspect-video bg-slate-800 rounded-xl mb-4 overflow-hidden">
-            <img src="https://images.pexels.com/photos/1571468/pexels-photo-1571468.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Cámara 3" class="w-full h-full object-cover">
-          </div>
-          <div class="flex items-center justify-between">
-            <div>
-              <h3 class="font-semibold text-slate-200">Sala de Estar</h3>
-              <p class="text-sm text-slate-400">Activa • HD</p>
-            </div>
-            <div class="w-3 h-3 bg-emerald-400 rounded-full animate-pulse"></div>
-          </div>
-        </div>
-
-        <div class="camera-card p-6 rounded-2xl border border-slate-700/50 cursor-pointer" onclick="abrirModal('https://images.pexels.com/photos/1571470/pexels-photo-1571470.jpeg?auto=compress&cs=tinysrgb&w=800')">
-          <div class="aspect-video bg-slate-800 rounded-xl mb-4 overflow-hidden">
-            <img src="https://images.pexels.com/photos/1571470/pexels-photo-1571470.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Cámara 4" class="w-full h-full object-cover">
-          </div>
-          <div class="flex items-center justify-between">
-            <div>
-              <h3 class="font-semibold text-slate-200">Garaje</h3>
               <p class="text-sm text-slate-400">Activa • HD</p>
             </div>
             <div class="w-3 h-3 bg-emerald-400 rounded-full animate-pulse"></div>
@@ -230,6 +187,7 @@
   </main>
 
   <script>
+    // Dropdown ubicación
     function toggleDropdown() {
       const dropdown = document.getElementById("dropdownUbicacion");
       const icon = document.querySelector("#ubicacionBtn svg");
@@ -238,9 +196,7 @@
     }
 
     function cambiarUbicacion(ubicacion) {
-      if (ubicacion === "hogar") {
-        document.getElementById("ubicacionActual").textContent = "Hogar";
-      }
+      document.getElementById("ubicacionActual").textContent = ubicacion.charAt(0).toUpperCase() + ubicacion.slice(1);
       toggleDropdown();
     }
 
@@ -249,6 +205,7 @@
       toggleDropdown();
     }
 
+    // Modal cámara
     function abrirModal(src) {
       document.getElementById("imagenExpandida").src = src;
       document.getElementById("modalCamara").classList.remove("hidden");
@@ -260,6 +217,7 @@
       document.getElementById("modalCamara").classList.remove("flex");
     }
 
+    // Usuarios
     const usuarios = {
       Sofi: { entrada: "2025-06-03T18:30:00", salida: "2025-06-04T10:15:00" },
       Eve: { entrada: "2025-06-01T09:00:00", salida: "2025-06-03T20:00:00" },
@@ -273,63 +231,27 @@
         const btn = document.createElement("button");
         btn.className = "w-full text-left bg-slate-800/30 border border-slate-700/30 px-4 py-3 rounded-xl hover:bg-slate-700/50 transition-all duration-200 flex items-center gap-3";
         const inicial = nombre.charAt(0);
-        btn.innerHTML = `<div class="w-8 h-8 bg-slate-700 rounded-full flex items-center justify-center text-sm font-medium">${inicial}</div><span class="text-slate-200">${nombre}</span>`;
-        btn.onclick = () => mostrarInfoUsuario(nombre);
+        btn.innerHTML = `<div class='w-8 h-8 bg-slate-700 rounded-full flex items-center justify-center text-sm font-medium'>${inicial}</div><span class='text-slate-200'>${nombre}</span>`;
         contenedor.appendChild(btn);
       }
     }
 
-    function mostrarInfoUsuario(nombre) {
-      const datos = usuarios[nombre];
-      const entrada = new Date(datos.entrada);
-      const salida = new Date(datos.salida);
-      const esEntradaReciente = entrada > salida;
-      const mensaje = esEntradaReciente ? `Entró hace: ${tiempoDesde(entrada)}` : `Salió hace: ${tiempoDesde(salida)}`;
-      const panel = document.getElementById("infoUsuario");
-      panel.innerHTML = `<div class="flex items-center gap-3 mb-2"><div class="w-8 h-8 bg-emerald-500/20 rounded-full flex items-center justify-center"><span class="text-emerald-400 text-sm font-semibold">${nombre.charAt(0)}</span></div><strong class="text-slate-200">${nombre}</strong></div><p class="text-sm text-slate-300">${mensaje}</p>`;
-      panel.classList.remove("hidden");
-      setTimeout(() => { panel.classList.add("hidden"); }, 5000);
-    }
-
-    function tiempoDesde(fecha) {
-      const ahora = new Date();
-      const diffMs = ahora - fecha;
-      const minutos = Math.floor(diffMs / (1000 * 60));
-      if (minutos < 60) return `${minutos} min`;
-      const horas = Math.floor(minutos / 60);
-      if (horas < 24) return `${horas} horas`;
-      const dias = Math.floor(horas / 24);
-      return `${dias} día${dias !== 1 ? 's' : ''}`;
-    }
-
-    window.addEventListener('click', function(e) {
-      const btn = document.getElementById('ubicacionBtn');
-      const dropdown = document.getElementById('dropdownUbicacion');
-      if (!btn.contains(e.target)) {
-        dropdown.classList.add('hidden');
-        document.querySelector("#ubicacionBtn svg").style.transform = "rotate(0deg)";
-      }
-    });
-
     mostrarUsuarios();
 
-    // Toggle modo oscuro/claro
+    // 🌙 / ☀️ Modo oscuro / claro persistente
     function toggleModo() {
-      const body = document.getElementById("body");
-      const esOscuro = body.classList.contains("text-slate-100");
-      if (esOscuro) {
-        body.classList.remove("gradient-bg","text-slate-100");
-        body.classList.add("gradient-bg","text-slate-900");
-        localStorage.setItem("modo","claro");
-      } else {
-        body.classList.remove("gradient-bg","text-slate-900");
-        body.classList.add("gradient-bg","text-slate-100");
-        localStorage.setItem("modo","oscuro");
-      }
+      const pagina = window.location.pathname.split("/").pop();
+      const nuevoModo = pagina.includes("inicioclaro") ? "oscuro" : "claro";
+      localStorage.setItem("modo", nuevoModo);
+      window.location.href = nuevoModo === "claro" ? "inicioclaro.html" : "inicio.html";
     }
+
     window.onload = () => {
-      if(localStorage.getItem("modo")==="claro") toggleModo();
-    }
+      const modo = localStorage.getItem("modo");
+      if (modo === "claro" && !window.location.pathname.includes("inicioclaro")) {
+        window.location.href = "inicioclaro.html";
+      }
+    };
   </script>
 </body>
 </html>
