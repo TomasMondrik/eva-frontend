@@ -168,16 +168,45 @@
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <!-- Ejemplo de cámara -->
-        <div class="camera-card p-6 rounded-2xl border border-slate-700/50 cursor-pointer"
-             onclick="abrirModal('https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=800')">
-          <div class="aspect-video bg-slate-800 rounded-xl mb-4 overflow-hidden">
-            <img src="https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=800"
-                 alt="Cámara 1" class="w-full h-full object-cover">
+       <!-- Ejemplo de cámara -->
+<div class="camera-card p-6 rounded-2xl border border-slate-700/50 cursor-pointer">
+  <div class="aspect-video bg-slate-800 rounded-xl mb-4 overflow-hidden">
+    <!-- ✅ Video HLS -->
+    <video id="video" controls autoplay class="w-full h-full object-cover"></video>
+  </div>
+  <div class="flex items-center justify-between">
+    <div>
+      <h3 class="font-semibold text-slate-200">Entrada Principal</h3>
+      <p class="text-sm text-slate-400">Activa • HD</p>
+    </div>
+    <div class="w-3 h-3 bg-emerald-400 rounded-full animate-pulse"></div>
+  </div>
+</div>
+
+<!-- ✅ Script para reproducir el stream -->
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<script>
+  const video = document.getElementById('video');
+
+  if (Hls.isSupported()) {
+    const hls = new Hls();
+    hls.loadSource('http://localhost:8080/hls/stream.m3u8');
+    hls.attachMedia(video);
+  } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+    // Compatibilidad para Safari
+    video.src = 'http://localhost:8080/hls/stream.m3u8';
+  }
+
+  video.addEventListener('error', (e) => {
+    console.error('❌ Error al cargar el video:', e);
+  });
+</script>
+
+            </script>
+                  
           </div>
           <div class="flex items-center justify-between">
             <div>
-              <h3 class="font-semibold text-slate-200">Entrada Principal</h3>
-              <p class="text-sm text-slate-400">Activa • HD</p>
             </div>
             <div class="w-3 h-3 bg-emerald-400 rounded-full animate-pulse"></div>
           </div>
