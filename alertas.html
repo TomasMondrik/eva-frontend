@@ -192,43 +192,77 @@
     // ====== Lógica de Alertas ======
     const API_BASE="https://eva-back-end.vercel.app";
     let page=1; const pageSize=12;
-    function formatearFechaISO(iso){const f=new Date(iso);return f.toLocaleString("es-AR",{day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit",hour12:false});}
-    function pintarUsuario(){const t=getToken();if(!t)return;const p=decodeJwtPayload(t);const n=p?.nombre||p?.email||"Usuario";const i=(n.trim()[0]||"U").toUpperCase();document.getElementById("userName").textContent=n;document.getElementById("userInitial").textContent=i;}
+
+    function formatearFechaISO(iso){
+      const f=new Date(iso);
+      return f.toLocaleString("es-AR",{
+        day:"2-digit",month:"2-digit",year:"numeric",
+        hour:"2-digit",minute:"2-digit",hour12:false
+      });
+    }
+
+    function pintarUsuario(){
+      const t=getToken();if(!t)return;
+      const p=decodeJwtPayload(t);
+      const n=p?.nombre||p?.email||"Usuario";
+      const i=(n.trim()[0]||"U").toUpperCase();
+      document.getElementById("userName").textContent=n;
+      document.getElementById("userInitial").textContent=i;
+    }
 
     async function cargarDetecciones(){
-      const token=requireTokenOrRedirect();if(!token)return;
-      const status=document.getElementById("status");const container=document.getElementById("alertasContainer");const pageInfo=document.getElementById("pageInfo");
+      const status=document.getElementById("status");
+      const container=document.getElementById("alertasContainer");
+      const pageInfo=document.getElementById("pageInfo");
+
       status.textContent="Cargando...";
       try{
         const url=`${API_BASE}/deteccion?page=${page}&pageSize=${pageSize}`;
-        const res=await authFetch(url);
-        if(!res.ok)throw new Error("No se pudieron obtener las detecciones");
-        const payload=await res.json();const items=Array.isArray(payload?.data)?payload.data:[];
+        const res=await fetch(url); // 👈 ahora sin token
+
+        if(!res.ok) throw new Error("No se pudieron obtener las detecciones");
+
+        const payload=await res.json();
+        const items=Array.isArray(payload?.data)?payload.data:[];
+
         container.innerHTML="";
         if(items.length===0){
-          container.innerHTML=`<div class='glass-effect p-6 rounded-2xl border border-slate-700/50'><p class='text-slate-400'>No hay detecciones en esta página.</p></div>`;
+          container.innerHTML=`<div class='glass-effect p-6 rounded-2xl border border-slate-700/50'>
+            <p class='text-slate-400'>No hay detecciones en esta página.</p>
+          </div>`;
         }else{
           for(const det of items){
-            container.innerHTML+=`<div class="alert-card p-6 rounded-2xl">
-              <div class="aspect-video bg-slate-800 rounded-xl mb-4 overflow-hidden">
-                <img src="${det.imagen}" alt="Detección ${det.id}" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/1280x720?text=Imagen+no+disponible'"/>
-              </div>
-              <div class="flex items-center justify-between">
-                <div>
-                  <h3 class="font-semibold text-slate-200 mb-1">Detección #${det.id}</h3>
-                  <p class="text-sm text-slate-400">${formatearFechaISO(det.hora)}</p>
+            container.innerHTML+=`
+              <div class="alert-card p-6 rounded-2xl">
+                <div class="aspect-video bg-slate-800 rounded-xl mb-4 overflow-hidden">
+                  <img src="${det.imagen}" alt="Detección ${det.id}"
+                       class="w-full h-full object-cover"
+                       onerror="this.src='https://via.placeholder.com/1280x720?text=Imagen+no+disponible'"/>
                 </div>
-                <div class="flex items-center gap-2">
-                  <div class="w-2 h-2 bg-emerald-400 rounded-full"></div>
-                  <span class="text-xs text-emerald-400 font-medium">OK</span>
+                <div class="flex items-center justify-between">
+                  <div>
+                    <h3 class="font-semibold text-slate-200 mb-1">Detección #${det.id}</h3>
+                    <p class="text-sm text-slate-400">${formatearFechaISO(det.hora)}</p>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <div class="w-2 h-2 bg-emerald-400 rounded-full"></div>
+                    <span class="text-xs text-emerald-400 font-medium">OK</span>
+                  </div>
                 </div>
-              </div></div>`;
+              </div>`;
           }
         }
-        const total=Number(payload?.total??0);const totalPages=Math.max(1,Math.ceil(total/pageSize));
-        document.getElementById("prevBtn").disabled=page<=1;document.getElementById("nextBtn").disabled=page>=totalPages;
-        pageInfo.textContent=`Página ${page} de ${totalPages} • Total: ${total}`;status.textContent="";
-      }catch(e){console.error(e);status.textContent="Error al cargar. Intentá nuevamente.";}
+
+        const total=Number(payload?.total??0);
+        const totalPages=Math.max(1,Math.ceil(total/pageSize));
+        document.getElementById("prevBtn").disabled=page<=1;
+        document.getElementById("nextBtn").disabled=page>=totalPages;
+        pageInfo.textContent=`Página ${page} de ${totalPages} • Total: ${total}`;
+        status.textContent="";
+      }catch(e){
+        console.error(e);
+        status.textContent="Error al cargar. Intentá nuevamente.";
+      }
     }
 
     // ====== Eventos ======
@@ -238,7 +272,11 @@
     document.getElementById("logoutBtn").addEventListener("click",logout);
 
     // ====== Inicio ======
-    (function init(){if(!requireTokenOrRedirect())return;pintarUsuario();cargarDetecciones();})();
+    (function init(){
+      if(!requireTokenOrRedirect())return; // sigue necesitando estar logueado para ver el dashboard
+      pintarUsuario();
+      cargarDetecciones();
+    })();
   </script>
 
   <!-- 🌗 Script para alternar entre modo oscuro y claro -->
