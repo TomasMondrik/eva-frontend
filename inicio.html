@@ -190,11 +190,11 @@
 
   if (Hls.isSupported()) {
     const hls = new Hls();
-    hls.loadSource('https://evaia-alpha.vercel.app/hls/stream.m3u8');
+    hls.loadSource('http://localhost:8080/hls/stream.m3u8');
     hls.attachMedia(video);
   } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
     // Compatibilidad para Safari
-    video.src = 'https://evaia-alpha.vercel.app/hls/stream.m3u8';
+    video.src = 'http://localhost:8080/hls/stream.m3u8';
   }
 
   video.addEventListener('error', (e) => {
